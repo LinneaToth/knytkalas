@@ -1,0 +1,462 @@
+[{
+  "_id": {
+    "$oid": "69dcf255e644ea950a3682d1"
+  },
+  "creation": {
+    "$date": "2026-04-13T13:40:37.640Z"
+  },
+  "replied": {
+    "$date": "2026-04-15T13:27:17.211Z"
+  },
+  "status": "accepted",
+  "guest": {
+    "personId": {
+      "$oid": "69dcca43ed03fd2edf3682d1"
+    },
+    "name": "Theodor Svensson"
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "contributions": [
+    {
+      "name": "Coca Cola",
+      "qty": 6,
+      "unit": "liter",
+      "allergen": null,
+      "category": "beverage"
+    },
+    {
+      "name": "Burnt almonds",
+      "qty": 500,
+      "unit": "gram",
+      "allergen": "nuts",
+      "category": "dessert"
+    }
+  ],
+  "event": {
+    "occasion": "Sommarkväll",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682df"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "69dcf255e644ea950a3682d2"
+  },
+  "creation": {
+    "$date": "2026-04-13T13:40:37.640Z"
+  },
+  "replied": {
+    "$date": "2026-04-15T13:27:17.211Z"
+  },
+  "status": "accepted",
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d1"
+    },
+    "name": "Carl Nilsson"
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "contributions": [
+    {
+      "name": "Korv Stroganoff",
+      "qty": 10,
+      "unit": "servings",
+      "allergen": [
+        "dairy",
+        "meat"
+      ],
+      "category": "main"
+    },
+    {
+      "name": "Rice",
+      "qty": 10,
+      "unit": "servings",
+      "allergen": null,
+      "category": "side"
+    }
+  ],
+  "event": {
+    "occasion": "Sommarkväll",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682df"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "69dde24845ee3135b83682d1"
+  },
+  "creation": {
+    "$date": "2026-04-14T06:44:24.446Z"
+  },
+  "replied": {
+    "$date": "2026-04-15T13:27:17.211Z"
+  },
+  "status": "accepted",
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d2"
+    },
+    "name": "Solei Åberg"
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "contributions": [
+    {
+      "name": "Grilled vegan panini",
+      "qty": 10,
+      "unit": "pieces",
+      "allergen": [
+        "gluten"
+      ],
+      "category": "main"
+    },
+    {
+      "name": "Fruit salad",
+      "qty": 10,
+      "unit": "servings",
+      "allergen": null,
+      "category": "dessert"
+    }
+  ],
+  "event": {
+    "occasion": "Sommarkväll",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682df"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "69dde24845ee3135b83682d2"
+  },
+  "creation": {
+    "$date": "2026-04-14T06:44:24.446Z"
+  },
+  "replied": null,
+  "status": "declined",
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d1"
+    },
+    "name": "Sara Mollberg"
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d2"
+    },
+    "name": "Solei Åberg"
+  },
+  "contributions": [],
+  "event": {
+    "occasion": "Sommarkväll",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682df"
+    }
+  }
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d1"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d4"
+    },
+    "name": "Sören Svantesson"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d2"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d5"
+    },
+    "name": "Katinka Gren"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d3"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d7"
+    },
+    "name": "Robert Laszlo"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d4"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d8"
+    },
+    "name": "Daniel Preben"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d5"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d9"
+    },
+    "name": "Clara Rosenqvist"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d6"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682da"
+    },
+    "name": "Lilja Åberg"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d7"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682db"
+    },
+    "name": "Iris Laszlo"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df8307beb736d3b83682d8"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:22:31.452Z"
+  },
+  "replied": null,
+  "status": "pending",
+  "event": {
+    "occasion": "Halloween",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682e0"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d6"
+    },
+    "name": "Linnéa Toth"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682dc"
+    },
+    "name": "Svala Laszlo"
+  },
+  "contributions": []
+},
+{
+  "_id": {
+    "$oid": "69df87cfbeb736d3b83682d9"
+  },
+  "creation": {
+    "$date": "2026-04-15T12:42:55.981Z"
+  },
+  "replied": {
+    "$date": "2026-04-15T12:42:55.981Z"
+  },
+  "status": "accepted",
+  "event": {
+    "occasion": "Sommarkväll",
+    "id": {
+      "$oid": "69dce873d1df9064ef3682df"
+    }
+  },
+  "host": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d1"
+    },
+    "name": "Carl Nilsson"
+  },
+  "guest": {
+    "personId": {
+      "$oid": "69dcdf35d1df9064ef3682d7"
+    },
+    "name": "Robert Laszlo"
+  },
+  "contributions": [
+    {
+      "name": "S*ll",
+      "qty": 200,
+      "unit": "gram",
+      "allergen": null,
+      "category": "side"
+    },
+    {
+      "name": "Sour dough buns",
+      "qty": 20,
+      "unit": "pieces",
+      "allergen": [
+        "gluten"
+      ],
+      "category": "bread"
+    },
+    {
+      "name": "Blandgodis",
+      "qty": 500,
+      "unit": "gram",
+      "allergen": [
+        "dairy",
+        "meat"
+      ],
+      "category": "dessert"
+    }
+  ]
+}]

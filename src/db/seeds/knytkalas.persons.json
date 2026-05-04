@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "69dcca43ed03fd2edf3682d1"
+  },
+  "name": "Theodor Svensson",
+  "email": "t.svensson@gmail.com",
+  "dietary_issues": [
+    "dairy",
+    "meat",
+    "egg",
+    "honey"
+  ],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d1"
+  },
+  "name": "Carl Nilsson",
+  "email": "nilsson.carl@outlook.com",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d2"
+  },
+  "name": "Solei Åberg",
+  "email": "s.aberg@me.com",
+  "dietary_issues": [
+    "meat",
+    "egg",
+    "dairy",
+    "honey"
+  ],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d3"
+  },
+  "name": "Sara Mollberg",
+  "email": "sara_mollberg@hotmail.com",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d4"
+  },
+  "name": "Sören Svantesson",
+  "email": "s.svantesson@telia.com",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d5"
+  },
+  "name": "Katinka Gren",
+  "email": "katinka_g@yahoo.se",
+  "dietary_issues": [
+    "nuts"
+  ],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d6"
+  },
+  "name": "Linnéa Toth",
+  "email": "l.tothhhh@protonmail.com",
+  "dietary_issues": [
+    "dairy"
+  ],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d7"
+  },
+  "name": "Robert Laszlo",
+  "email": "robban.laszlo@live.se",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d8"
+  },
+  "name": "Daniel Preben",
+  "email": "d.preben@icloud.com",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682d9"
+  },
+  "name": "Clara Rosenqvist",
+  "email": "clarafardigaga@lunarstorm.se",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682da"
+  },
+  "name": "Lilja Åberg",
+  "dietary_issues": [
+    "meat",
+    "egg",
+    "dairy",
+    "honey"
+  ],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682db"
+  },
+  "name": "Iris Laszlo",
+  "dietary_issues": [],
+  "invites": []
+},
+{
+  "_id": {
+    "$oid": "69dcdf35d1df9064ef3682dc"
+  },
+  "name": "Svala Laszlo",
+  "dietary_issues": [],
+  "invites": []
+}]
