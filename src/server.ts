@@ -4,8 +4,12 @@ import { connectToDb } from "./config/db.js";
 
 const PORT = process.env.PORT || 3000;
 
-await connectToDb();
-
-app.listen(PORT, () => {
-  console.log(`Currently serving on http://localhost:${PORT}`);
-});
+try {
+  await connectToDb();
+  app.listen(PORT, () => {
+    console.log(`Currently serving on http://localhost:${PORT}`);
+  });
+} catch (e) {
+  console.error(e);
+  process.exit(1);
+}
