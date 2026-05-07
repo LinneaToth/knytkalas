@@ -1,14 +1,17 @@
 import mongoose from "mongoose";
 
 const eventSchema = new mongoose.Schema({
-  creation: Date,
   startTime: Date,
   location: String,
   occasion: String,
-  invites: Array,
-  host: { name: String, id: mongoose.Types.ObjectId },
-});
+  invites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Invite" }],
+  host: { name: String, id: { type: mongoose.Schema.Types.ObjectId, ref: "User" } },
+  description: { type: String, default: "No description" },
+}, { timestamps: true }); //timestamps add createdAt and updatedAt
 
+//add if required and or unique etc 
+ 
 const Event = mongoose.model("Event", eventSchema); //Event -> collection "events", through mongoose's interpretation
 
 export default Event;
+

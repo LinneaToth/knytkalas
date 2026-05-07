@@ -15,4 +15,5 @@ app.use((_, res) => {
     .json({ error: "Oops! Nothing was found here. Try something else!" });
 });
 
+//ERROR HANDLING FUNCTION MISSING
 export default app;
