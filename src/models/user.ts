@@ -22,7 +22,8 @@ const userSchema = new mongoose.Schema(
       meat: { type: Boolean, default: false },
       fish: { type: Boolean, default: false },
     },
-    invites: [{ type: mongoose.Schema.Types.ObjectId, ref: "Invite" }],
+    invitesReceived: [{ type: mongoose.Schema.Types.ObjectId, ref: "Invite" }],
+    eventsHosting: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
   },
   { timestamps: true },
 ); //timestamps will add createdAt and updatedAt

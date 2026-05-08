@@ -6,7 +6,6 @@ import User from "../../models/user.js";
 import type { UserInput, EventInput, InviteInput } from "../../types/types.js";
 import Invite from "../../models/invite.js";
 import { connectToDb } from "../../config/db.js";
-import { create } from "node:domain";
 
 await connectToDb();
 
@@ -353,5 +352,59 @@ const invites = await seedInvites(fictionalInvites);
 if (!invites) {
   throw new Error("Something went wrong, we have no invites");
 }
+
+const addInvitesToEvents = async () => {
+  for (const event of events) {
+    const relatedInvites = invites.filter(
+      (inv) => inv.event.id.toString() === event._id.toString(),
+    );
+    console.log(
+      "for event " +
+        event.occasion +
+        " we have " +
+        relatedInvites.length +
+        " matches",
+    );
+
+    for (const invite of relatedInvites) {
+      await Event.findByIdAndUpdate(
+        event._id,
+        { $push: { invites: invite._id } },
+        { returnDocument: "after" },
+      );
+    }
+  }
+};
+
+await addInvitesToEvents();
+
+const connectToUsers = async () => {
+  for (const user of users) {
+    const relatedInvites = invites.filter(
+      (inv) => inv.invitee.id.toString() === user._id.toString(),
+    );
+    const relatedEvents = events.filter(
+      (event) => event.host.id.toString() === user._id.toString(),
+    );
+
+    for (const invite of relatedInvites) {
+      await User.findByIdAndUpdate(
+        user._id,
+        { $push: { invitesReceived: invite._id } },
+        { returnDocument: "after" },
+      );
+    }
+
+    for (const event of relatedEvents) {
+      await User.findByIdAndUpdate(
+        user._id,
+        { $push: { eventsHosting: event._id } },
+        { returnDocument: "after" },
+      );
+    }
+  }
+};
+
+await connectToUsers();
 
 process.exit(0);

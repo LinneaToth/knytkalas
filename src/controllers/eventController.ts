@@ -45,9 +45,16 @@ export const searchEvents = async (
   }
 };
 
-export const getEvent = (req: Request, res: Response, next: NextFunction) => {
-  //look up particular event by ID
-  return res.json({
-    Hello: `You wanted a specific event, eventually you'll get one here`,
-  });
+export const getEvent = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  const { id } = req.params;
+  const events = await Event.find({ _id: id });
+  if (events.length != 0) {
+    return res.json(events);
+  } else {
+    return res.status(404).json({ error: `No events found with id ${id}` });
+  }
 };
