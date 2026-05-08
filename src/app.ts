@@ -1,13 +1,15 @@
 import express from "express";
 import { eventRouter } from "./routes/eventRoutes.js";
+import { inviteRouter } from "./routes/inviteRouter.js";
+import { userRouter } from "./routes/userRouter.js";
 
 const app = express();
 
 app.use(express.json());
 
 app.use("/api/events", eventRouter);
-//app.use("/api/users", eventRouter);
-//app.use("/api/events", eventRouter);
+app.use("/api/invites", inviteRouter);
+app.use("/api/users", userRouter);
 
 app.use((_, res) => {
   res
@@ -16,4 +18,5 @@ app.use((_, res) => {
 });
 
 //ERROR HANDLING FUNCTION MISSING
+
 export default app;
