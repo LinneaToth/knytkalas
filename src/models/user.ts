@@ -10,6 +10,13 @@ const userSchema = new mongoose.Schema(
         true,
         "The e-mail address is already registered with an existing user",
       ],
+      lowercase: true,
+      trim: true,
+      validate: {
+        validator: function (v) {
+          return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+        },
+      },
     },
     dietaryRestrictions: {
       dairy: { type: Boolean, default: false },

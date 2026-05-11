@@ -201,7 +201,12 @@ const fictionalInvites: InviteInput[] = [
     invitedBy: { name: "Leo Rossi", id: users[2]._id },
     status: "accepted",
     contributions: [
-      { name: "Craft Beer", amount: 6, unit: "cans", dietaryRestrictions: {} },
+      {
+        name: "Craft Beer",
+        amount: 6,
+        unit: "cans",
+        dietaryRestrictions: { gluten: true },
+      },
     ],
   },
 
@@ -215,13 +220,7 @@ const fictionalInvites: InviteInput[] = [
         name: "Vegan Brownies",
         amount: 12,
         unit: "squares",
-        dietaryRestrictions: {
-          meat: true,
-          fish: true,
-          dairy: true,
-          egg: true,
-          honey: true,
-        },
+        dietaryRestrictions: { gluten: true },
       },
       {
         name: "Oat Milk Ice Cream",

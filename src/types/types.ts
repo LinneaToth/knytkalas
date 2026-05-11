@@ -25,7 +25,7 @@ export type EventInput = {
   invites?: any[];
 };
 
-type Contribution = {
+export type ContributionType = {
   name: string;
   amount: number;
   unit: string;
@@ -42,7 +42,7 @@ type Contribution = {
   };
 };
 
-export type InviteInput = {
+export interface InviteInput {
   event: {
     occasion: string;
     id: mongoose.Types.ObjectId;
@@ -50,5 +50,11 @@ export type InviteInput = {
   invitee: { name: string; id: mongoose.Types.ObjectId };
   invitedBy: { name: string; id: mongoose.Types.ObjectId };
   status: "accepted" | "pending" | "declined";
-  contributions: Contribution[];
-};
+  contributions: ContributionType[];
+}
+
+export interface InviteType extends InviteInput {
+  createdAt: Date;
+  updatedAt: Date;
+  __v: number;
+}

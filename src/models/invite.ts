@@ -3,19 +3,39 @@ import mongoose from "mongoose";
 const inviteSchema = new mongoose.Schema(
   {
     event: {
-      occasion: String,
-      id: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
+      occasion: {
+        type: String,
+        required: [true, "Occasion must be specified"],
+      },
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Event",
+        required: [true, "Event must be assigned with a valid ID"],
+      },
     },
     invitee: {
       name: String,
-      id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [true, "Guest must be assigned to the invite"],
+      },
     },
     invitedBy: {
       name: String,
-      id: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+        required: [
+          true,
+          "The person inviting the guest must be assigned to the invite",
+        ],
+      },
     },
     status: {
       type: String,
+      trim: true,
+      lowercase: true,
       enum: ["pending", "accepted", "declined"],
       default: "pending",
     },

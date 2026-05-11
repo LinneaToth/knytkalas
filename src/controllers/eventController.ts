@@ -1,7 +1,11 @@
 import { type Request, type Response, type NextFunction } from "express";
 import mongoose from "mongoose";
 import Event from "../models/event.js";
+import Invite from "../models/invite.js";
+import type { InviteType } from "../types/types.js";
+import { contributionsCompiler } from "../services/contributionsCompiler.js";
 
+//Get all events
 export const getEvents = async (
   req: Request,
   res: Response,
@@ -18,6 +22,7 @@ export const getEvents = async (
   }
 };
 
+//Search for events with certain hosts, by ID
 export const searchEvents = async (
   req: Request,
   res: Response,
@@ -45,16 +50,48 @@ export const searchEvents = async (
   }
 };
 
+//Get event by ID
 export const getEvent = async (
   req: Request,
   res: Response,
   next: NextFunction,
 ) => {
-  const { id } = req.params;
-  const events = await Event.find({ _id: id });
-  if (events.length != 0) {
-    return res.json(events);
-  } else {
-    return res.status(404).json({ error: `No events found with id ${id}` });
+  try {
+    const { id } = req.params;
+    const events = await Event.find({ _id: id });
+    if (events.length != 0) {
+      return res.json(events);
+    } else {
+      return res.status(404).json({ error: `No events found with id ${id}` });
+    }
+  } catch (e) {
+    next(e);
+  }
+};
+
+//Get all contributions for a certain event
+export const getEventContributions = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { id } = req.params;
+    const relatedInvites = await Invite.find({ "event.id": id });
+    if (relatedInvites.length === 0) {
+      return res.status(404).json({
+        error: "No invites found for this event",
+      });
+    }
+    const eventContributions = await contributionsCompiler(
+      relatedInvites as InviteType[],
+    );
+
+    return res.json({
+      eventId: id,
+      contributions: eventContributions,
+    });
+  } catch (e) {
+    next(e);
   }
 };
