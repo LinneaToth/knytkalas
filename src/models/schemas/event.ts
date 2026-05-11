@@ -23,7 +23,7 @@ const eventSchema = new mongoose.Schema(
       id: {
         type: mongoose.Schema.Types.ObjectId,
         ref: "User",
-        required: [true, "Host name is needed for the event"],
+        required: [true, "Host ID is needed for the event"],
       },
     },
     description: { type: String, default: "No description" },

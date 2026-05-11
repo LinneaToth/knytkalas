@@ -6,7 +6,7 @@ type CompiledContribution = {
 };
 
 //Compiles contributions from all invites for a particular event
-export const contributionsCompiler = async (invites: InviteType[]) => {
+export const contributionsCompiler = (invites: InviteType[]) => {
   const compiledContributions = invites.reduce<CompiledContribution[]>(
     (contributions: CompiledContribution[], invite: InviteType) => {
       const userContributions = {

@@ -1,10 +1,10 @@
 //WARNING! RUNNING THIS SCRIPT WILL OVERWRITE ANY EVENTS, USERS, INVITES COLLECTION YOU MAY HAVE IN YOUR DB
 
 import "dotenv/config";
-import Event from "../../models/event.js";
-import User from "../../models/user.js";
+import Event from "../../models/schemas/event.js";
+import User from "../../models/schemas/user.js";
 import type { UserInput, EventInput, InviteInput } from "../../types/types.js";
-import Invite from "../../models/invite.js";
+import Invite from "../../models/schemas/invite.js";
 import { connectToDb } from "../../config/db.js";
 
 await connectToDb();

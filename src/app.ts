@@ -2,6 +2,7 @@ import express from "express";
 import { eventRouter } from "./routes/eventRoutes.js";
 import { inviteRouter } from "./routes/inviteRouter.js";
 import { userRouter } from "./routes/userRouter.js";
+import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 
@@ -17,6 +18,6 @@ app.use((_, res) => {
     .json({ error: "Oops! Nothing was found here. Try something else!" });
 });
 
-//ERROR HANDLING FUNCTION MISSING
+app.use(errorHandler);
 
 export default app;

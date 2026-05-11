@@ -13,3 +13,7 @@ export const connectToDb = async () => {
     throw e; //re-throw the error to let server.ts deal with it
   }
 };
+
+export const disconnectFromDb = async () => {
+  await mongoose.connection.close();
+};

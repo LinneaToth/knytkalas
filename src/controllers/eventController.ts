@@ -1,7 +1,7 @@
 import { type Request, type Response, type NextFunction } from "express";
 import mongoose from "mongoose";
-import Event from "../models/event.js";
-import Invite from "../models/invite.js";
+import Event from "../models/schemas/event.js";
+import Invite from "../models/schemas/invite.js";
 import type { InviteType } from "../types/types.js";
 import { contributionsCompiler } from "../services/contributionsCompiler.js";
 
@@ -44,6 +44,10 @@ export const searchEvents = async (
           .status(404)
           .json({ error: `No events found with host id ${hostId}` });
       }
+    } else {
+      res.status(400).json({
+        error: "Only search through hostId is available at the moment",
+      });
     }
   } catch (e) {
     next(e);
@@ -58,11 +62,11 @@ export const getEvent = async (
 ) => {
   try {
     const { id } = req.params;
-    const events = await Event.find({ _id: id });
-    if (events.length != 0) {
-      return res.json(events);
+    const event = await Event.findById(id);
+    if (event) {
+      return res.json(event);
     } else {
-      return res.status(404).json({ error: `No events found with id ${id}` });
+      return res.status(404).json({ error: `No event found with id ${id}` });
     }
   } catch (e) {
     next(e);
@@ -83,7 +87,7 @@ export const getEventContributions = async (
         error: "No invites found for this event",
       });
     }
-    const eventContributions = await contributionsCompiler(
+    const eventContributions = contributionsCompiler(
       relatedInvites as InviteType[],
     );
 

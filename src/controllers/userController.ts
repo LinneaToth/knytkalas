@@ -1,14 +1,15 @@
 import { type Request, type Response, type NextFunction } from "express";
-import User from "../models/user.js";
+import { formatDietaryRestrictions } from "../services/formatDietaryRestrictions.js";
+import { getAllUsers, createUser } from "../services/userService.js";
 
 //Get all users
 export const getUsers = async (
-  req: Request,
+  _: Request,
   res: Response,
   next: NextFunction,
 ) => {
   try {
-    const users = await User.find();
+    const users = await getAllUsers();
     if (users.length != 0) {
       return res.json(users);
     } else {
@@ -19,6 +20,21 @@ export const getUsers = async (
   }
 };
 
-//Delete user
+//Add user
+export const addUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    const { email, name, dietaryRestrictions } = req.body;
+    const formattedDietRes = formatDietaryRestrictions(dietaryRestrictions);
+    const newUser = await createUser(email, name, formattedDietRes);
+    return res.status(201).json(newUser);
+  } catch (e) {
+    next(e);
+  }
+};
 
-//Update user allergies
+//Delete user - 2do
+//Update user allergies - 2do
