@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType } from "mongoose";
 
 const inviteSchema = new mongoose.Schema(
   {
@@ -68,3 +68,4 @@ const inviteSchema = new mongoose.Schema(
 const Invite = mongoose.model("Invite", inviteSchema); //Invite -> collection "invites", through mongoose's interpretation
 
 export default Invite;
+export type InviteSchemaType = InferSchemaType<typeof inviteSchema>;

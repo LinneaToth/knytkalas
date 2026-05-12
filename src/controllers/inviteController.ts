@@ -1,8 +1,10 @@
 import { type Request, type Response, type NextFunction } from "express";
-import Invite from "../models/schemas/invite.js";
-import { findContrMatch } from "../services/findContrMatch.js";
-import User from "../models/schemas/user.js";
-import Event from "../models/schemas/event.js";
+import Invite from "../models/invite.js";
+import {
+  createInvite,
+  deleteInvite,
+  getAllInvites,
+} from "../services/inviteService.js";
 
 //Get all invites
 export const getInvites = async (
@@ -11,7 +13,7 @@ export const getInvites = async (
   next: NextFunction,
 ) => {
   try {
-    const invites = await Invite.find();
+    const invites = await getAllInvites();
     if (invites.length != 0) {
       return res.json(invites);
     } else {
@@ -31,34 +33,39 @@ export const addInvite = async (
   const { eventId, inviteeId, invitedById } = req.body;
 
   try {
-    const [event, invitee, invBy] = await Promise.all([
-      Event.findById(eventId),
-      User.findById(inviteeId),
-      User.findById(invitedById),
-    ]);
+    const newInvite = await createInvite(eventId, inviteeId, invitedById);
 
-    if (!event) return res.status(404).json({ error: "Event not found" });
-    if (!invitee)
-      return res.status(404).json({ error: "User not found for invitee" });
-    if (!invBy)
-      return res.status(404).json({ error: "User not found for invited by" });
+    if ("error" in newInvite) {
+      if (newInvite.error === "404-event")
+        return res.status(404).json({ error: "Event not found" });
+      if (newInvite.error === "404-invitee")
+        return res.status(404).json({ error: "Invitee not found" });
+      if (newInvite.error === "404-invitedby")
+        return res.status(404).json({ error: "Invited by not found" });
+      if (newInvite.error === "409-exists")
+        return res.status(409).json({ error: "Invite already exists" }); //409: server conflict
+    }
 
-    const alreadyInvited = await Invite.find({
-      "invitee.id": invitee._id,
-      "event.id": event._id,
-    });
-
-    if (alreadyInvited.length !== 0)
-      return res
-        .status(409)
-        .json({ error: "User is already invited to this event" });
-
-    const newInvite = await new Invite({
-      event: { occasion: event.occasion, id: event._id },
-      invitee: { name: invitee.name, id: invitee._id },
-      invitedBy: { name: invBy.name, id: invBy._id },
-    }).save();
     res.status(201).json(newInvite);
+  } catch (e) {
+    next(e);
+  }
+};
+
+//Delete invite and update references
+export const delInvite = async (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => {
+  try {
+    let { id } = req.params;
+    if (typeof id != "string") id = id[0];
+
+    const deletedInvite = await deleteInvite(id);
+    if (!deletedInvite.deleted)
+      return res.status(404).json({ error: "No invite found" });
+    return res.status(200).json(deletedInvite);
   } catch (e) {
     next(e);
   }
@@ -66,7 +73,7 @@ export const addInvite = async (
 
 // Edit contributions
 // Will expect either "Edit, Delete or Add" as action
-//WIP!!
+//WIP!!! Lacks functionality and is not yet properly properly divided into controller vs service
 
 export const updateContributions = async (
   req: Request,
@@ -92,13 +99,17 @@ export const updateContributions = async (
             'Functionality "edit" is not yet implemented for contributions',
         });
       case "delete":
-        const match = findContrMatch(contribution, invite.contributions);
-        if (!match) {
+        const { invId, contributionId } = req.body;
+        const invite = await Invite.findById(invId);
+        if (!invite) return res.status(404).json({ error: "Invite not found" });
+        const origAmtContributions = invite.contributions.length;
+
+        invite.contributions.pull(contributionId);
+
+        if (invite.contributions.length === origAmtContributions) {
           return res.status(404).json({ error: "Contribution not found" });
         }
-        invite.contributions.pull({
-          name: match?.name,
-        });
+
         await invite.save();
         return res.json(invite);
 

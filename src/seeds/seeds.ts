@@ -1,11 +1,11 @@
 //WARNING! RUNNING THIS SCRIPT WILL OVERWRITE ANY EVENTS, USERS, INVITES COLLECTION YOU MAY HAVE IN YOUR DB
 
 import "dotenv/config";
-import Event from "../../models/schemas/event.js";
-import User from "../../models/schemas/user.js";
-import type { UserInput, EventInput, InviteInput } from "../../types/types.js";
-import Invite from "../../models/schemas/invite.js";
-import { connectToDb } from "../../config/db.js";
+import Event from "../models/event.js";
+import User from "../models/user.js";
+import type { UserInput, EventInput, InviteInput } from "../types/types.js";
+import Invite from "../models/invite.js";
+import { connectToDb } from "../config/db.js";
 
 await connectToDb();
 
@@ -356,13 +356,6 @@ const addInvitesToEvents = async () => {
   for (const event of events) {
     const relatedInvites = invites.filter(
       (inv) => inv.event.id.toString() === event._id.toString(),
-    );
-    console.log(
-      "for event " +
-        event.occasion +
-        " we have " +
-        relatedInvites.length +
-        " matches",
     );
 
     for (const invite of relatedInvites) {

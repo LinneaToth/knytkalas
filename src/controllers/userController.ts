@@ -1,5 +1,5 @@
 import { type Request, type Response, type NextFunction } from "express";
-import { formatDietaryRestrictions } from "../services/formatDietaryRestrictions.js";
+import { formatDietaryRestrictions } from "../utils/formatDietaryRestrictions.js";
 import { getAllUsers, createUser } from "../services/userService.js";
 
 //Get all users

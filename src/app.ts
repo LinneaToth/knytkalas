@@ -1,5 +1,5 @@
 import express from "express";
-import { eventRouter } from "./routes/eventRoutes.js";
+import { eventRouter } from "./routes/eventRouter.js";
 import { inviteRouter } from "./routes/inviteRouter.js";
 import { userRouter } from "./routes/userRouter.js";
 import { errorHandler } from "./middleware/errorHandler.js";
@@ -13,9 +13,9 @@ app.use("/api/invites", inviteRouter);
 app.use("/api/users", userRouter);
 
 app.use((_, res) => {
-  res
-    .status(404)
-    .json({ error: "Oops! Nothing was found here. Try something else!" });
+  res.status(404).json({
+    error: "This I don't know. Try something else!",
+  });
 });
 
 app.use(errorHandler);

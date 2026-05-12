@@ -1,4 +1,4 @@
-import User from "../models/schemas/user.js";
+import User from "../models/user.js";
 import type { DietaryRestrictions } from "../types/types.js";
 
 export const getAllUsers = async () => await User.find();

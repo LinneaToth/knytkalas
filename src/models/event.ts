@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose, { type InferSchemaType } from "mongoose";
 
 const eventSchema = new mongoose.Schema(
   {
@@ -34,3 +34,5 @@ const eventSchema = new mongoose.Schema(
 const Event = mongoose.model("Event", eventSchema); //Event -> collection "events", through mongoose's interpretation
 
 export default Event;
+
+export type EventSchemaType = InferSchemaType<typeof eventSchema>;

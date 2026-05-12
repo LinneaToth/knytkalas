@@ -1,9 +1,13 @@
 import { type Request, type Response, type NextFunction } from "express";
 import mongoose from "mongoose";
-import Event from "../models/schemas/event.js";
-import Invite from "../models/schemas/invite.js";
 import type { InviteType } from "../types/types.js";
-import { contributionsCompiler } from "../services/contributionsCompiler.js";
+import { contributionsCompiler } from "../utils/contributionsCompiler.js";
+import {
+  getAllEvents,
+  getEventByHost,
+  getEventById,
+} from "../services/eventService.js";
+import { findInviteByEvent } from "../services/inviteService.js";
 
 //Get all events
 export const getEvents = async (
@@ -12,7 +16,7 @@ export const getEvents = async (
   next: NextFunction,
 ) => {
   try {
-    const events = await Event.find();
+    const events = await getAllEvents();
     if (!events || events.length === 0) {
       return res.status(404).json({ error: "No events found" });
     }
@@ -36,7 +40,7 @@ export const searchEvents = async (
           .status(400)
           .json({ error: "The ID you provided was not in a valid format." });
       }
-      const events = await Event.find({ "host.id": hostId });
+      const events = await getEventByHost(hostId);
       if (events.length != 0) {
         return res.json(events);
       } else {
@@ -61,8 +65,10 @@ export const getEvent = async (
   next: NextFunction,
 ) => {
   try {
-    const { id } = req.params;
-    const event = await Event.findById(id);
+    let { id } = req.params;
+    if (typeof id != "string") id = id[0];
+
+    const event = await getEventById(id);
     if (event) {
       return res.json(event);
     } else {
@@ -80,8 +86,9 @@ export const getEventContributions = async (
   next: NextFunction,
 ) => {
   try {
-    const { id } = req.params;
-    const relatedInvites = await Invite.find({ "event.id": id });
+    let { id } = req.params;
+    if (typeof id != "string") id = id[0];
+    const relatedInvites = await findInviteByEvent(id);
     if (relatedInvites.length === 0) {
       return res.status(404).json({
         error: "No invites found for this event",
