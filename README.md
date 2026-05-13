@@ -4,6 +4,54 @@ A handmade RESTful API for organizing potluck dinners; saving sanity by coordina
 
 Built with Node.js, Express, TypeScript, and MongoDB with Mongoose.
 
+## About
+
+- Manage events (potluck dinners) with host info and timestamps
+- Register users with dietary restrictions and invite history
+- Send and track invites with RSVP status (accepted / declined / pending)
+- Track food/drink contributions per invite, including allergen info
+
+## Takeaways from the process, fresh from my project journal
+
+- Mongoose SchemaTypes are not TypeScript types! They are values (e.g. String, Number, Types.ObjectId)
+- Mongoose provides the full created object, including \_id, immediately after creation!
+- Subdocuments get their own \_id automatically 🥳
+- Mongoose can infer its own TypeScript types from a schema (InferSchemaType)
+- Regex .test() as a custom Mongoose validator
+- TypeScript structural typing: A function only checks that required typed fields exist. Extra fields on the
+  passed object are fine
+- Layered architecture: Hands-on understanding of the server → app → routes → controllers → services → models chain
+
+## Data Model
+
+Three MongoDB collections, using a mix of embedded documents and references. Below are some highlights for each, but I'd recommend that you check out my shemas (@ /src/models) if you are curious!
+
+### Events
+
+The host is stored as an **embedded object** (name + id). This is a deliberate denormalization so you can display who is hosting without an extra lookup. Invites are stored as an array of **reference IDs** pointing to the invites collection.
+
+### Users
+
+Has a custom **regex validator** on the email field (also lowercased and trimmed). Dietary restrictions are an embedded object where every field defaults to `false` (not restricted) unless specified. Two reference arrays track sent and received invites.
+
+### Invites
+
+The most complex collection. Contains three embedded objects: the event, the person who sent the invite, and the recipient. Food and drink contributions are stored as an **array of subdocuments** — each gets its own `_id` automatically. RSVP status is an **enum**: `pending` (default), `accepted`, or `declined`.
+
+**Embedding vs. references** — embedding the host in events and the event/user info in invites trades some redundancy for fewer round-trips. The risk is that references can go stale in ways a relational database would prevent. My code does account for that in the implemented endpoints, but it takes some extra awareness for sure.
+
+## What I'd develop next
+
+**Remaining endpoints** — several are yet to be implemented. Some politely respond with `501 Not Implemented`.
+
+**Authentication and authorization** — right now there's no concept of who's making a request. In future development, users will log in and be able to manage only their own events and invites.
+
+**Automated testing** — the layered architecture makes this a natural next step.
+
+**Frontend** — of course, it will need an UI to actually create and respond to invites! I don't think my guests would be too enthusiastic with being referred to Postman..
+
+**Relational database** — MongoDB works here, but the domain has many natural entities and relationships (users, events, invites, contributions, dietary restrictions). This project may become my thesis project, at which point revisiting a relational model like PostgreSQL would make sense.
+
 ## Installation
 
 Want to try it out? Be my guest!

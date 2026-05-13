@@ -10,11 +10,13 @@ try {
     console.log(`Currently serving on http://localhost:${PORT}`);
   });
 
-  //No shutdown log received when run on tsx with --watch during dev due to SIGINT caught by it before node does. npx tsx src/server.ts works
+  //No shutdown log received when run on tsx with --watch during dev due to SIGINT caught by it before node does.
+  //npx tsx src/server.ts will work
   const shutdown = () => {
     server.close(async () => {
       await disconnectFromDb();
       console.log("Server and database connection closed");
+      process.exit(0);
     });
   };
 
