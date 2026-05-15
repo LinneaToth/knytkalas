@@ -35,7 +35,7 @@ export type EventInput = {
   occasion: string;
   host: { name: string; id: mongoose.Types.ObjectId };
   description?: string;
-  invites?: any[];
+  invites?: mongoose.Types.ObjectId[];
 };
 
 export type ContributionType = {
