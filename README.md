@@ -13,7 +13,7 @@ Built with Node.js, Express, TypeScript, and MongoDB with Mongoose.
 
 ## Takeaways from the process, fresh from my project journal
 
-- Mongoose SchemaTypes are not TypeScript types! They are values (e.g. String, Number, Types.ObjectId)
+- Mongoose SchemaTypes are not TypeScript types but values (e.g. String, Number, Types.ObjectId)
 - Mongoose provides the full created object, including \_id, immediately after creation!
 - Subdocuments get their own \_id automatically 🥳
 - Mongoose can infer its own TypeScript types from a schema (InferSchemaType)
