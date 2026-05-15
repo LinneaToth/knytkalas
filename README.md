@@ -11,17 +11,6 @@ Built with Node.js, Express, TypeScript, and MongoDB with Mongoose.
 - Send and track invites with RSVP status (accepted / declined / pending)
 - Track food/drink contributions per invite, including allergen info
 
-## Takeaways from the process, fresh from my project journal
-
-- Mongoose SchemaTypes are not TypeScript types but values (e.g. String, Number, Types.ObjectId)
-- Mongoose provides the full created object, including \_id, immediately after creation!
-- Subdocuments get their own \_id automatically 🥳
-- Mongoose can infer its own TypeScript types from a schema (InferSchemaType)
-- Regex .test() as a custom Mongoose validator
-- TypeScript structural typing: A function only checks that required typed fields exist. Extra fields on the
-  passed object are fine
-- Layered architecture: Hands-on understanding of the server → app → routes → controllers → services → models chain
-
 ## Data Model
 
 Three MongoDB collections, using a mix of embedded documents and references. Below are some highlights for each, but I'd recommend that you check out my shemas (@ /src/models) if you are curious!
@@ -39,6 +28,17 @@ Has a custom **regex validator** on the email field (also lowercased and trimmed
 The most complex collection. Contains three embedded objects: the event, the person who sent the invite, and the recipient. Food and drink contributions are stored as an **array of subdocuments**. Each gets its own `_id` automatically. RSVP status is an **enum**: `pending` (default), `accepted`, or `declined`.
 
 **Embedding vs. references** - embedding the host in events and the event/user info in invites trades some redundancy for fewer round-trips. The risk is that references can go stale in ways a relational database would prevent. My code does account for that in the implemented endpoints, but it takes some extra awareness for sure.
+
+## Takeaways from the process, fresh from my project journal
+
+- Mongoose SchemaTypes are not TypeScript types but values (e.g. String, Number, Types.ObjectId)
+- Mongoose provides the full created object, including \_id, immediately after creation!
+- Subdocuments get their own \_id automatically 🥳
+- Mongoose can infer its own TypeScript types from a schema (InferSchemaType)
+- Regex .test() as a custom Mongoose validator
+- TypeScript structural typing: A function only checks that required typed fields exist. Extra fields on the
+  passed object are fine
+- Layered architecture: Hands-on understanding of the server → app → routes → controllers → services → models chain
 
 ## What's next?
 **Remaining endpoints** - several are yet to be implemented. Some politely respond with `501 Not Implemented`.
