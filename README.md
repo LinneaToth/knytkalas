@@ -40,8 +40,7 @@ The most complex collection. Contains three embedded objects: the event, the per
 
 **Embedding vs. references** — embedding the host in events and the event/user info in invites trades some redundancy for fewer round-trips. The risk is that references can go stale in ways a relational database would prevent. My code does account for that in the implemented endpoints, but it takes some extra awareness for sure.
 
-## What I'd develop next
-
+## What's next?
 **Remaining endpoints** — several are yet to be implemented. Some politely respond with `501 Not Implemented`.
 
 **Authentication and authorization** — right now there's no concept of who's making a request. In future development, users will log in and be able to manage only their own events and invites.
