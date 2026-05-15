@@ -36,20 +36,20 @@ Has a custom **regex validator** on the email field (also lowercased and trimmed
 
 ### Invites
 
-The most complex collection. Contains three embedded objects: the event, the person who sent the invite, and the recipient. Food and drink contributions are stored as an **array of subdocuments** — each gets its own `_id` automatically. RSVP status is an **enum**: `pending` (default), `accepted`, or `declined`.
+The most complex collection. Contains three embedded objects: the event, the person who sent the invite, and the recipient. Food and drink contributions are stored as an **array of subdocuments**. Each gets its own `_id` automatically. RSVP status is an **enum**: `pending` (default), `accepted`, or `declined`.
 
-**Embedding vs. references** — embedding the host in events and the event/user info in invites trades some redundancy for fewer round-trips. The risk is that references can go stale in ways a relational database would prevent. My code does account for that in the implemented endpoints, but it takes some extra awareness for sure.
+**Embedding vs. references** - embedding the host in events and the event/user info in invites trades some redundancy for fewer round-trips. The risk is that references can go stale in ways a relational database would prevent. My code does account for that in the implemented endpoints, but it takes some extra awareness for sure.
 
 ## What's next?
-**Remaining endpoints** — several are yet to be implemented. Some politely respond with `501 Not Implemented`.
+**Remaining endpoints** - several are yet to be implemented. Some politely respond with `501 Not Implemented`.
 
-**Authentication and authorization** — right now there's no concept of who's making a request. In future development, users will log in and be able to manage only their own events and invites.
+**Authentication and authorization** - right now there's no concept of who's making a request. In future development, users will log in and be able to manage only their own events and invites.
 
-**Automated testing** — the layered architecture makes this a natural next step.
+**Automated testing** - the layered architecture makes this a natural next step.
 
-**Frontend** — of course, it will need an UI to actually create and respond to invites! I don't think my guests would be too enthusiastic with being referred to Postman..
+**Frontend** - of course, it will need an UI to actually create and respond to invites! I don't think my guests would be too enthusiastic with being referred to Postman..
 
-**Relational database** — MongoDB works here, but the domain has many natural entities and relationships (users, events, invites, contributions, dietary restrictions). This project may become my thesis project, at which point revisiting a relational model like PostgreSQL would make sense.
+**Relational database** - MongoDB works here, but the domain has many natural entities and relationships (users, events, invites, contributions, dietary restrictions). This project may become my thesis project, at which point revisiting a relational model like PostgreSQL would make sense.
 
 ## Installation
 
