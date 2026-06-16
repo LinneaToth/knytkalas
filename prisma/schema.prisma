@@ -1,0 +1,57 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../app/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User{
+  id                Int         @id @default(autoincrement())
+  email             String      @unique
+  name              String?
+  sentInvites       Invite[]    @relation("SentInvite")
+  receivedInvites   Invite[]    @relation("ReceivedInvite")
+  dietaryIssues     IssueType[] 
+  }
+
+enum IssueType {
+  MEAT 
+  DAIRY 
+  LACTOSE
+  NUTS
+  GLUTEN
+  EGG
+  SHELLFISH
+  FISH
+  ANIMALBASED
+}
+
+model Contribution {
+  id        Int     @id @default(autoincrement())
+  invite    Invite  @relation(fields: [inviteId], references: [id])
+  inviteId  Int
+}
+
+model Invite {
+  id            Int             @id @default(autoincrement())
+  event         Event           @relation(fields: [eventId], references: [id])
+  eventId       Int
+  invBy         User            @relation("SentInvite", fields: [invById], references: [id])
+  invById       Int
+  guest         User            @relation("ReceivedInvite", fields: [guestId], references: [id])
+  guestId       Int
+  contributions Contribution[]  @relation()
+}
+
+model Event {
+  id        Int         @id @default(autoincrement())
+  occasion  String
+  invites   Invite[]
+}
