@@ -33,6 +33,24 @@ enum IssueType {
   ANIMALBASED
 }
 
+enum RsvpStatus { 
+  PENDING 
+  GOING 
+  DECLINED 
+  }
+
+  enum CategoryType {
+  STARTER    
+  MAIN   
+  SALAD    
+  SIDE
+  BREAD 
+  DESSERT 
+  SNACK 
+  DRINK 
+  OTHER 
+}
+
 model Contribution {
   id        Int     @id @default(autoincrement())
   invite    Invite  @relation(fields: [inviteId], references: [id])
@@ -48,10 +66,13 @@ model Invite {
   guest         User            @relation("ReceivedInvite", fields: [guestId], references: [id])
   guestId       Int
   contributions Contribution[]  @relation()
+  status        RsvpStatus      @default(PENDING)
+
 }
 
 model Event {
-  id        Int         @id @default(autoincrement())
-  occasion  String
-  invites   Invite[]
+  id                Int         @id @default(autoincrement())
+  occasion          String
+  invites           Invite[]
+  activeCategories  CategoryType[]   // if going enum route
 }
