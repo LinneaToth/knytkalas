@@ -6,7 +6,7 @@ const adapter = new PrismaPg({
 const globalForPrisma = global as unknown as {
   prisma: PrismaClient;
 };
-const prisma =
+export const prisma =
   globalForPrisma.prisma ||
   new PrismaClient({
     adapter,

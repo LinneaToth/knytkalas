@@ -1,8 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-
 generator client {
   provider = "prisma-client-js"
   output   = "../generated/prisma"
@@ -12,20 +7,27 @@ datasource db {
   provider = "postgresql"
 }
 
-model User{
-  id                String         @id @default(cuid())
-  createdAt         DateTime    @default(now())
-  email             String      @unique
-  name              String?
-  sentInvites       Invite[]    @relation("SentInvite")
-  receivedInvites   Invite[]    @relation("ReceivedInvite")
-  hostedEvents      Event[]     @relation("HostedEvents")
-  avoids            IssueType[] 
-  }
+model User {
+  id              String      @id @default(cuid())
+  createdAt       DateTime    @default(now())
+  email           String      @unique
+  name            String?
+  sentInvites     Invite[]    @relation("SentInvite")
+  receivedInvites Invite[]    @relation("ReceivedInvite")
+  hostedEvents    Event[]     @relation("HostedEvents")
+  avoids          IssueType[]
+  emailVerified   Boolean     @default(false)
+  image           String?
+  updatedAt       DateTime    @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+
+  @@map("user")
+}
 
 enum IssueType {
-  MEAT 
-  DAIRY 
+  MEAT
+  DAIRY
   LACTOSE
   NUTS
   GLUTEN
@@ -35,58 +37,106 @@ enum IssueType {
   ANIMALBASED
 }
 
-enum RsvpStatus { 
-  PENDING 
-  GOING 
-  DECLINED 
-  }
+enum RsvpStatus {
+  PENDING
+  GOING
+  DECLINED
+}
 
-  enum CategoryType {
-  STARTER    
-  MAIN   
-  SALAD    
+enum CategoryType {
+  STARTER
+  MAIN
+  SALAD
   SIDE
-  BREAD 
-  DESSERT 
-  SNACK 
-  DRINK 
-  OTHER 
+  BREAD
+  DESSERT
+  SNACK
+  DRINK
+  OTHER
 }
 
 model Contribution {
-  id        Int     @id @default(autoincrement())
-  invite    Invite  @relation(fields: [inviteId], references: [id])
-  inviteId  Int
-  name      String
-  servings  Int?
-  category  CategoryType
-  contains  IssueType[]
+  id       Int          @id @default(autoincrement())
+  invite   Invite       @relation(fields: [inviteId], references: [id])
+  inviteId Int
+  name     String
+  servings Int?
+  category CategoryType
+  contains IssueType[]
 }
 
 model Invite {
-  id            Int             @id @default(autoincrement())
-  createdAt     DateTime        @default(now())
-  token         String          @unique @default(cuid())
-  event         Event           @relation(fields: [eventId], references: [id])
+  id            Int            @id @default(autoincrement())
+  createdAt     DateTime       @default(now())
+  token         String         @unique @default(cuid())
+  event         Event          @relation(fields: [eventId], references: [id])
   eventId       Int
-  invBy         User            @relation("SentInvite", fields: [invById], references: [id])
+  invBy         User           @relation("SentInvite", fields: [invById], references: [id])
   invById       String
-  guest         User?            @relation("ReceivedInvite", fields: [guestId], references: [id])
+  guest         User?          @relation("ReceivedInvite", fields: [guestId], references: [id])
   guestId       String?
-  contributions Contribution[]  
-  status        RsvpStatus      @default(PENDING)
+  contributions Contribution[]
+  status        RsvpStatus     @default(PENDING)
 }
 
 model Event {
-  id                Int         @id @default(autoincrement())
-  createdAt         DateTime    @default(now())
-  occasion          String
-  description       String?
-  invites           Invite[]
-  activeCategories  CategoryType[]   
-  date              DateTime
-  location          String?
-  responseDeadline  DateTime?
-  host              User   @relation("HostedEvents", fields: [hostId], references: [id])
-  hostId            String
+  id               Int            @id @default(autoincrement())
+  createdAt        DateTime       @default(now())
+  occasion         String
+  description      String?
+  invites          Invite[]
+  activeCategories CategoryType[]
+  date             DateTime
+  location         String?
+  responseDeadline DateTime?
+  host             User           @relation("HostedEvents", fields: [hostId], references: [id])
+  hostId           String
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@index([userId])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime  @default(now())
+  updatedAt             DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("account")
+}
+
+model Verification {
+  id         String   @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([identifier])
+  @@map("verification")
 }
