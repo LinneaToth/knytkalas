@@ -46,6 +46,10 @@ I plan to host the thing at home, later, and found that NameCheap (where I bough
 
 With that distraction out of the world, it was back to focusing on the scaffolding of the app flow, using Figma to draw out a sketchy flow chart.
 
-### MVP SCOPE:
+### To forego scope creep, I defined my MVP SCOPE:
 
 Landing page. Google auth (signup/login). User details added on signup, including dietary profile. Dashboard listing events the user hosts or is invited to. Create/edit event (occasion, date, location, description, host-selected contribution categories, contribution deadline). Shareable invite links → invite landing page. Event details page (host and guest variants). RSVP with editable status. Guests add/edit/remove their own contributions within open categories, each tagged with dietary flags. Dietary issues shown for both users and contributions, with a filter to see what's safe to eat.
+
+Created a local postgreSQL db for dev, and managed to connect it to Prisma with guidance from their docs (I basically just followed their instructiosn step by step). The new tables confirm that the migration worke.d
+
+![Tables shown in DBeaver](./img/3.png)
