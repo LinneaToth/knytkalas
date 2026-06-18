@@ -57,6 +57,18 @@ Created a local postgreSQL db for dev, and managed to connect it to Prisma with 
 
 I developed my data schema. Lastly I ran the Better Auth CLI to generate its required models (Session, Account, Verification), which also added fields to User. I ran into a Prisma 7 vs pnpm bug, but I got some help by Claude to scan the web for solutions and resolved it by adding the package with prismas client runtime utils as an explicit dependency.
 
+Next time I merge a branch into main I'll try to remember to use --squash for a cleaner history. And with that, this day is officially over.
+
 ## [2026-06-18]
 
-- Start with implementing google auth and verify that it works
+I followed [Better-Auth's documentation for authentication with google](https://better-auth.com/docs/authentication/google). First thing this morning, I created a project over at [console.cloud.google.com](console.cloud.google.com). From there, I set up the credentials as per Better-Auth's instructions. Auth isn't open for anybody, until the app is published and later approved. For now, I have a added list of test users from my family, who will be able to use the service.
+
+One of the scripts I ran during installation introduced a src/lib folder for prisma.ts. I moved prisma.ts to utils, to clean up the architecture and adhere to the "everything in root" structure I got from installing next.
+
+I have yet to decide how I organize my components in this app. Next time I will read up on architecture best practices in Next.
+
+For now, there is a one tap button that works with Google authentication. It triggers their own modal, where the user is prompted to select an account.
+
+And the startup-phase of my project is a wrap!
+
+![Tables shown in DBeaver](./img/5.png)
