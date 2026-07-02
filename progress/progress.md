@@ -72,3 +72,33 @@ For now, there is a one tap button that works with Google authentication. It tri
 And the startup-phase of my project is a wrap!
 
 ![Tables shown in DBeaver](./img/5.png)
+
+## [2026-07-02]
+
+I found an hour, and decided to spend it on architectural decisions. I consulted with [Next docs on project structure](https://nextjs.org/docs/app/getting-started/project-structure), and asked what Claude had to say in the matter.
+
+I refreshed my memory on Next's app routing, and how components can be safely colocated without initiating routes. However, I prefer the cleaner separation, where the app folder is solely for routing purposes. For this project, I decide on a feature driven architecture.
+
+Components: Shared UI components  
+Features: Feature modules  
+Utils: Core utilities  
+Types: Global types
+
+Each feature will be structured as follows:
+
+- Components
+- Hooks
+- Services
+- Types
+
+I read something about explicit exports through multiple index.ts files. It seems interesting, but I decided against spending time on pursuing that.
+
+I also [need to add a route for Better Auth integration](https://better-auth.com/docs/integrations/next).
+
+To do this, I create a route file inside `/api/auth/[...all]`
+
+The rest of the setup, I have already done, it seems. I got some errors with the generic one tap button. After a lot of troubleshooting, I resorted to creating my own login buttons (which I am going to prefer anyway; and googles errors are gone from my console!). Auth now works!
+
+![Auth sequence](./img/6.png)
+
+(Daily annoyance: Apparently Google has deprecated the individual access to Gemini Code Assist. If I want to keep using it, I need to migrate to their own Antigravity IDE.)
