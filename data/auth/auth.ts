@@ -1,8 +1,6 @@
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { oneTap } from "better-auth/plugins";
-// Use the generated Prisma client package
-import prisma from "./prisma";
+import prisma from "../../prisma/utils/prismaUtils";
 
 export const auth = betterAuth({
   baseURL: process.env.BETTER_AUTH_URL,
@@ -15,7 +13,4 @@ export const auth = betterAuth({
   database: prismaAdapter(prisma, {
     provider: "postgresql",
   }),
-  plugins: [
-    oneTap(), // Adds the One Tap server plugin
-  ],
 });

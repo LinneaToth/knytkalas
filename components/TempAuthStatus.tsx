@@ -1,5 +1,5 @@
 "use client";
-import { useSession } from "@/utils/auth-client";
+import { useSession } from "@/data/auth/auth-client";
 
 export function TempAuthStatus() {
   const { data, isPending, error } = useSession();

@@ -11,7 +11,7 @@ model User {
   id              String      @id @default(cuid())
   createdAt       DateTime    @default(now())
   email           String      @unique
-  name            String?
+  name            String
   sentInvites     Invite[]    @relation("SentInvite")
   receivedInvites Invite[]    @relation("ReceivedInvite")
   hostedEvents    Event[]     @relation("HostedEvents")
@@ -21,6 +21,7 @@ model User {
   updatedAt       DateTime    @updatedAt
   sessions        Session[]
   accounts        Account[]
+  onboarded       Boolean     @default(false)
 
   @@map("user")
 }

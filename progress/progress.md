@@ -75,7 +75,9 @@ And the startup-phase of my project is a wrap!
 
 ## [2026-07-02]
 
-I found an hour, and decided to spend it on architectural decisions. I consulted with [Next docs on project structure](https://nextjs.org/docs/app/getting-started/project-structure), and asked what Claude had to say in the matter.
+New "sprint", or phase, initiated! **User is able to sign in with their google account, and sign out. If user doesn't exist, a new user can be created**
+
+I found an hour or two, and decided to spend it on architectural decisions. I consulted with [Next docs on project structure](https://nextjs.org/docs/app/getting-started/project-structure), and asked what Claude had to say in the matter.
 
 I refreshed my memory on Next's app routing, and how components can be safely colocated without initiating routes. However, I prefer the cleaner separation, where the app folder is solely for routing purposes. For this project, I decide on a feature driven architecture.
 
@@ -102,3 +104,21 @@ The rest of the setup, I have already done, it seems. I got some errors with the
 ![Auth sequence](./img/6.png)
 
 (Daily annoyance: Apparently Google has deprecated the individual access to Gemini Code Assist. If I want to keep using it, I need to migrate to their own Antigravity IDE.)
+
+## [2026-07-03]
+
+The better auth useSession() hook I used yesterday, for a temporary component verifying that the Google authentication works, is client side only, and hence breaks the [data access layer (DAL) pattern](https://nextjs.org/docs/app/guides/data-security#data-access-layer) I am going for.
+
+The [better-auth docs describe what I believe is the server equivalence, the auth API](https://better-auth.com/docs/concepts/api).
+
+I need to juggle some concepts here, simultaneously reading up on [CRUD with Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud).
+
+Even though all components are serverside by default, explicit "server-only" is added to everything in the Data Access Layer, to prevent Next from bundling and exposing it with client side code.
+
+Since Prisma and its adapter automatically points to my User table, Better Auth automatically adds a User row when someone authenticates themselves. I have no way of telling if they have done the onboarding, declaring allergies etc, so I add a bool ("onboarded") that defaults to false to the schema.
+
+Next time I open this project, I will continue working on getCurrentUser.ts:
+
+Check if there is currently a user at all. If there is a user, use their ID from better auth to get their data from DB (since better auth only stores and shows core fields, not the ones particularly relevant to my project.)
+
+Curate the data and only return what the app might need. Make certain to pay attention to if the person is onboarded or not. If the user needs onboarding: minimal info (id, email), if already onboarded: full profile (avoids, events and invites etc)
