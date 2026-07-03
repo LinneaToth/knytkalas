@@ -117,8 +117,12 @@ Even though all components are serverside by default, explicit "server-only" is 
 
 Since Prisma and its adapter automatically points to my User table, Better Auth automatically adds a User row when someone authenticates themselves. I have no way of telling if they have done the onboarding, declaring allergies etc, so I add a bool ("onboarded") that defaults to false to the schema.
 
-Next time I open this project, I will continue working on getCurrentUser.ts:
+Worked on getUser, getSessionUserId and onboardUser (create user, but creation is technically done as soon as someone verifies their identity with google).
 
-Check if there is currently a user at all. If there is a user, use their ID from better auth to get their data from DB (since better auth only stores and shows core fields, not the ones particularly relevant to my project.)
+Claude gave me a nice quote, during one of our tutoring sessions: "Don't return what nothing consumes". Would make for a great embroidery above my workstation.
 
-Curate the data and only return what the app might need. Make certain to pay attention to if the person is onboarded or not. If the user needs onboarding: minimal info (id, email), if already onboarded: full profile (avoids, events and invites etc)
+I wrap up the day with a hint of functionality in the sign up process. User verifies themselves with their google account, a row in User table is added. They fill in their details in a form, which is then updated in the database.
+
+client form → typed FormData extraction → Server Action with validated enum values → DAL update
+
+Next time, I will add logic to the issue management. If they indicate that they don't eat dairy at all, lactose should be crossed out as well. Same goes for vegans and everything animal based.

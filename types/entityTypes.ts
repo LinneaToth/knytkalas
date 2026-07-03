@@ -1,4 +1,5 @@
 import { Account, Session } from "better-auth";
+import type { IssueType } from "@/generated/prisma";
 
 export type User = {
   id: string;
@@ -17,7 +18,6 @@ export type User = {
 };
 
 export type NewUser = {
-  email: string;
   name: string;
   avoids: IssueType[];
 };
@@ -31,14 +31,3 @@ export type Event = {
   occasion: string;
   //WIP
 };
-
-export type IssueType =
-  | "MEAT"
-  | "DAIRY"
-  | "LACTOSE"
-  | "NUTS"
-  | "GLUTEN"
-  | "EGG"
-  | "SHELLFISH"
-  | "FISH"
-  | "ANIMALBASED";
