@@ -123,6 +123,9 @@ Claude gave me a nice quote, during one of our tutoring sessions: "Don't return 
 
 I wrap up the day with a hint of functionality in the sign up process. User verifies themselves with their google account, a row in User table is added. They fill in their details in a form, which is then updated in the database.
 
+![User input for signup](./img/7.png)  
+![User info appears in DB](./img/8.png)
+
 client form → typed FormData extraction → Server Action with validated enum values → DAL update
 
 Next time, I will add logic to the issue management. If they indicate that they don't eat dairy at all, lactose should be crossed out as well. Same goes for vegans and everything animal based.
