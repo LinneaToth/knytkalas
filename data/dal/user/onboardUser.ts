@@ -14,7 +14,7 @@ export const onboardUser = async (user: NewUser) => {
     throw new Error("User is already registered with Knytkalas");
   }
 
-  const newUser = await prisma.user.update({
+  await prisma.user.update({
     where: { id },
     data: {
       name: user.name || currentUser.name,

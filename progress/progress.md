@@ -129,3 +129,15 @@ I wrap up the day with a hint of functionality in the sign up process. User veri
 client form → typed FormData extraction → Server Action with validated enum values → DAL update
 
 Next time, I will add logic to the issue management. If they indicate that they don't eat dairy at all, lactose should be crossed out as well. Same goes for vegans and everything animal based.
+
+## [2026-07-04]
+
+Didn't have much time to spend on code today, but I managed to add an utility function for formatting dietary issues as described above, and mapped my theme colors to global variables.
+
+**WCAG CHECK**
+FG #0D1821 /BG #EFEFEF - AAA
+FG #0D1821 /Card BG #F9F9F9 - AAA
+FG / Primary #7FC8F8 - AAA
+FG / secondary #FF6392 - AAA
+FG #304C89 / accent #FFE45E - AA (on normal text, AAA on large)
+FG / success #40C9A2
