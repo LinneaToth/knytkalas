@@ -1,6 +1,6 @@
 export default function About() {
   return (
-    <section className="w-full">
+    <section className="w-full scroll-mt-16 min-h-[50vh]" id="about">
       <h2>About</h2>
       <p>
         Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe earum

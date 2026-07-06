@@ -2,14 +2,20 @@ import Button from "@/components/ui/Button";
 
 export default function Hero() {
   return (
-    <section className="h-[95vh] bg-accent flex flex-col items-center justify-center">
-      <p>TEMPORARY BUTTON DISPLAY</p>
-      <div className="p-7 bg-card-background">
-        <Button variant="solid">Type Solid</Button>
-        <Button variant="outline">Type Outline</Button>
-        <Button variant="ghost">Type ghost</Button>
-        <Button variant="cta">Type CTA</Button>
-      </div>
-    </section>
+    <>
+      <div className="absolute w-screen h-screen bg-[url('/graphics/bg.svg')] bg-cover bg-center "></div>
+      <section className="z-10 h-screen mt-15 flex flex-col items-center justify-center ">
+        <div className="p-7 gap-3 flex w-full">
+          <Button variant="cta" size="l">
+            create event
+          </Button>
+          <a href="#about">
+            <Button variant="outline" size="l">
+              read more
+            </Button>
+          </a>
+        </div>
+      </section>
+    </>
   );
 }

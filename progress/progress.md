@@ -144,6 +144,8 @@ FG #0D1821/ success #40C9A2 - AAA
 
 ## [2026-07-06]
 
+(4h)
+
 String up the routing in the app folder and am rethinking my original modal ideas. They get messy on mobile, and focuse wise certain steps would benefit from having a dedicated page.
 
 This will likely, of course, be developed along the road, but here is my foundation as of today:
@@ -167,3 +169,7 @@ Spent some time on a button component, with four types and three different sizes
 Since we are allowed to use AI in this project, I am cautiously looking for a balance between having it help me while not diminishing my joy in the craft and ownership in this. One example is when I had an issue with outlining my "Knytkalas" text in the header. It came up with an overlay strategy, and handed me functioning code for that.
 
 ![WIP landing page](./img/12.png)
+
+My strategy now that I have a foundation, is to work through my project following the flow chart. I'm currently at the landing page. I will not wait for it to be refined, but I want the functionality and outlines of it to be in place before moving on.
+
+I am trying to wrap my head aroun whether I need global state. In that regard, fullstack Next is not like frontend React. I can safely access my DAL from server components.

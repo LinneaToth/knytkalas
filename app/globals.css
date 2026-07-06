@@ -5,6 +5,7 @@
   --foreground: #0D1821;
   --card-background: #F9F9F9;
   --primary: #7FC8F8;
+  --primary-darker: #5AA9E6;
   --primary-foreground: #0D1821;
   --secondary: #FF6392;
   --secondary-foreground: #0D1821;
@@ -19,6 +20,7 @@
   --color-foreground: var(--foreground);
   --color-card-background: var(--card-background);
   --color-primary: var(--primary);
+  --color-primary-darker: var(--primary-darker);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -51,7 +53,7 @@ h6 {
 } */
 
 body {
-  background: var(--background);
+  background: var(--primary-darker);
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
 }
