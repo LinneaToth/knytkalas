@@ -9,7 +9,7 @@ export function TempAuthStatus() {
   if (error) return <p>Something went wrong: {error.message}</p>;
   return (
     <>
-      <p>{data ? `Logged in as ${data.user.email}` : "You're not logged in"}</p>
+      <p>{!data && "You're not logged in"}</p>
       {data && <OnboardingForm />}
     </>
   );

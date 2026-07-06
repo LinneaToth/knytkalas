@@ -19,7 +19,7 @@ export default function OnboardingForm() {
 
   return (
     <>
-      <p>You are registering with the e-mail: {data?.user.email}</p>
+      <h2>You are registering with the e-mail: {data?.user.email}</h2>
       <Form action={handleAction}>
         <label htmlFor="name">Name:</label>
         <input id="name" name="name" placeholder="Enter your name" />

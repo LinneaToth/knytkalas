@@ -137,7 +137,33 @@ Didn't have much time to spend on code today, but I managed to add an utility fu
 **WCAG CHECK**
 FG #0D1821 /BG #EFEFEF - AAA
 FG #0D1821 /Card BG #F9F9F9 - AAA
-FG / Primary #7FC8F8 - AAA
-FG / secondary #FF6392 - AAA
+FG #0D1821/ Primary #7FC8F8 - AAA
+FG #0D1821/ secondary #FF6392 - AAA
 FG #304C89 / accent #FFE45E - AA (on normal text, AAA on large)
-FG / success #40C9A2
+FG #0D1821/ success #40C9A2 - AAA
+
+## [2026-07-06]
+
+String up the routing in the app folder and am rethinking my original modal ideas. They get messy on mobile, and focuse wise certain steps would benefit from having a dedicated page.
+
+This will likely, of course, be developed along the road, but here is my foundation as of today:
+
+![App routing](./img/9.png)
+![Updated flowchart](./img/10.png)
+
+Poppins is everywhere, and I debated whether adding to the overuse of the. However, it is clean with nice geometries, reads friendly and clear. It stays. For featured headlines, "Bagel fat one" is what ignites the party.
+
+![Font pairing](./img/11.png)
+
+The next/font module is already in place with /google, so all I need to do is to add my fonts to the import in the root layout, and update the globals.css.
+
+I have heard a lot of good things about shadcn, and have decided to try it. Here goes.
+`pnpm dlx shadcn@latest add button`
+
+Strategic or not, did a 180 and decided otherwise. I'm fine with good old Tailwind and CSS. There are enough new concepts and abstractions to deal with in this project.
+
+Spent some time on a button component, with four types and three different sizes.
+
+Since we are allowed to use AI in this project, I am cautiously looking for a balance between having it help me while not diminishing my joy in the craft and ownership in this. One example is when I had an issue with outlining my "Knytkalas" text in the header. It came up with an overlay strategy, and handed me functioning code for that.
+
+![WIP landing page](./img/12.png)
