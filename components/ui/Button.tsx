@@ -34,7 +34,7 @@ export default function Button({
   switch (variant) {
     case "solid":
       styling +=
-        " border-transparent bg-secondary text-white hover:brightness-95";
+        " border-transparent bg-secondary text-secondary-foreground hover:brightness-95";
       break;
     case "outline":
       styling += " border-foreground text-foreground hover:bg-foreground/5";
@@ -46,6 +46,7 @@ export default function Button({
     case "cta":
       styling +=
         " border-transparent bg-accent text-accent-foreground hover:brightness-95";
+      break;
     case "success":
       styling +=
         " border-transparent bg-success text-foreground hover:brightness-95";

@@ -144,7 +144,7 @@ FG #0D1821/ success #40C9A2 - AAA
 
 ## [2026-07-06]
 
-(4h)
+(4h + 2h)
 
 String up the routing in the app folder and am rethinking my original modal ideas. They get messy on mobile, and focuse wise certain steps would benefit from having a dedicated page.
 
@@ -173,3 +173,15 @@ Since we are allowed to use AI in this project, I am cautiously looking for a ba
 My strategy now that I have a foundation, is to work through my project following the flow chart. I'm currently at the landing page. I will not wait for it to be refined, but I want the functionality and outlines of it to be in place before moving on.
 
 I am trying to wrap my head aroun whether I need global state. In that regard, fullstack Next is not like frontend React. I can safely access my DAL from server components.
+
+Found a couple of hours in the evening. Added missing pages to links from landing page. Tweaked stuff to make navigation between the diffent routes work, as well as very rudimentary styling. Added pattern SVG export from Affinity as hero background.
+
+## [2026-07-07]
+
+(3h)
+
+Refined the "move to the top of the home page" functionality of the logo, by moving it to an invididual component, "use client" and make use of the window element. I still have an anchor page on "about" which looks a bit messy in the URL, it is not in the top of my backlog but it is there.
+
+![WIP landing page](./img/13.png)
+
+There is a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.

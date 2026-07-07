@@ -3,6 +3,7 @@
 :root {
   --background: #EFEFEF;
   --foreground: #0D1821;
+  --foreground-light: #EFEFEF;
   --card-background: #F9F9F9;
   --primary: #7FC8F8;
   --primary-darker: #5AA9E6;
@@ -18,6 +19,7 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-foreground-light: var(--foreground-light);
   --color-card-background: var(--card-background);
   --color-primary: var(--primary);
   --color-primary-darker: var(--primary-darker);
