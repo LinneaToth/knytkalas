@@ -1,18 +1,13 @@
 "use client";
+import Button from "@/components/ui/Button";
 import { signIn } from "@/data/auth/auth-client";
-import { useSession } from "@/data/auth/auth-client";
 
-export function GoogleSignInButton() {
-  const { data } = useSession();
+export function GoogleLogInButton() {
   return (
-    <>
-      {!data && (
-        <button
-          className="cursor-pointer  bg-green-700 text-white"
-          onClick={() => signIn.social({ provider: "google" })}>
-          Sign in with Google
-        </button>
-      )}
-    </>
+    <Button
+      variant="success"
+      onClick={() => signIn.social({ provider: "google" })}>
+      Sign in with Google
+    </Button>
   );
 }
