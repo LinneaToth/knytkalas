@@ -178,10 +178,12 @@ Found a couple of hours in the evening. Added missing pages to links from landin
 
 ## [2026-07-07]
 
-(3h)
+(3h +1h)
 
 Refined the "move to the top of the home page" functionality of the logo, by moving it to an invididual component, "use client" and make use of the window element. I still have an anchor page on "about" which looks a bit messy in the URL, it is not in the top of my backlog but it is there.
 
 ![WIP landing page](./img/13.png)
 
-There is a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.
+Kept working on the landing page. Spent some time on stacking order and a switch fallthroug-bug. I have a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.
+
+Worked on the redirects. To avoid people introducing absolute redirects to other places through my auth, I wrote a little util that validates paths. I spent some time chatting with both Claude and Gemini on the design of this.
