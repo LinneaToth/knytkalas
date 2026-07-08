@@ -1,33 +1,16 @@
-import { Account, Session } from "better-auth";
 import type { IssueType } from "@/generated/prisma";
 
-export type User = {
-  id: string;
-  createdAt?: Date;
-  email: string;
+export type EventData = { occasion: string; date: Date; id: number };
+
+export type UserData = {
   name: string;
-  sentInvites?: Invite[];
-  receivedInvites?: Invite[];
-  hostedEvents?: Event[];
-  avoids: IssueType[];
-  emailVerified?: boolean;
-  image?: string;
-  updatedAt?: Date;
-  sessions?: Session[];
-  accounts?: Account[];
+  email: string;
+  onboarded: boolean;
+  id: string;
+  avoids?: IssueType[];
 };
 
 export type NewUser = {
   name: string;
   avoids: IssueType[];
-};
-
-export type Invite = {
-  placeholder: string;
-  //WIP
-};
-
-export type Event = {
-  occasion: string;
-  //WIP
 };

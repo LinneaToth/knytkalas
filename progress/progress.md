@@ -178,10 +178,26 @@ Found a couple of hours in the evening. Added missing pages to links from landin
 
 ## [2026-07-07]
 
-(3h)
+(3h +1h)
 
 Refined the "move to the top of the home page" functionality of the logo, by moving it to an invididual component, "use client" and make use of the window element. I still have an anchor page on "about" which looks a bit messy in the URL, it is not in the top of my backlog but it is there.
 
 ![WIP landing page](./img/13.png)
 
-There is a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.
+Kept working on the landing page. Spent some time on stacking order and a switch fallthroug-bug. I have a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.
+
+Worked on the redirects. To avoid people introducing absolute redirects to other places through my auth, I wrote a little util that validates paths. I spent some time chatting with both Claude and Gemini on the design and functionality of this.
+
+## [2026-07-08]
+
+(2.5h)
+
+Today, I tackled the previously non-existing dashboard. Created UI components and some utils, working with mock data. Layout itself is scaffolded with tailwind grid + flex. Still a lot of tweaking to be done with the UI, but I'm aiming for a functional app before polishing. No responsiveness in place whatsoever. Next step is setting up some services.
+
+![WIP dashboard](./img/14.png)
+
+I forgot about the scope I had set for this particular branch, and happened to do some off topic work in "signup-login". Worth noticing and correcting in future work, however as I am soloing this it doesn't really matter past the slight annoyance.
+
+In my previous projects, where I have worked with databases and backends, I set up scripts for seeding mock data in a db. This time I took the shortcut of adding some stuff manually to the events table through DBeaver's GUI.
+
+So where are we, now.. There is a skeleton for a landing page; same goes for dashboard. Needs work and refinement, but we have something. Dashboard loads signed in user's own hosted events. Events attending are still just placeholders. Sign in and sign up with google works!

@@ -2,6 +2,7 @@
 import { signOut } from "@/data/auth/auth-client";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/data/auth/auth-client";
+import Button from "@/components/ui/Button";
 
 export function SignOutButton() {
   const { data } = useSession();
@@ -16,11 +17,9 @@ export function SignOutButton() {
   return (
     <>
       {data && (
-        <button
-          className="cursor-pointer bg-blue-700 text-white"
-          onClick={handleSignOut}>
+        <Button variant="ghost" onClick={handleSignOut}>
           Sign out
-        </button>
+        </Button>
       )}
     </>
   );

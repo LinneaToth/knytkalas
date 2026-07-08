@@ -23,7 +23,7 @@ export default function Hero() {
             </article>
           </div>
 
-          <nav className="md: flex w-full max-w-240 items-center justify-end gap-3 p-7 md:pr-25">
+          <nav className="flex w-full max-w-240 items-center justify-end gap-3 p-7 md:pr-25">
             <Button variant="solid" size="l">
               create event
             </Button>

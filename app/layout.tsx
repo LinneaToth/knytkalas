@@ -38,9 +38,9 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${poppins.variable} ${bagelFatOne.variable} min-h-screen overscroll-x-none scroll-smooth antialiased`}
+      className={`${poppins.variable} ${bagelFatOne.variable} overscroll-x-none scroll-smooth antialiased`}
     >
-      <body className="flex min-h-screen flex-col justify-between overscroll-x-none">
+      <body className="flex h-screen flex-col justify-between overscroll-x-none">
         {" "}
         <NavBar mode={currentUser ? "signedin" : "notSignedIn"} />
         <main className="bg-background flex-1 pt-16"> {children}</main>
