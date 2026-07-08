@@ -1,9 +1,9 @@
-import { Event as PrismaEvent } from "@/generated/prisma";
+import { EventData } from "@/types/entityTypes";
 import EventCard from "./EventCard";
 import { orderByDate } from "../utils/orderByDate";
 
 type Props = {
-  events: PrismaEvent[];
+  events: EventData[];
 };
 
 export default function EventList({ events }: Props) {

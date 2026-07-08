@@ -3,6 +3,7 @@ import EventList from "@/features/dashboard/components/EventList";
 import DashboardMenu from "@/features/dashboard/components/DashboardMenu";
 import FeatureHeadline from "@/components/ui/FeatureHeadline";
 import HostEventCta from "@/features/dashboard/components/HostEventCta";
+import { getHostedEvents } from "@/features/dashboard/services/getHostedEvents";
 
 const mockEvents: PrismaEvent[] = [
   {
@@ -53,34 +54,9 @@ const mockEvents: PrismaEvent[] = [
   },
 ];
 
-const hostMockEvents: PrismaEvent[] = [
-  {
-    id: 101,
-    createdAt: new Date(),
-    occasion: "Brunch mot söndagsångest",
-    description:
-      "Vem orkar måndag? Vi dränker måndagsångesten i mimosa, pannkakor och alldeles för mycket lönnsirap.",
-    activeCategories: ["MAIN", "SALAD", "DESSERT"],
-    date: new Date("2026-10-04T11:00:00"),
-    location: "Café Mys, Götgatan",
-    responseDeadline: new Date("2026-10-02"),
-    hostId: "host-brunch-789",
-  },
-  {
-    id: 102,
-    createdAt: new Date(),
-    occasion: "Spelkväll",
-    description:
-      "Vänskaper kommer att sättas på prov i Monopoly och Settlers. Förloraren diskar.",
-    activeCategories: ["MAIN", "SALAD", "DESSERT"],
-    date: new Date("2026-11-14T18:00:00"),
-    location: "Hemma hos Linus, Lgh 4B",
-    responseDeadline: new Date("2026-11-12"),
-    hostId: "host-gamer-999",
-  },
-];
+export default async function Dashboard() {
+  const hostedEvents = await getHostedEvents();
 
-export default function Dashboard() {
   return (
     <div className="grid h-full max-w-350 grid-cols-4 grid-rows-[auto_1fr]">
       <header className="col-span-2 col-start-2 row-start-1 p-10">
@@ -95,7 +71,7 @@ export default function Dashboard() {
       </section>
       <section className="col-span-1 col-start-3 row-start-2 pr-10">
         <h2 className="mb-5">Hosting</h2>
-        <EventList events={hostMockEvents} />
+        <EventList events={hostedEvents} />
       </section>
       <section className="col-span-1 col-start-4 row-start-2 pr-10">
         <HostEventCta />

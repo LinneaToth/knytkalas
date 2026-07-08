@@ -195,3 +195,9 @@ Worked on the redirects. To avoid people introducing absolute redirects to other
 Today, I tackled the previously non-existing dashboard. Created UI components and some utils, working with mock data. Layout itself is scaffolded with tailwind grid + flex. Still a lot of tweaking to be done with the UI, but I'm aiming for a functional app before polishing. No responsiveness in place whatsoever. Next step is setting up some services.
 
 ![WIP dashboard](./img/14.png)
+
+I forgot about the scope I had set for this particular branch, and happened to do some off topic work in "signup-login". Worth noticing and correcting in future work, however as I am soloing this it doesn't really matter past the slight annoyance.
+
+In my previous projects, where I have worked with databases and backends, I set up scripts for seeding mock data in a db. This time I took the shortcut of adding some stuff manually to the events table through DBeaver's GUI.
+
+So where are we, now.. There is a skeleton for a landing page; same goes for dashboard. Needs work and refinement, but we have something. Dashboard loads signed in user's own hosted events. Events attending are still just placeholders. Sign in and sign up with google works!

@@ -1,8 +1,8 @@
-import { Event as PrismaEvent } from "@/generated/prisma";
+import { EventData } from "@/types/entityTypes";
 import { borderColor } from "../utils/borderColor";
 
 type Props = {
-  event: PrismaEvent;
+  event: EventData;
 };
 
 export default function EventCard({ event }: Props) {

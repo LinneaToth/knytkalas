@@ -3,9 +3,11 @@ import { useSession } from "@/data/auth/auth-client";
 import Form from "next/form";
 import { onboard } from "../services/onboard";
 import { IssueType } from "@/generated/prisma";
+import { useRouter } from "next/navigation";
 
 export default function OnboardingForm() {
   const { data } = useSession();
+  const router = useRouter();
 
   async function handleAction(formData: FormData) {
     const user = {
@@ -15,6 +17,7 @@ export default function OnboardingForm() {
         .map((value) => String(value) as IssueType),
     };
     await onboard(user);
+    router.push("/dashboard");
   }
 
   return (
@@ -39,7 +42,7 @@ export default function OnboardingForm() {
             );
           })}
         </fieldset>
-        <button type="submit" className="bg-amber-300 cursor-pointer">
+        <button type="submit" className="cursor-pointer bg-amber-300">
           Join the party!
         </button>
       </Form>

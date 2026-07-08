@@ -26,7 +26,4 @@ export const getUser = async (id: string) => {
   };
 
   return userData;
-
-  //Curate the data and only return what the app might need. Make certain to pay attention to if the person is onboarded or not.
-  //needs onboarding: minimal info (id, email), onboarded: full profile (avoids, events and invites etc)
 };
