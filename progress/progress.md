@@ -186,4 +186,12 @@ Refined the "move to the top of the home page" functionality of the logo, by mov
 
 Kept working on the landing page. Spent some time on stacking order and a switch fallthroug-bug. I have a very crude landing page now, which obviously needs refinement. I will leave it as is, for now, while I focus on scaffolding the rest of the app and its functionality.
 
-Worked on the redirects. To avoid people introducing absolute redirects to other places through my auth, I wrote a little util that validates paths. I spent some time chatting with both Claude and Gemini on the design of this.
+Worked on the redirects. To avoid people introducing absolute redirects to other places through my auth, I wrote a little util that validates paths. I spent some time chatting with both Claude and Gemini on the design and functionality of this.
+
+## [2026-07-08]
+
+(2.5h)
+
+Today, I tackled the previously non-existing dashboard. Created UI components and some utils, working with mock data. Layout itself is scaffolded with tailwind grid + flex. Still a lot of tweaking to be done with the UI, but I'm aiming for a functional app before polishing. No responsiveness in place whatsoever. Next step is setting up some services.
+
+![WIP dashboard](./img/14.png)

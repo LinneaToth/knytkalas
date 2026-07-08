@@ -1,4 +1,13 @@
 export const isPathSafe = (requestedPath: string): boolean => {
+  const validPaths = [
+    "",
+    "login",
+    "onboarding",
+    "dashboard",
+    "createEvent",
+    "event",
+  ];
+
   if (!requestedPath) return false;
 
   let decodedPath;
@@ -15,15 +24,6 @@ export const isPathSafe = (requestedPath: string): boolean => {
 
   const noQueriesPath = decodedPath.split("?")[0];
   const basePath = noQueriesPath.split("/")[1];
-
-  const validPaths = [
-    "",
-    "login",
-    "onboarding",
-    "dashboard",
-    "createEvent",
-    "event",
-  ];
 
   return validPaths.includes(basePath);
 };

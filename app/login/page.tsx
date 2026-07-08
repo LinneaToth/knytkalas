@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { GoogleLogInButton } from "@/features/auth/components/GoogleLogInButton";
 
 export default function LoginPage() {
-  const callbackUrl = useSearchParams().get("target-url") || "/";
+  const callbackUrl = "/" + useSearchParams().get("target-url") || "/";
 
   return (
     <main className="flex flex-col items-center justify-center">
