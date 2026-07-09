@@ -1,5 +1,6 @@
 "use client";
-import Button from "@/components/ui/Button";
+import { LogIn } from "lucide-react";
+import Button from "@/ui/components/Button";
 import { signIn } from "@/data/auth/auth-client";
 import { isPathSafe } from "../utils/isPathSafe";
 
@@ -15,8 +16,12 @@ export function GoogleLogInButton({ callbackUrl }: Props) {
     callbackURL: pathIsSafe ? url : "/",
   };
   return (
-    <Button variant="success" onClick={() => signIn.social(config)}>
-      Sign in with Google
+    <Button
+      variant="success"
+      onClick={() => signIn.social(config)}
+      variant="dark"
+    >
+      <LogIn /> Sign in with Google
     </Button>
   );
 }

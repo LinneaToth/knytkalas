@@ -4,7 +4,7 @@ import "./globals.css";
 import NavBar from "@/features/pageFrame/components/NavBar";
 import Footer from "@/features/pageFrame/components/Footer";
 import { getUser } from "@/data/dal/user/getUser";
-import { getSessionUserId } from "@/data/auth/getSessionUserId";
+import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 
 const poppins = Poppins({
   variable: "--font-poppins",

@@ -1,6 +1,6 @@
 import Image from "next/image";
-import Button from "@/components/ui/Button";
-import FeatureHeadline from "@/components/ui/FeatureHeadline";
+import Button from "@/ui/components/Button";
+import FeatureHeadline from "@/ui/components/FeatureHeadline";
 
 export default function Hero() {
   return (
@@ -24,8 +24,8 @@ export default function Hero() {
           </div>
 
           <nav className="flex w-full max-w-240 items-center justify-end gap-3 p-7 md:pr-25">
-            <Button variant="solid" size="l">
-              create event
+            <Button variant="solid" size="l" href="/onboarding">
+              join the party
             </Button>
             <a href="#about">
               <Button variant="outline" size="l">

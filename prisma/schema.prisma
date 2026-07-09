@@ -92,6 +92,7 @@ model Event {
   responseDeadline DateTime?
   host             User           @relation("HostedEvents", fields: [hostId], references: [id])
   hostId           String
+  deletedAt        DateTime?     
 }
 
 model Session {

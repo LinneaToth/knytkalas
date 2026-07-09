@@ -2,7 +2,7 @@
 import { signOut } from "@/data/auth/auth-client";
 import { useRouter } from "next/navigation";
 import { useSession } from "@/data/auth/auth-client";
-import Button from "@/components/ui/Button";
+import Button from "@/ui/components/Button";
 
 export function SignOutButton() {
   const { data } = useSession();

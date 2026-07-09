@@ -1,31 +1,36 @@
-"use client";
 import OnboardingForm from "@/features/onboarding/components/OnboardingForm";
-import { useEffect } from "react";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
-import { useAuthRedirect } from "@/features/auth/hooks/useAuthRedirect";
 import { GoogleLogInButton } from "@/features/auth/components/GoogleLogInButton";
+import ContentBox from "@/ui/components/ContentBox";
+import FeatureHeadline from "@/ui/components/FeatureHeadline";
+import { isPathSafe } from "@/features/auth/utils/isPathSafe";
+import { redirect } from "next/navigation";
+import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 
-export default function OnboardingPage() {
-  const searchParams = useSearchParams();
-  const callbackUrl = "/" + (searchParams.get("target-url") || "");
-  const { isLoading, currentUser } = useAuthRedirect(callbackUrl);
-  const router = useRouter();
+export default async function OnboardingPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>; //type from https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional
+}) {
+  const params = await searchParams;
+  const targetParam = params["target-url"];
+  const target = "/" + targetParam;
+  const callbackUrl = isPathSafe(target) ? target : "/";
+  const user = await getCurrentUser();
 
-  useEffect(() => {
-    if (!isLoading) {
-      if (currentUser?.onboarded) {
-        router.push(callbackUrl);
-      }
-    }
-  }, [isLoading, callbackUrl, currentUser?.onboarded, router]);
-
-  if (isLoading) {
-    return <main className="flex items-center justify-center">Loading...</main>;
+  if (user?.onboarded) {
+    redirect(callbackUrl);
   }
 
-  if (currentUser?.onboarded) return null;
-  if (currentUser) return <OnboardingForm />;
-
-  if (!currentUser) return <GoogleLogInButton />;
+  return (
+    <main className="flex h-full items-center justify-center">
+      {" "}
+      <ContentBox>
+        <FeatureHeadline extraStyling="-mt-20 mb-5" size="medium">
+          Join the party!
+        </FeatureHeadline>
+        {user && <OnboardingForm />}
+        {!user && <GoogleLogInButton />}
+      </ContentBox>
+    </main>
+  );
 }

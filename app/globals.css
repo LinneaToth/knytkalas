@@ -3,10 +3,11 @@
 :root {
   --background: #EFEFEF;
   --foreground: #0D1821;
-  --foreground-light: #EFEFEF;
+  --foreground-light: #ffffff;
   --card-background: #F9F9F9;
   --primary: #7FC8F8;
   --primary-darker: #5AA9E6;
+  --primary-darkest: #304C89;
   --primary-foreground: #0D1821;
   --secondary: #FF6392;
   --secondary-foreground: #0D1821;
@@ -14,6 +15,7 @@
   --accent-foreground: #304C89;
   --success: #40C9A2;
   --success-foreground: #0D1821;
+  --inactive: #5a5c5e;
 }
 
 @theme inline {
@@ -23,6 +25,7 @@
   --color-card-background: var(--card-background);
   --color-primary: var(--primary);
   --color-primary-darker: var(--primary-darker);
+  --color-primary-darkest: var(--primary-darkest);
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
@@ -30,8 +33,10 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-inactive: var(--inactive);
   --font-sans: var(--font-poppins);
   --font-bagel: var(--font-bagel);
+
 }
 
 h1 {
@@ -43,7 +48,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-weight: 700;
+  font-weight: 500;
 }
 
 /* 

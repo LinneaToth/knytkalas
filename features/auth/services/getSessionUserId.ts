@@ -1,8 +1,9 @@
 "server-only";
-import { auth } from "./auth";
+import { cache } from "react";
+import { auth } from "../../../data/auth/auth";
 import { headers } from "next/headers";
 
-export const getSessionUserId = async () => {
+export const getSessionUserId = cache(async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
@@ -12,4 +13,4 @@ export const getSessionUserId = async () => {
   const { id } = session.user;
 
   return id;
-};
+});

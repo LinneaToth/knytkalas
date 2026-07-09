@@ -1,6 +1,11 @@
 import type { IssueType } from "@/generated/prisma";
 
-export type EventData = { occasion: string; date: Date; id: number };
+export type EventData = {
+  occasion: string;
+  date: Date;
+  id: number;
+  deletedAt?: Date;
+};
 
 export type UserData = {
   name: string;

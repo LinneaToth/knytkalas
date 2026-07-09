@@ -4,7 +4,7 @@ import { ReactNode, ButtonHTMLAttributes } from "react";
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   size?: "s" | "m" | "l";
-  variant?: "solid" | "outline" | "ghost" | "cta" | "success";
+  variant?: "solid" | "outline" | "ghost" | "cta" | "success" | "dark";
   href?: string;
   onClick?: () => void;
 }
@@ -17,7 +17,7 @@ export default function Button({
   onClick,
 }: Props) {
   let styling =
-    "lowercase border-1 font-semibold transition-colors duration-300 focus:outline-none cursor-pointer active:scale-95 ";
+    " border-1 font-semibold transition-colors duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-5 ";
 
   switch (size) {
     case "s":
@@ -50,6 +50,10 @@ export default function Button({
     case "success":
       styling +=
         " border-transparent bg-success text-foreground hover:brightness-95";
+      break;
+    case "dark":
+      styling +=
+        " border-transparent bg-primary-darkest text-foreground-light hover:brightness-95";
       break;
   }
 

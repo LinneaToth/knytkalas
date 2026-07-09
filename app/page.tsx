@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import { getSessionUserId } from "@/data/auth/getSessionUserId";
+import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 import { getUser } from "@/data/dal/user/getUser";
 import LandingPage from "@/features/landingpage/components/LandingPage";
 
@@ -12,6 +12,7 @@ export default async function Home() {
   }
 
   const user = await getUser(userId);
-  if (!user.onboarded) redirect("/onboarding");
-  redirect("/dashboard");
+  if (user.onboarded) redirect("/dashboard");
+
+  return <LandingPage />;
 }

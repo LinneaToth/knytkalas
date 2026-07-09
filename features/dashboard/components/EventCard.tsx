@@ -7,7 +7,7 @@ type Props = {
 
 export default function EventCard({ event }: Props) {
   const { occasion, date } = event;
-  const accent = borderColor(date);
+  const accent = borderColor(event);
 
   return (
     <article

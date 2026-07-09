@@ -2,7 +2,7 @@
 
 import prisma from "@/prisma/utils/prismaUtils";
 import { getUser } from "./getUser";
-import { getSessionUserId } from "@/data/auth/getSessionUserId";
+import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 
 import type { NewUser } from "@/types/entityTypes";
 

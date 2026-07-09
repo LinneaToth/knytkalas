@@ -1,7 +1,7 @@
 import { Event as PrismaEvent } from "@/generated/prisma";
 import EventList from "@/features/dashboard/components/EventList";
 import DashboardMenu from "@/features/dashboard/components/DashboardMenu";
-import FeatureHeadline from "@/components/ui/FeatureHeadline";
+import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import HostEventCta from "@/features/dashboard/components/HostEventCta";
 import { getHostedEvents } from "@/features/dashboard/services/getHostedEvents";
 
@@ -16,6 +16,7 @@ const mockEvents: PrismaEvent[] = [
     location: "123 Maple St",
     responseDeadline: new Date("2026-08-10"),
     hostId: "some-cuid-string",
+    deletedAt: new Date(),
   },
   {
     id: 2354,
@@ -27,6 +28,7 @@ const mockEvents: PrismaEvent[] = [
     location: "123 Maple St",
     responseDeadline: new Date("2026-08-10"),
     hostId: "some-cuid-string",
+    deletedAt: null,
   },
   {
     id: 3,
@@ -39,6 +41,7 @@ const mockEvents: PrismaEvent[] = [
     location: "Ängsvägen 7, Skärgården",
     responseDeadline: new Date("2026-06-01"),
     hostId: "host-midsommar-123",
+    deletedAt: null,
   },
   {
     id: 4,
@@ -51,6 +54,7 @@ const mockEvents: PrismaEvent[] = [
     location: "TechHub, Studio 4",
     responseDeadline: new Date("2026-09-05"),
     hostId: "host-coder-456",
+    deletedAt: null,
   },
 ];
 
@@ -66,7 +70,7 @@ export default async function Dashboard() {
         <DashboardMenu />
       </section>
       <section className="col-span-1 col-start-2 row-start-2 px-10">
-        <h2 className="mb-5">Attending</h2>
+        <h2 className="mb-5">Invited</h2>
         <EventList events={mockEvents} />
       </section>
       <section className="col-span-1 col-start-3 row-start-2 pr-10">

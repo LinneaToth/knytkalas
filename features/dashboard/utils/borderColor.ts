@@ -1,5 +1,11 @@
-export const borderColor = (date: Date): string => {
-  const month = date.getMonth();
+import { EventData } from "@/types/entityTypes";
+
+export const borderColor = (event: EventData): string => {
+  const month = event.date.getMonth();
+
+  if (event.deletedAt) {
+    return "border-l-inactive";
+  }
 
   const borderClasses = {
     primary: "border-l-primary",

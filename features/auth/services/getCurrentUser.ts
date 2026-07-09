@@ -2,10 +2,12 @@
 
 "use server";
 import { getUser } from "@/data/dal/user/getUser";
+import { getSessionUserId } from "./getSessionUserId";
 
-export const getCurrentUser = async (id: string) => {
+export const getCurrentUser = async () => {
   try {
-    return await getUser(id);
+    const userId = await getSessionUserId();
+    return await getUser(userId);
   } catch {
     return undefined;
   }

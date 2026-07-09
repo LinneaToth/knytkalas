@@ -1,5 +1,5 @@
 import { getEventsByUser } from "@/data/dal/event/getEventsByUser";
-import { getSessionUserId } from "@/data/auth/getSessionUserId";
+import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 
 export const getHostedEvents = async () => {
   const userId = await getSessionUserId();

@@ -190,7 +190,7 @@ Worked on the redirects. To avoid people introducing absolute redirects to other
 
 ## [2026-07-08]
 
-(2.5h)
+(2.5h + 1.5h + 2h)
 
 Today, I tackled the previously non-existing dashboard. Created UI components and some utils, working with mock data. Layout itself is scaffolded with tailwind grid + flex. Still a lot of tweaking to be done with the UI, but I'm aiming for a functional app before polishing. No responsiveness in place whatsoever. Next step is setting up some services.
 
@@ -201,3 +201,62 @@ I forgot about the scope I had set for this particular branch, and happened to d
 In my previous projects, where I have worked with databases and backends, I set up scripts for seeding mock data in a db. This time I took the shortcut of adding some stuff manually to the events table through DBeaver's GUI.
 
 So where are we, now.. There is a skeleton for a landing page; same goes for dashboard. Needs work and refinement, but we have something. Dashboard loads signed in user's own hosted events. Events attending are still just placeholders. Sign in and sign up with google works!
+
+And, a git win, I did remember to squash during merge this time 😁
+
+## [2026-07-09]
+
+CRUD for events. Not as straight forward as I first thought. What, delete, done. Right? No. Cascading deletes? Stale references? FK errors from Prisma? What happens on the guest's side? Do their invites just disappear? Or does the UI reflect that the event has been cancelled? Brilliant idea, just deactivate it! But storage..? I'm in deep water. I put all of this into Claude, which helped me sort my thoughts. In the end, it was simple as adding an optional field to the Event schema: deletedAt DateTime? ✅
+
+`npx prisma migrate dev --name add_event_deleted_at` for migration
+(also had to rebuild the prisma client, always forget that and have to look it up!)
+
+`pnpm add lucide-react` Added open sourced Lucide for icons.
+
+This is the first full stack app I build from scratch in Next, and I'm learning while I go along. Tried to come up with more ways to utilize AI, and asked Claude how well my project utilizes Next:
+
+> What's working well
+>
+> - Real Server Components throughout — app/layout.tsx is async and fetches session data directly server-side, no unnecessary client wrapper.
+> - next/font/google wired properly via CSS variables (self-hosted fonts, no layout shift).
+> - next/image in use for the hero.
+> - Server Actions ("use server") genuinely used for getCurrentUser, onboard, etc. — not faked via API routes, which is the idiomatic Next 16 way to do mutations.
+> - Custom not-found.tsx.
+>
+> Missing — natural fits you haven't reached for yet
+>
+> - No middleware.ts anywhere. Your login redirect (useAuthRedirect.ts) is entirely client-side: "use client" → useEffect → fetch user → router.push. That means the page renders once, then redirects — a visible flash. Middleware runs before the page renders at all, so an unauthenticated user gets redirected server-side with no flash. This is the single highest-value gap to close.
+> - No loading.tsx / error.tsx / Suspense anywhere. Riust blocks the whole page with nothing shown. Theseare file-based in App Router — dropping a loading.tsx next to a page.tsx is close to free.
+> - No per-page metadata. Only the root layout sets a title, so /dashboard, /login, etc. all share one browser-tab title.
+> - No revalidation strategy (revalidatePath/revalidatorth knowing about once you have mutations thatshould refresh cached data.
+>
+> One thing actively fighting Next conventions
+>
+> - Duplicate DB round-trips: app/layout.tsx calls getSessionUserId(), and getHostedEvents() (used separately on the dashboard page) calls it again. fetch() gets automatic per-request dma calls don't — so this is two real session lookupsper page load instead of one. Wrapping those DAL functions in React's cache() fixes it without restructuring anything.
+>
+> If you want the highest leverage for least effort, iuth redirect → loading.tsx on dashboard/event pages → cache() around the session lookups.
+
+I will _definitely_ adjust my redirects with middleware to avoid clunky reloads. Straight to the backlog. So is suspense for layout while loading, but most UI refinement is deliberately kepts for last. Priority is a working app. Caching only took an import and method call, so that I did immediately.
+
+So regarding middleware, docs tell me the middleware file convention in Next is deprecated and is now handled through proxy.js - which is more or less the same thing? [Spent some time with the docs](https://nextjs.org/docs/app/getting-started/proxy).
+
+[This video on Youtube](https://www.youtube.com/watch?v=QKzWMdve6oY) gave me some takeaways:
+
+- No auth in proxy
+- Multiple execution contexts in Next -> cannot have middleware in the middle of the "chaos"
+- Use it only for routing
+- Use react cache() to lessen the impact of calling a lot of functions from the DAL
+
+Also, the video offered a solution with better auth. I'll look into what I can recycle from that.
+
+![coding snippet](./img/reference_from_tobi_mei.png)
+
+I ran into the advertised issue of multiple execution context.
+
+[A lot of "spike time" today. Read up on session management among other things.](https://better-auth.com/docs/concepts/session-management).
+
+Server components are receiving searchParams automatically as props!
+
+I will surely need a lot of time to digest all this, but I can wrap up the day with gated routes in proxy.ts, which helped reduce the redirect logic I had in place (needless having the components mount and render, only to forward the user somewhere else).
+
+I deviated from the event CRUD plan I had, but since the outcome was another box ticked it's okay. Next time.
