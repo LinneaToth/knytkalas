@@ -4,7 +4,7 @@ export type EventData = {
   occasion: string;
   date: Date;
   id: number;
-  deletedAt?: Date;
+  deletedAt: Date | null;
 };
 
 export type UserData = {

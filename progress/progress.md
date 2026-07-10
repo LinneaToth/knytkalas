@@ -261,7 +261,9 @@ I will surely need a lot of time to digest all this, but I can wrap up the day w
 
 Got to close my next not-timeboxed-"sprint", "login/signup, landingpage exists". Good thing I deviated from the event CRUD plan I had for today, that will make for a great next chapter along with the rest of the CRUD-functionality I need!
 
-## [2026-07-09]
+## [2026-07-10]
+
+(7h)
 
 I love discovering little "gifts" here and there, in the frameworks and libraries I use. I struggle with something, and suddenly receive a gem of a tool that solves it! Today I am grateful for Prisma's different automatic types.
 
@@ -270,3 +272,20 @@ Powered through most of the DAL functionality for CRUD of users, events and invi
 Will implement the currently supported functions in the dashboard first.
 
 Also, If I have time I have plans for the UI. Going for a completely different look.
+
+Reorganised my dashboard routing, by moving event to a subroute. Moved some UI to a layout.tsx which subroutes will inherit. Looked into dynamic routing in next docs, doesn't look too intimidating. Made one for events based on id. Services check if people have a role at the event, before getting the details from DAL and passing them to the page. Spent quite some time on bug hunts.
+
+Some planning:
+When host invites, they write a name of their own for the recipient and get a shareable token. As soon as the invitee signs in from that, the name is replaced with whatever they have in their account. That way, the event will have a list of invited people as well as their status
+In the future, the app should probably have a friend/messaging feature and/or something elaborate, but this should work for now.
+
+2do, update the Schema with a name field:
+
+model Invite {
+...
+guestName String // host-written placeholder, e.g. "Cousin Bob"
+guestId String? // set once they sign in
+guest User? @relation(...)
+}
+
+When I get back from another week off, I recommend myself to start with reading all of the data to the event details page and add some functionality for the host. Send invites. Edit. Delete. And so on. Goodness I have a lot to implement. Good thing that's a problem for later. Cheers! 🌞
