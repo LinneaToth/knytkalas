@@ -2,15 +2,10 @@
 
 import prisma from "@/prisma/utils/prismaUtils";
 
-export const getInvitesByUser = async (
-  userId: string,
-  attendance: "sent" | "received",
-) => {
-  const key = attendance === "sent" ? "invById" : "guestId";
-
-  return await prisma.invite.findMany({
+export const getInvite = async (invId: number) => {
+  return await prisma.invite.findUnique({
     where: {
-      [key]: userId,
+      id: invId,
     },
     select: {
       id: true,
@@ -19,10 +14,10 @@ export const getInvitesByUser = async (
       invById: true,
       guestId: true,
       contributions: true,
-      eventId: true,
 
       event: {
         select: {
+          id: true,
           occasion: true,
           date: true,
           description: true,

@@ -6,15 +6,20 @@ type Props = {
 };
 
 export default function EventCard({ event }: Props) {
-  const { occasion, date } = event;
+  const { occasion, date, deletedAt } = event;
   const accent = borderColor(event);
 
   return (
     <article
       className={`bg-card-background text-foreground rounded-xl border-l-10 px-5 py-2 drop-shadow ${accent} cursor-pointer`}
     >
-      <h2>{occasion}</h2>
-      <p>{date.toLocaleDateString()}</p>
+      <h2>
+        {deletedAt && "Cancelled: "}
+        {occasion}
+      </h2>
+      <p className={`${deletedAt && "line-through"} `}>
+        {date.toLocaleDateString()}
+      </p>
     </article>
   );
 }

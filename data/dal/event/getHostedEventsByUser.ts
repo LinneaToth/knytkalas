@@ -2,7 +2,7 @@
 
 import prisma from "@/prisma/utils/prismaUtils";
 
-export const getEventsByUser = async (id: string) => {
+export const getHostedEventsByUser = async (id: string) => {
   const usersEvents = await prisma.event.findMany({
     where: { hostId: id },
   });
@@ -14,6 +14,7 @@ export const getEventsByUser = async (id: string) => {
       occasion: event.occasion,
       date: event.date,
       id: event.id,
+      deletedAt: event.deletedAt,
     };
   });
 

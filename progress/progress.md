@@ -259,4 +259,14 @@ Server components are receiving searchParams automatically as props!
 
 I will surely need a lot of time to digest all this, but I can wrap up the day with gated routes in proxy.ts, which helped reduce the redirect logic I had in place (needless having the components mount and render, only to forward the user somewhere else).
 
-I deviated from the event CRUD plan I had, but since the outcome was another box ticked it's okay. Next time.
+Got to close my next not-timeboxed-"sprint", "login/signup, landingpage exists". Good thing I deviated from the event CRUD plan I had for today, that will make for a great next chapter along with the rest of the CRUD-functionality I need!
+
+## [2026-07-09]
+
+I love discovering little "gifts" here and there, in the frameworks and libraries I use. I struggle with something, and suddenly receive a gem of a tool that solves it! Today I am grateful for Prisma's different automatic types.
+
+Powered through most of the DAL functionality for CRUD of users, events and invites. Haven't touched contributions yet.
+
+Will implement the currently supported functions in the dashboard first.
+
+Also, If I have time I have plans for the UI. Going for a completely different look.

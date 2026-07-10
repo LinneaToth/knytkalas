@@ -1,10 +1,9 @@
 "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
-import { any } from "better-auth";
 
-//Events are never actually deleted, since there are relations. However, the event data will be wiped.
+//Hard delete would mess up the database in terms of many hardwired relations.
 
-export const deleteEvent = async (id: number) => {
+export const softDeleteEvent = async (id: number) => {
   await prisma.event.update({
     where: {
       id: id,
