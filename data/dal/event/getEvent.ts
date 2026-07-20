@@ -19,6 +19,7 @@ export const getEvent = async (id: number) => {
     location: event.location,
     responseDeadline: event.responseDeadline,
     hostId: event.hostId,
+    deletedAt: event.deletedAt,
   };
 
   return eventData;

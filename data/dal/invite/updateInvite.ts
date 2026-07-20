@@ -11,6 +11,6 @@ export const updateInvite = async (
 ) => {
   return await prisma.invite.update({
     where: { id: id },
-    data: { ...inviteData, updatedAt: new Date() },
+    data: { ...inviteData },
   });
 };

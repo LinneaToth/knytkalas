@@ -27,7 +27,6 @@ export const softDeleteUser = async (userId: string) => {
   return await prisma.user.update({
     where: { id: userId },
     data: {
-      deletedAt: new Date(),
       email: `${userId}@deleted.user`,
       name: "Deleted User",
       image: null,

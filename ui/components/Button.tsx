@@ -7,6 +7,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "solid" | "outline" | "ghost" | "cta" | "success" | "dark";
   href?: string;
   onClick?: () => void;
+  width?: "full" | null;
 }
 
 export default function Button({
@@ -15,9 +16,12 @@ export default function Button({
   variant = "solid",
   href = "",
   onClick,
+  width,
 }: Props) {
   let styling =
-    " border-1 font-semibold transition-colors duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-5 ";
+    " border-1 font-semibold transition-colors duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-5 justify-center ";
+
+  if (width === "full") styling += " w-full ";
 
   switch (size) {
     case "s":

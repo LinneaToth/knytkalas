@@ -283,9 +283,27 @@ In the future, the app should probably have a friend/messaging feature and/or so
 
 model Invite {
 ...
-guestName String // host-written placeholder, e.g. "Cousin Bob"
-guestId String? // set once they sign in
+guestName String // host-written placeholder, "Bob"
+guestId String? // set once they sign up/in
 guest User? @relation(...)
 }
 
 When I get back from another week off, I recommend myself to start with reading all of the data to the event details page and add some functionality for the host. Send invites. Edit. Delete. And so on. Goodness I have a lot to implement. Good thing that's a problem for later. Cheers! 🌞
+
+## [2026-07-20]
+
+(7h)
+
+Started by adding the above guest name to Invite, did a db migration and a prisma client generation.
+
+Doing the form creation component, I'm facing some challenges with typing. IDE and AI are inferring deprecated types (FormEvent). Found the solution, changed to React.SubmitEvent<HTMLFormElement>. Also it will take some getting used to not needing the e.preventDefault and passing FormData directly.
+
+Created functional event details page. Shows occasion, description, date/time, response deadline countdown, location, host name. Reacts to whether it is in the past or has been cancelled. Host gets options to send invites (actually sending/sharing the invite doesn't exist yet, it just created an invite instance) and can toggle cancel/republish the event (with host endpoint auth check on the server side of things). Also shows guests, with a collapsable participants list.
+
+Events can be created by a form -> services -> DAL.
+
+Schemas were updated with guestName and totalGuests for Invite, and all of the categories are active per default on events.
+
+Spent some time on bug fixes and TS+Eslint complaints.
+
+Tomorrow, I will wire up functionality for sending and receiving invites, starting with an invite token landing page.

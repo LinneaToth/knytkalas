@@ -16,6 +16,7 @@
   --success: #40C9A2;
   --success-foreground: #0D1821;
   --inactive: #5a5c5e;
+  --focus: #FFFFFF;
 }
 
 @theme inline {
@@ -34,6 +35,7 @@
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
   --color-inactive: var(--inactive);
+  --color-focus: var(--focus);
   --font-sans: var(--font-poppins);
   --font-bagel: var(--font-bagel);
 

@@ -76,8 +76,10 @@ model Invite {
   invById       String
   guest         User?          @relation("ReceivedInvite", fields: [guestId], references: [id])
   guestId       String?
+  guestName     String
   contributions Contribution[]
   status        RsvpStatus     @default(PENDING)
+  totalGuests   Int            @default(1)
 }
 
 model Event {
@@ -86,7 +88,7 @@ model Event {
   occasion         String
   description      String?
   invites          Invite[]
-  activeCategories CategoryType[]
+  activeCategories CategoryType[] @default([STARTER, MAIN, SALAD, SIDE, BREAD, DESSERT, SNACK, DRINK, OTHER])
   date             DateTime
   location         String?
   responseDeadline DateTime?

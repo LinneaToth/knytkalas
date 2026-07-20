@@ -1,7 +1,7 @@
 import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import { getUsersEvents } from "@/features/dashboard/services/getUsersEvents";
 import EventList from "@/features/dashboard/components/EventList";
-import HostEventCta from "@/features/dashboard/components/HostEventCta";
+import HostEventCta from "@/features/dashboard/components/CreateEvent";
 
 export default async function Page() {
   const usersInvitedEvents = await getUsersEvents("guest");
@@ -22,6 +22,7 @@ export default async function Page() {
         <EventList events={usersHostedEvents} />
       </section>
       <section className="col-span-1 col-start-4 row-start-2 pr-10">
+        <h2>Create Event</h2>
         <HostEventCta />
       </section>
     </>
