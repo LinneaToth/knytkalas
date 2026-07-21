@@ -88,8 +88,7 @@ model Event {
   occasion         String
   description      String?
   invites          Invite[]
-  activeCategories CategoryType[] @default([STARTER, MAIN, SALAD, SIDE, BREAD, DESSERT, SNACK, DRINK, OTHER])
-  date             DateTime
+   date             DateTime
   location         String?
   responseDeadline DateTime?
   host             User           @relation("HostedEvents", fields: [hostId], references: [id])

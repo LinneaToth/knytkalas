@@ -8,7 +8,7 @@ import FeatureHeadline from "@/ui/components/FeatureHeadline";
 
 export default function LoginPage() {
   const searchParams = useSearchParams();
-  const callbackUrl = "/" + (searchParams.get("target-url") || "");
+  const callbackUrl = searchParams.get("target-url") || "";
 
   return (
     <main className="flex h-full flex-col items-center justify-center">

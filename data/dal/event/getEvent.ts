@@ -14,7 +14,7 @@ export const getEvent = async (id: number) => {
     id: event.id,
     createdAt: event.createdAt,
     description: event.description,
-    activeCategories: event.activeCategories,
+
     date: event.date,
     location: event.location,
     responseDeadline: event.responseDeadline,

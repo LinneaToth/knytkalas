@@ -6,6 +6,7 @@ export const isPathSafe = (requestedPath: string): boolean => {
     "dashboard",
     "createEvent",
     "event",
+    "invite",
   ];
 
   if (!requestedPath) return false;

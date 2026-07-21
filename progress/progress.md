@@ -292,7 +292,7 @@ When I get back from another week off, I recommend myself to start with reading 
 
 ## [2026-07-20]
 
-(7h)
+(8h)
 
 Started by adding the above guest name to Invite, did a db migration and a prisma client generation.
 
@@ -306,4 +306,22 @@ Schemas were updated with guestName and totalGuests for Invite, and all of the c
 
 Spent some time on bug fixes and TS+Eslint complaints.
 
-Tomorrow, I will wire up functionality for sending and receiving invites, starting with an invite token landing page.
+Have begin wiring up functionality for sending and receiving invites, starting with an invite token landing page.
+
+One of todays main takeaways was `connect` with Prisma, to link related records.
+
+## [2026-07-21]
+
+(3h + ?h)
+
+Ongoing struggle trying to find balance with AI. I want to ensure that I learn from this project, and I do enjoy coding, but I also realise that I am soon going to be ejected into a world that is heavily dependent on LLM accelleration. In side projects, I have left the reins to Claude. I think my current conclusion is that that approach requires a Big Design Up Front. Iterations are, in my limited experience, messy unless the direction and instructions are razor sharp to begin with. This project is very much a living process, being crafted as I go. Sure, I have my MVP-definition, but a lot of decisions are made underway. I do frequently ask for code reviews and discuss solutions. More than once, however, I have been given advice based on deprecated routines. Or in a manner that simply deviates from what I would like to build. More often than that, the advice is rock solid. This rant is not leading anywhere, other than describing my conundrum. It is useful but I'm not prepared to hand it the steering wheel. In an episode of FOMO I had it generate a component for sharing on socials. Which I deleted. However! Claude is **extremely** helpful in debugging! ⭐
+
+Spent a lot of time today on tracking flows in different scenarios. User needs different redirects, depending on whether they have a session, are onboarded or not and so on. Also, I need to keep in mind that I don't want the client components rerouting people, at risk of getting hijacked with malicious URL's. That is taken care of on the server side. All in all, a bit challenging, but fun!
+
+![Visitor flow to invite page](./img/15.png)
+
+The last step is a bit clunky, note to future self and the backlog, maybe just auto claim the invite and send user directly to the event page?
+
+I have no idea if this is legit or bad practice, but I absolutely love this pattern: `Awaited<ReturnType<typeof getInviteByToken>>` for typing obscure function returns. It automatically stays in sync, and if it works, it works, yes?
+
+Made a decision to scrap the "active categories" thing. I'll hardcode a bunch of categories for people to choose from and that's it.

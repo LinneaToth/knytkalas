@@ -4,10 +4,16 @@ import Form from "next/form";
 import { onboard } from "../services/onboard";
 import { IssueType } from "@/generated/prisma";
 import { useRouter } from "next/navigation";
+import { isPathSafe } from "@/features/auth/utils/isPathSafe";
 
-export default function OnboardingForm() {
+type Props = {
+  callbackUrl: string;
+};
+
+export default function OnboardingForm({ callbackUrl = "/dashboard" }: Props) {
   const { data } = useSession();
   const router = useRouter();
+  const url = isPathSafe(callbackUrl) ? callbackUrl : "/dashboard";
 
   async function handleAction(formData: FormData) {
     const user = {
@@ -17,7 +23,7 @@ export default function OnboardingForm() {
         .map((value) => String(value) as IssueType),
     };
     await onboard(user);
-    router.push("/dashboard");
+    router.push(url);
   }
 
   return (

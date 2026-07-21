@@ -23,7 +23,6 @@ export const getInvitesByEvent = async (eventId: number) => {
           occasion: true,
           date: true,
           description: true,
-          activeCategories: true,
           responseDeadline: true,
           deletedAt: true,
         },

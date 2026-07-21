@@ -11,7 +11,11 @@ export async function proxy(request: NextRequest) {
     return NextResponse.redirect(new URL("/", request.url));
   }
 
-  if (!session && !PUBLIC_ROUTES.has(pathname)) {
+  if (
+    !session &&
+    !PUBLIC_ROUTES.has(pathname) &&
+    !pathname.startsWith("/invite/")
+  ) {
     return NextResponse.redirect(new URL("/login", request.url));
   }
 

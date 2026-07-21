@@ -1,11 +1,10 @@
 "server-only";
 
 import prisma from "@/prisma/utils/prismaUtils";
-
-export const getInvite = async (invId: number) => {
+export const getInviteByToken = async (token: string) => {
   return await prisma.invite.findUnique({
     where: {
-      id: invId,
+      token: token,
     },
     select: {
       id: true,
@@ -13,7 +12,7 @@ export const getInvite = async (invId: number) => {
       status: true,
       invById: true,
       guestId: true,
-      contributions: true,
+      guestName: true,
 
       event: {
         select: {
@@ -23,6 +22,13 @@ export const getInvite = async (invId: number) => {
           description: true,
           responseDeadline: true,
           deletedAt: true,
+          location: true,
+          host: {
+            select: {
+              id: true,
+              name: true,
+            },
+          },
         },
       },
     },

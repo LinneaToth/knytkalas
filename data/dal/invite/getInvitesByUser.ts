@@ -26,7 +26,6 @@ export const getInvitesByUser = async (
           occasion: true,
           date: true,
           description: true,
-          activeCategories: true,
           responseDeadline: true,
           deletedAt: true,
         },

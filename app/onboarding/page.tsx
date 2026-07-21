@@ -12,8 +12,11 @@ export default async function OnboardingPage({
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>; //type from https://nextjs.org/docs/app/api-reference/file-conventions/page#searchparams-optional
 }) {
   const params = await searchParams;
-  const targetParam = params["target-url"];
-  const target = "/" + targetParam;
+  const targetParam = "" + params["target-url"];
+  const slashFreeTarget = targetParam?.startsWith("/")
+    ? targetParam.slice(1)
+    : targetParam;
+  const target = "/" + slashFreeTarget;
   const callbackUrl = isPathSafe(target) ? target : "/";
   const user = await getCurrentUser();
 
@@ -28,8 +31,12 @@ export default async function OnboardingPage({
         <FeatureHeadline extraStyling="-mt-20 mb-5" size="medium">
           Join the party!
         </FeatureHeadline>
-        {user && <OnboardingForm />}
-        {!user && <GoogleLogInButton />}
+        {user && <OnboardingForm callbackUrl={callbackUrl} />}
+        {!user && (
+          <GoogleLogInButton
+            callbackUrl={`/onboarding?target-url=${callbackUrl}`}
+          />
+        )}
       </ContentBox>
     </main>
   );
