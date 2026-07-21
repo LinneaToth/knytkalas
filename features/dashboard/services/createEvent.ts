@@ -1,15 +1,19 @@
 "use server";
 import { createEvent as createEventDAL } from "@/data/dal/event/createEvent";
-import { getCurrentUserId } from "@/features/auth/services/getCurrentUserId";
+import { createInvite as createInviteDAL } from "@/data/dal/invite/createInvite";
+import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 
 export const createEvent = async (formData: FormData) => {
   const occasion = formData.get("occasion") as string;
   const date = formData.get("date") as string;
 
   try {
-    const userId = await getCurrentUserId();
+    const user = await getCurrentUser();
 
-    if (!userId) throw new Error("Cannot create event without signed in user");
+    if (!user) throw new Error("Cannot create event without signed in user");
+
+    if (new Date(date) < new Date())
+      throw new Error("Event date must be in the future");
 
     const event = await createEventDAL({
       occasion,
@@ -19,10 +23,19 @@ export const createEvent = async (formData: FormData) => {
         : null,
       host: {
         connect: {
-          id: userId,
+          id: user.id,
         },
       },
     });
+
+    await createInviteDAL({
+      event: { connect: { id: event.id } },
+      invBy: { connect: { id: user.id } },
+      guest: { connect: { id: user.id } },
+      guestName: user?.name ?? "EVENT HOST",
+      status: "GOING",
+    });
+
     return event;
   } catch (error) {
     console.error("Error creating event:", error);

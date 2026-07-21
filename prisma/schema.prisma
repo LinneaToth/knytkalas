@@ -57,13 +57,14 @@ enum CategoryType {
 }
 
 model Contribution {
-  id       Int          @id @default(autoincrement())
-  invite   Invite       @relation(fields: [inviteId], references: [id])
-  inviteId Int
-  name     String
-  servings Int?
-  category CategoryType
-  contains IssueType[]
+  id          Int          @id @default(autoincrement())
+  invite      Invite       @relation(fields: [inviteId], references: [id])
+  inviteId    Int
+  name        String
+  servings    Int?
+  category    CategoryType
+  contains    IssueType[]
+  description String?
 }
 
 model Invite {

@@ -20,6 +20,7 @@ export const getInvitesByUser = async (
       guestId: true,
       contributions: true,
       eventId: true,
+      guestName: true,
 
       event: {
         select: {

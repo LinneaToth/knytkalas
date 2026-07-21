@@ -33,7 +33,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
   //if user is not host, add option to RSPV to the event
 
   return (
-    <div>
+    <>
       <h2>
         {eventHasBeen && "Past event - "}
         {event.deletedAt && "CANCELLED - "}
@@ -56,7 +56,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
       )}
       <p>{event.location}</p>
       <p>Host: {role === "host" ? "This is your event!" : event.hostName}</p>
-      <GuestList guests={event.guests} />
+
       {role === "host" && !eventHasBeen && (
         <>
           {!event.deletedAt && <CreateInvite eventId={event.id} />}
@@ -65,6 +65,6 @@ export default function EventDetails({ event, date, time, role }: Props) {
           </Button>
         </>
       )}
-    </div>
+    </>
   );
 }
