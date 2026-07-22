@@ -333,3 +333,21 @@ It struck me, that the event host didn't have any way to register contributions.
 Did a massive leap on contribution functionality today. Added DAL for CRUD, and two supporting services. There is a very rudimentary UI component, adding a list of contributions to the event page.
 
 I need to think the UI through tomorrow. I have been postponing it but it seems like it might be time.
+
+## [2026-07-22]
+
+(9h)
+
+[I heard that indexes make db queries faster](https://use-the-index-luke.com/sql/anatomy). With Prisma it is as easy as adding @@index rows to the schemas. So I did that, cross referencing Invites to their Event and two User relations. Same for Events (hostId) and Contribution (inviteId).
+
+Dropped my DB to get rid of messy placeholder data. `npx prisma migrate reset` Consolidated `getHostedEventsByUser` and `getInvitedEventsByUser` into one `getEventsByUser(id, role)`; they were nearly identical and we want to keep our code DRY, KISS and so on. Got rid of some hand written types from before, now that I have discovered the `Awaited<ReturnType<type of [methodName]>>`.
+
+Added RSVP counts via a small util.
+
+| BEFORE & DURING         | AT THE END OF THE DAY                     |
+| ----------------------- | ----------------------------------------- |
+| ![WIP UI](./img/16.png) | ![UI at the end of the day](./img/17.png) |
+
+Kept working on wiring up UI functionality. Rebuilt the event detail page and the event card. Also rebuilt the sidebar. Getting really tired of the color scheme by now, but at the moment the structure is my main focus. If I have time I'll make it look better.
+
+Tomorrow I'll make the RSVP response flow work!

@@ -2,11 +2,12 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import GuestList from "./GuestList";
 import CreateInvite from "./CreateInvite";
 import Button from "@/ui/components/Button";
 import { toggleCancelEvent } from "../services/toggleCancelEvent";
 import { getEventDetails } from "../services/getEventDetails";
+import { Users, CalendarDays, MapPin, Clock10 } from "lucide-react";
+import ContentBox from "@/ui/components/ContentBox";
 
 type EventDetails = Awaited<ReturnType<typeof getEventDetails>>;
 
@@ -33,29 +34,26 @@ export default function EventDetails({ event, date, time, role }: Props) {
   //if user is not host, add option to RSPV to the event
 
   return (
-    <>
+    <ContentBox styling="flex flex-col gap-6 rounded-2xl shadow-md md:col-span-2">
       <h2>
-        {eventHasBeen && "Past event - "}
-        {event.deletedAt && "CANCELLED - "}
-        {event.occasion}
+        {eventHasBeen && "Past event"}
+        {event.deletedAt && "Cancelled event"}
+        {!eventHasBeen && !event.deletedAt && "When & Where"}
       </h2>
       <p>{event.description}</p>
-      <p className={`${event.deletedAt ? "line-through" : ""}`}>{date}</p>
-      <p className={`${event.deletedAt ? "line-through" : ""}`}>
+      <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
+        {" "}
+        <CalendarDays /> {date}
+      </p>
+      <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
+        <Clock10 />
         Start time: {time}
       </p>
-      {!eventHasBeen && event.responseDeadline && (
-        <p>
-          Response deadline: {event.responseDeadline?.toLocaleDateString()}{" "}
-          {`(${Math.ceil(
-            (new Date(event.responseDeadline).getTime() -
-              new Date().getTime()) /
-              (1000 * 60 * 60 * 24),
-          )} days left)`}
-        </p>
-      )}
-      <p>{event.location}</p>
-      <p>Host: {role === "host" ? "This is your event!" : event.hostName}</p>
+      <p className="flex gap-3">
+        <MapPin /> {event.location ? event.location : "Location to be decided"}
+      </p>
+
+      <p>Hosted by: {role === "host" ? "You! " : event.hostName}</p>
 
       {role === "host" && !eventHasBeen && (
         <>
@@ -65,6 +63,6 @@ export default function EventDetails({ event, date, time, role }: Props) {
           </Button>
         </>
       )}
-    </>
+    </ContentBox>
   );
 }

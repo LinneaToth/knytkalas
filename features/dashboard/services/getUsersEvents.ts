@@ -1,21 +1,30 @@
 "use server";
 
-import { getHostedEventsByUser } from "@/data/dal/event/getHostedEventsByUser";
 import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
-import { getInvitedEventsByUser } from "@/data/dal/event/getInvitedEventsByUser";
+import { getEventsByUser } from "@/data/dal/event/getEventsByUser";
 
 export const getUsersEvents = async (
-  attendance: "guest" | "host",
+  attendance: "guest" | "host" | "all",
   archivePastDays = 7,
 ) => {
   const userId = await getSessionUserId();
-  let events;
-  if (attendance === "host") events = await getHostedEventsByUser(userId);
-  else events = await getInvitedEventsByUser(userId);
+  let events: Awaited<ReturnType<typeof getEventsByUser>> = [];
 
-  return events.filter(
+  if (attendance === "host") events = await getEventsByUser(userId, "host");
+  if (attendance === "all") {
+    const [hosted, invited] = await Promise.all([
+      getEventsByUser(userId, "host"),
+      getEventsByUser(userId, "guest"),
+    ]);
+    events = [...hosted, ...invited];
+  } else if (attendance === "guest")
+    events = await getEventsByUser(userId, "guest");
+
+  const currentEvents = events.filter(
     (e) =>
       e.date.getTime() >
       new Date().getTime() - archivePastDays * 24 * 60 * 60 * 1000,
   );
+
+  return currentEvents;
 };

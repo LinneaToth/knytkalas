@@ -1,11 +1,9 @@
 "use client";
 import { signOut } from "@/data/auth/auth-client";
 import { useRouter } from "next/navigation";
-import { useSession } from "@/data/auth/auth-client";
 import Button from "@/ui/components/Button";
 
 export function SignOutButton() {
-  const { data } = useSession();
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -15,12 +13,8 @@ export function SignOutButton() {
   };
 
   return (
-    <>
-      {data && (
-        <Button variant="ghost" onClick={handleSignOut}>
-          Sign out
-        </Button>
-      )}
-    </>
+    <Button variant="outline" onClick={handleSignOut} width="full">
+      Sign out
+    </Button>
   );
 }

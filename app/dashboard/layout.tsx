@@ -7,7 +7,7 @@ export default function DashboardLayout({
 }) {
   return (
     <main className="grid h-full max-w-350 grid-cols-4 grid-rows-[auto_1fr]">
-      <section className="col-span-1 col-start-1 row-span-2 row-start-1">
+      <section className="col-span-1 col-start-1 row-start-1 -row-end-1">
         <DashboardMenu />
       </section>
       {children}

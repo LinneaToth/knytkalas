@@ -65,6 +65,7 @@ model Contribution {
   category    CategoryType
   contains    IssueType[]
   description String?
+  @@index([inviteId])
 }
 
 model Invite {
@@ -81,6 +82,10 @@ model Invite {
   contributions Contribution[]
   status        RsvpStatus     @default(PENDING)
   totalGuests   Int            @default(1)
+  @@index([eventId])
+  @@index([guestId])
+  @@index([invById])
+
 }
 
 model Event {
@@ -95,6 +100,7 @@ model Event {
   host             User           @relation("HostedEvents", fields: [hostId], references: [id])
   hostId           String
   deletedAt        DateTime?     
+  @@index([hostId])
 }
 
 model Session {

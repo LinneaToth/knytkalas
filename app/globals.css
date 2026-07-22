@@ -5,11 +5,13 @@
   --foreground: #0D1821;
   --foreground-light: #ffffff;
   --card-background: #F9F9F9;
+  --primary-lighter: #bee5ff;
   --primary: #7FC8F8;
   --primary-darker: #5AA9E6;
   --primary-darkest: #304C89;
   --primary-foreground: #0D1821;
   --secondary: #FF6392;
+  --error: #FF6392;
   --secondary-foreground: #0D1821;
   --accent: #FFE45E;
   --accent-foreground: #304C89;
@@ -25,6 +27,7 @@
   --color-foreground-light: var(--foreground-light);
   --color-card-background: var(--card-background);
   --color-primary: var(--primary);
+  --color-primary-lighter: var(--primary-lighter);
   --color-primary-darker: var(--primary-darker);
   --color-primary-darkest: var(--primary-darkest);
   --color-primary-foreground: var(--primary-foreground);
@@ -34,6 +37,7 @@
   --color-accent-foreground: var(--accent-foreground);
   --color-success: var(--success);
   --color-success-foreground: var(--success-foreground);
+  --color-error: var(--error);
   --color-inactive: var(--inactive);
   --color-focus: var(--focus);
   --font-sans: var(--font-poppins);
@@ -43,6 +47,11 @@
 
 h1 {
   font-family: var(--font-bagel);
+
+}
+
+h2 {
+  font-size: 2rem;
 }
 
 h2,

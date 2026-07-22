@@ -2,7 +2,6 @@
 
 import { getCurrentUserId } from "@/features/auth/services/getCurrentUserId";
 import { getEvent } from "@/data/dal/event/getEvent";
-import { isGuestAtEvent } from "../utils/isGuestAtEvent";
 import { getUser } from "@/data/dal/user/getUser";
 import { getInvitesByEvent } from "@/data/dal/invite/getInvitesByEvent";
 
@@ -28,9 +27,20 @@ export const getEventDetails = async (eventId: number) => {
       totalGuests: invite.totalGuests,
     }));
 
-    const eventDetails = { ...event, hostName: hostName, guests: guests };
+    const userInvite = relatedInvites.find(
+      (invite) => invite.guestId === userId,
+    );
 
-    if (await isGuestAtEvent(userId, event.id)) return eventDetails;
+    const eventDetails = {
+      ...event,
+      hostName: hostName,
+      guests: guests,
+      status: userInvite?.status,
+    };
+
+    const isAuthorized = userId === event.hostId || !!userInvite;
+    if (isAuthorized) return eventDetails;
+    else throw new Error("User is not authorized to view this event");
   } catch (e) {
     //handle error, for now it is just logged:
     console.error(e);

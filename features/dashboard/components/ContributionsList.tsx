@@ -3,11 +3,11 @@
 import { getContributionsByEvent } from "../services/getContributionsByEvent";
 import { useState } from "react";
 
-export default function ContributionsList({
-  contributions,
-}: {
+type Props = {
   contributions: Awaited<ReturnType<typeof getContributionsByEvent>>;
-}) {
+};
+
+export default function ContributionsList({ contributions }: Props) {
   const [sortBy, setSortBy] = useState<"guestName" | "categories">("guestName");
 
   return (
@@ -21,4 +21,7 @@ export default function ContributionsList({
       ))}
     </ul>
   );
+  //EXPAND TO SEE WHO BROUGHT IT, DESCRIPTION AND ALLERGENS
+  //SORT BY CATEGORY OR GUEST NAME
+  //FILTER BY USER'S ALLERGIES VS ALLERGENS
 }

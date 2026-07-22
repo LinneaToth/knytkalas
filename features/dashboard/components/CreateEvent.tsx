@@ -6,14 +6,9 @@ import { createEvent } from "../services/createEvent";
 import Button from "@/ui/components/Button";
 
 export default function CreateEvent() {
-  const [isActive, setIsActive] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
   const [eventId, setEventId] = useState<number | null>(null);
-
-  const toggleActive = () => {
-    setIsActive((oldStatus) => !oldStatus);
-  };
 
   const handleFormAction = async (formData: FormData): Promise<void> => {
     try {
@@ -24,21 +19,6 @@ export default function CreateEvent() {
       setError((error as Error).message);
     }
   };
-
-  if (!isActive) {
-    return (
-      <button
-        onClick={toggleActive}
-        className={
-          "bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl py-5 drop-shadow"
-        }
-      >
-        <div className="from-primary to-primary-darker flex size-20 items-center justify-center rounded-full bg-radial-[at_25%_25%] text-8xl text-white">
-          +
-        </div>
-      </button>
-    );
-  }
 
   if (error) {
     return (

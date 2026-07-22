@@ -1,12 +1,11 @@
 "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
 import { softDeleteEvent } from "../event/deleteEvent";
-import { getHostedEventsByUser } from "../event/getHostedEventsByUser";
-
+import { getEventsByUser } from "../event/getEventsByUser";
 //Hard delete would mess up the database in terms of many hardwired relations. For GDPR and integrity reasons, personal data is scrambled. Sessions and accounts, handled by Prisma and used to identify user with auth service, are deleted.
 
 export const softDeleteUser = async (userId: string) => {
-  const usersEvents = await getHostedEventsByUser(userId);
+  const usersEvents = await getEventsByUser(userId, "host");
 
   if (usersEvents.length > 0) {
     await Promise.all(

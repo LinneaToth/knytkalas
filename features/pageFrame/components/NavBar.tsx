@@ -24,8 +24,6 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
           </Button>
         </div>
       )}
-
-      <SignOutButton />
     </header>
   );
 }

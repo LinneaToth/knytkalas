@@ -1,9 +1,11 @@
-import { EventData } from "@/types/entityTypes";
+export const borderColor = (
+  e: Awaited<
+    ReturnType<typeof import("../services/getUsersEvents").getUsersEvents>
+  >[number],
+): string => {
+  const month = e.date.getMonth();
 
-export const borderColor = (event: EventData): string => {
-  const month = event.date.getMonth();
-
-  if (event.deletedAt) {
+  if (e.deletedAt) {
     return "border-l-inactive";
   }
 
