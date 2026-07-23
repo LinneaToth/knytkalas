@@ -1,44 +1,47 @@
 import ContentBox from "@/ui/components/ContentBox";
 import PercentageBar from "@/ui/components/PercentageBar";
 import GuestList from "./GuestList";
+import { getEventDetails } from "../services/getEventDetails";
+import CreateInvite from "./CreateInvite";
 
 type Props = {
-  guestsAccepted: number;
-  guestsPending: number;
-  guestsDeclined: number;
-  guests: {
-    id: string | null;
-    guestName: string;
-    status: string;
-    totalGuests: number;
-  }[];
+  event: Awaited<ReturnType<typeof getEventDetails>>;
+  role: "host" | "guest";
 };
 
-export default function GuestDetails({
-  guestsAccepted,
-  guestsPending,
-  guestsDeclined,
-  guests,
-}: Props) {
+export default function GuestsDetails({ event, role }: Props) {
+  if (!event) return <></>;
+
   const guestData = [
-    { label: "Attending", amount: guestsAccepted, color: "var(--success)" },
-    { label: "Not Attending", amount: guestsDeclined, color: "var(--accent)" },
-    { label: "Pending", amount: guestsPending, color: "var(--primary)" },
+    {
+      label: "Attending",
+      amount: event.guestsAccepted,
+      color: "var(--success)",
+    },
+    {
+      label: "Not Attending",
+      amount: event.guestsDeclined,
+      color: "var(--accent)",
+    },
+    { label: "Pending", amount: event.guestsPending, color: "var(--primary)" },
   ];
 
   return (
-    <ContentBox styling="md:col-span-1 md:col-start-3 gap-2">
+    <ContentBox styling="gap-2">
       <h2>Guests</h2> <PercentageBar data={guestData} />
       <p>
-        Attending: {guestsAccepted} /{" "}
-        {guestsAccepted + guestsPending + guestsDeclined}
+        Attending: {event.guestsAccepted} /{" "}
+        {event.guestsAccepted + event.guestsPending + event.guestsDeclined}
       </p>{" "}
       <p className="text-sm">
-        {guestsAccepted > 0 && `${guestsAccepted} confirmed, `}{" "}
-        {guestsDeclined > 0 && `${guestsDeclined} not attending, `}{" "}
-        {guestsPending > 0 && `${guestsPending} pending`}
+        {event.guestsAccepted > 0 && `${event.guestsAccepted} confirmed, `}{" "}
+        {event.guestsDeclined > 0 && `${event.guestsDeclined} not attending, `}{" "}
+        {event.guestsPending > 0 && `${event.guestsPending} pending`}
       </p>
-      <GuestList guests={guests} />
+      {role === "host" && !event.deletedAt && (
+        <CreateInvite eventId={event.id} />
+      )}
+      <GuestList guests={event.guests} role={role} hostId={event.hostId} />
     </ContentBox>
   );
 }

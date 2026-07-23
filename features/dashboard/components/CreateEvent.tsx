@@ -1,9 +1,8 @@
 "use client";
 import Link from "next/link";
-import Form from "next/form";
 import { useState } from "react";
 import { createEvent } from "../services/createEvent";
-import Button from "@/ui/components/Button";
+import EventForm from "./EventForm";
 
 export default function CreateEvent() {
   const [error, setError] = useState<string | null>(null);
@@ -38,51 +37,5 @@ export default function CreateEvent() {
     );
   }
 
-  return (
-    <Form
-      action={handleFormAction}
-      className={
-        "bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-start justify-start gap-5 rounded-xl p-10 drop-shadow"
-      }
-    >
-      <label htmlFor="occasion">Occasion (required)</label>
-      <input
-        type="text"
-        name="occasion"
-        id="occasion"
-        placeholder="Occasion"
-        required
-
-        className="bg-background text-foreground focus:bg-focus w-full p-3"
-      />
-
-      <label htmlFor="description">Description (optional)</label>
-      <input
-        type="text"
-        name="description"
-        id="description"
-        placeholder="Description"
-        className="bg-background text-foreground focus:bg-focus w-full p-3"
-      />
-
-      <label htmlFor="date">Date & start time (required)</label>
-      <input
-        type="datetime-local"
-        name="date"
-        id="date"
-        className="w-full"
-        required
-      />
-
-      <label htmlFor="responseDeadline">Respond by latest (optional)</label>
-      <input
-        type="date"
-        name="responseDeadline"
-        id="responseDeadline"
-        className="w-full"
-      />
-
-      <Button>Create Event</Button>
-    </Form>
-  );
+  return <EventForm handleFormAction={handleFormAction} />;
 }

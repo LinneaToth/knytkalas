@@ -113,7 +113,7 @@ The [better-auth docs describe what I believe is the server equivalence, the aut
 
 I need to juggle some concepts here, simultaneously reading up on [CRUD with Prisma](https://www.prisma.io/docs/orm/prisma-client/queries/crud).
 
-Even though all components are serverside by default, explicit "server-only" is added to everything in the Data Access Layer, to prevent Next from bundling and exposing it with client side code.
+Even though all components are serverside by default, explicit import 'server-only' is added to everything in the Data Access Layer, to prevent Next from bundling and exposing it with client side code.
 
 Since Prisma and its adapter automatically points to my User table, Better Auth automatically adds a User row when someone authenticates themselves. I have no way of telling if they have done the onboarding, declaring allergies etc, so I add a bool ("onboarded") that defaults to false to the schema.
 
@@ -351,3 +351,21 @@ Added RSVP counts via a small util.
 Kept working on wiring up UI functionality. Rebuilt the event detail page and the event card. Also rebuilt the sidebar. Getting really tired of the color scheme by now, but at the moment the structure is my main focus. If I have time I'll make it look better.
 
 Tomorrow I'll make the RSVP response flow work!
+
+## [2026-07-22]
+
+(5h)
+
+I've consistently used import 'server-only' in my DAL files, as per instructions in the next docs. However, [I just realised that I need to install a package for it to work](https://nextjs.org/docs/app/getting-started/server-and-client-components), and make imports rather than just declaring them.
+
+`pnpm add server-only` I guess? And find and replace all "server only" with import 'server-only'. I'm also actively trying to ensure that all of my service functions check that user is signed in and has some authority over the resource before being allowed to edit stuff.
+
+OOOOH MY GOD is time zone conversion a pain. There, I just needed to vent (working on the update event feature)
+
+I added functionality for guest to decline/accept invitation. If they are confirmed going, they can add extra guests. It checks if the user is actually authorized (an actual guest) to make rspv changes. Events can be edited, if the user happens to be the host. The person inviting a guest can uninvite them (right now only hosts can invite guests). They can't remove themselves, though. Made some tweaks to the dashboard layout, it still looks like 💩 but it's easier on the eyes as of right now.
+
+I really, really, **REALLY** would like to test my code. However, that wasn't taught in our education. It goes in the backlog, and far up, if I find myself some extra time post done-MVP and ok-looking project. I asked Claude how I could approach learning a bit about testing within the scope of what I'm currently working on, and it said Vitest would be the natural choice for my project. It also recommended starting out with the RSVP/auth logic. So, duly noted for later.
+
+Tomorrow:
+Make a reusable component for profile editing (same way as I did with events create/edit)
+UI CRUD for Contributions

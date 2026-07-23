@@ -18,7 +18,7 @@ export default function FeatureHeadline({
       ? "text-md md:text-xl"
       : size === "medium"
         ? "text-xl md:text-3xl"
-        : "text-5xl md:text-7xl";
+        : "text-3xl md:text-4xl";
 
   return (
     <h1 className={styling} data-text={children}>

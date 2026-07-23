@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
 
 //Hard delete would mess up the database in terms of many hardwired relations.

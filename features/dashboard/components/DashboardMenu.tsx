@@ -1,5 +1,6 @@
 import { SignOutButton } from "@/features/auth/components/SignOutButton";
 import MenuList from "./MenuList";
+import Logo from "@/features/pageFrame/components/Logo";
 
 export default function DashboardMenu() {
   const menuItems = [
@@ -17,8 +18,11 @@ export default function DashboardMenu() {
   ];
 
   return (
-    <nav className="bg-primary-lighter flex h-full w-64 flex-col justify-between border-r border-gray-100 p-6 pt-20">
-      <MenuList menuItems={menuItems} />
+    <nav className="bg-primary flex h-full w-64 flex-col justify-between border-r border-gray-100 p-6">
+      <div className="flex flex-col gap-20">
+        <Logo />
+        <MenuList menuItems={menuItems} />
+      </div>
       <SignOutButton />
     </nav>
   );

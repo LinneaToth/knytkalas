@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
 import { softDeleteEvent } from "../event/deleteEvent";
 import { getEventsByUser } from "../event/getEventsByUser";

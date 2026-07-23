@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
 import { Prisma } from "@/generated/prisma";
 

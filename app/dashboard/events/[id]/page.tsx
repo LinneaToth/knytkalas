@@ -4,9 +4,7 @@ import { getCurrentUserId } from "@/features/auth/services/getCurrentUserId";
 import EventDetails from "@/features/dashboard/components/EventDetails";
 import { getEventDetails } from "@/features/dashboard/services/getEventDetails";
 import FeatureHeadline from "@/ui/components/FeatureHeadline";
-import GuestList from "@/features/dashboard/components/GuestList";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
-import ContributionsList from "@/features/dashboard/components/ContributionsList";
 import ResponseDetails from "@/features/dashboard/components/ResponseDetails";
 import GuestDetails from "@/features/dashboard/components/GuestsDetails";
 import ContributionsDetails from "@/features/dashboard/components/ContributionsDetails";
@@ -29,28 +27,23 @@ export default async function Page({
     <>
       <header className="col-span-3 col-start-2 row-span-1 p-10">
         {" "}
-        <FeatureHeadline size="medium">{event.occasion}</FeatureHeadline>
+        <FeatureHeadline size="large">{event.occasion}</FeatureHeadline>
       </header>
-      <main className="col-span-3 col-start-2 row-span-2 row-start-2 grid grid-cols-1 items-start gap-6 px-10 md:grid-cols-3">
-        <section className="flex flex-col gap-5 md:col-span-2 md:col-start-1 md:row-start-1 md:-row-end-1">
+      <div className="col-span-3 col-start-2 row-span-2 row-start-2 grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-10 md:grid-cols-3">
+        <section className="flex min-h-0 flex-col gap-5 md:col-span-2 md:col-start-1 md:row-start-1 md:-row-end-1">
+          <GuestDetails role={role} event={event} />
+          <ContributionsDetails contributions={contributions} />
+        </section>
+        <section className="flex flex-col gap-5 md:col-span-1 md:col-start-3 md:row-start-1 md:-row-end-1">
           <EventDetails
             event={event}
             date={event.date.toLocaleDateString()}
             time={event.date.toLocaleTimeString().slice(0, -3)}
             role={role}
-          />
-          <ContributionsDetails contributions={contributions} />
+          />{" "}
+          <ResponseDetails role={role} event={event} />
         </section>
-        <section className="flex flex-col gap-5 md:col-span-1 md:col-start-3 md:row-start-1 md:-row-end-1">
-          <ResponseDetails />
-          <GuestDetails
-            guestsAccepted={event.guestsAccepted}
-            guestsPending={event.guestsPending}
-            guestsDeclined={event.guestsDeclined}
-            guests={event.guests}
-          />
-        </section>
-      </main>
+      </div>
     </>
   );
 }

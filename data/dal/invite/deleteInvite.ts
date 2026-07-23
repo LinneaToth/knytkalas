@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import prisma from "@/prisma/utils/prismaUtils";
 
 export const deleteInvite = async (id: number) => {

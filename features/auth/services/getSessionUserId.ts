@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import { cache } from "react";
 import { auth } from "../../../data/auth/auth";
 import { headers } from "next/headers";

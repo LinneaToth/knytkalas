@@ -8,6 +8,8 @@ import { toggleCancelEvent } from "../services/toggleCancelEvent";
 import { getEventDetails } from "../services/getEventDetails";
 import { Users, CalendarDays, MapPin, Clock10 } from "lucide-react";
 import ContentBox from "@/ui/components/ContentBox";
+import EventForm from "./EventForm";
+import { updateEvent } from "../services/updateEvent";
 
 type EventDetails = Awaited<ReturnType<typeof getEventDetails>>;
 
@@ -30,39 +32,77 @@ export default function EventDetails({ event, date, time, role }: Props) {
     router.refresh();
   };
 
+  const onSave = async (formData: FormData) => {
+    await updateEvent(event.id, formData);
+    setIsEditing(false);
+    router.refresh();
+  };
+
+  const onCancel = () => {
+    setIsEditing(false);
+  };
+
   //If user is host, add option to edit event details, like occasion, date, and description
-  //if user is not host, add option to RSPV to the event
 
-  return (
-    <ContentBox styling="flex flex-col gap-6 rounded-2xl shadow-md md:col-span-2">
-      <h2>
-        {eventHasBeen && "Past event"}
-        {event.deletedAt && "Cancelled event"}
-        {!eventHasBeen && !event.deletedAt && "When & Where"}
-      </h2>
-      <p>{event.description}</p>
-      <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
-        {" "}
-        <CalendarDays /> {date}
-      </p>
-      <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
-        <Clock10 />
-        Start time: {time}
-      </p>
-      <p className="flex gap-3">
-        <MapPin /> {event.location ? event.location : "Location to be decided"}
-      </p>
+  if (isEditing) {
+    return (
+      <ContentBox styling="flex flex-col gap-3 md:col-span-2">
+        <h2>Editing Event</h2>
+        <EventForm
+          handleFormAction={onSave}
+          eventData={{
+            occasion: event.occasion,
+            description: event.description || "",
+            location: event.location || "",
+            date: event.date,
+            responseDeadline: event.responseDeadline ?? undefined,
+          }}
+        />
+        <button onClick={onCancel}>CANCEL</button>
+      </ContentBox>
+    );
+  }
 
-      <p>Hosted by: {role === "host" ? "You! " : event.hostName}</p>
+  if (!isEditing) {
+    return (
+      <ContentBox styling="flex flex-col gap-3 md:col-span-2">
+        {role === "host" && (
+          <button
+            onClick={() => setIsEditing(true)}
+            className="absolute top-5 right-5"
+          >
+            EDIT
+          </button>
+        )}
+        <h2>
+          {eventHasBeen && "Past event"}
+          {event.deletedAt && "Cancelled event"}
+          {!eventHasBeen && !event.deletedAt && "When & Where"}
+        </h2>
+        {event.description && <p>{event.description}</p>}
+        <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
+          {" "}
+          <CalendarDays /> {date}
+        </p>
+        <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
+          <Clock10 />
+          Start time: {time}
+        </p>
+        <p className="flex gap-3">
+          <MapPin />{" "}
+          {event.location ? event.location : "Location to be decided"}
+        </p>
 
-      {role === "host" && !eventHasBeen && (
-        <>
-          {!event.deletedAt && <CreateInvite eventId={event.id} />}
-          <Button variant="outline" width="full" onClick={handleToggleCancel}>
-            {event.deletedAt ? "RE-PUBLISH EVENT" : "CANCEL EVENT"}
-          </Button>
-        </>
-      )}
-    </ContentBox>
-  );
+        <p>Hosted by: {role === "host" ? "You! " : event.hostName}</p>
+
+        {role === "host" && !eventHasBeen && (
+          <>
+            <Button variant="outline" width="full" onClick={handleToggleCancel}>
+              {event.deletedAt ? "RE-PUBLISH EVENT" : "CANCEL EVENT"}
+            </Button>
+          </>
+        )}
+      </ContentBox>
+    );
+  }
 }

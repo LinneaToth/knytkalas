@@ -20,6 +20,7 @@ export const getEventDetails = async (eventId: number) => {
     const relatedInvites = await getInvitesByEvent(eventId);
 
     const guests = relatedInvites.map((invite) => ({
+      inviteId: invite.id,
       id: invite.guestId,
       guestName: invite.guestName,
       status: invite.status,
@@ -36,6 +37,8 @@ export const getEventDetails = async (eventId: number) => {
       hostName: hostName,
       guests: guests,
       status: userInvite?.status,
+      userInviteId: userInvite?.id,
+      userInviteGuests: userInvite?.totalGuests,
     };
 
     const isAuthorized = userId === event.hostId || !!userInvite;

@@ -71,7 +71,6 @@ h6 {
 } */
 
 body {
-  background: var(--primary-darker);
   color: var(--foreground);
   font-family: var(--font-poppins), sans-serif;
 }

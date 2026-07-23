@@ -6,6 +6,9 @@ import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 export const createEvent = async (formData: FormData) => {
   const occasion = formData.get("occasion") as string;
   const date = formData.get("date") as string;
+  const description = formData.get("description") as string;
+  const location = formData.get("location") as string;
+  const responseDeadline = formData.get("responseDeadline") as string;
 
   try {
     const user = await getCurrentUser();
@@ -18,9 +21,11 @@ export const createEvent = async (formData: FormData) => {
     const event = await createEventDAL({
       occasion,
       date: new Date(date).toISOString(),
-      responseDeadline: formData.get("responseDeadline")
-        ? new Date(formData.get("responseDeadline") as string).toISOString()
+      responseDeadline: responseDeadline
+        ? new Date(responseDeadline).toISOString()
         : null,
+      description: description || null,
+      location: location || null,
       host: {
         connect: {
           id: user.id,

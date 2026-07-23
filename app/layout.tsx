@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import { Poppins, Bagel_Fat_One } from "next/font/google";
 import "./globals.css";
-import NavBar from "@/features/pageFrame/components/NavBar";
-import Footer from "@/features/pageFrame/components/Footer";
-import { getUser } from "@/data/dal/user/getUser";
-import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -28,23 +24,14 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  let currentUser = null;
-
-  try {
-    const id = await getSessionUserId();
-    currentUser = await getUser(id);
-  } catch (e) {}
-
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${poppins.variable} ${bagelFatOne.variable} overscroll-x-none scroll-smooth antialiased`}
     >
-      <body className="flex h-screen flex-col justify-between overscroll-x-none">
-        {" "}
-        <NavBar mode={currentUser ? "signedin" : "notSignedIn"} />
-        <main className="bg-background flex-1 pt-16"> {children}</main>
-        <Footer />
+      <body className="bg-background flex h-screen w-screen flex-col justify-between overflow-hidden overscroll-x-none">
+        {children}
       </body>
     </html>
   );

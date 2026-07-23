@@ -1,20 +1,23 @@
 "use client";
 
-import { Contribution } from "@/generated/prisma";
 import Button from "@/ui/components/Button";
 import { useState } from "react";
 import { ListChevronsUpDown, Users } from "lucide-react";
+import { uninviteGuest } from "../services/uninviteGuest";
 
-export default function GuestList({
-  guests,
-}: {
+type Props = {
   guests: {
     id: string | null;
     guestName: string;
     status: string;
     totalGuests: number;
+    inviteId: number;
   }[];
-}) {
+  role: "host" | "guest";
+  hostId: string;
+};
+
+export default function GuestList({ guests, role, hostId }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
 
   return (
@@ -31,7 +34,7 @@ export default function GuestList({
 
       {isExpanded &&
         guests.map((guest) => (
-          <div key={guest.id ?? guest.guestName} className="mb-2">
+          <div key={"invID" + guest.inviteId} className="mb-2">
             <p className="flex">
               {guest.guestName}{" "}
               {guest.totalGuests > 1 && (
@@ -42,6 +45,11 @@ export default function GuestList({
               )}
             </p>
             <p>Status: {guest.status}</p>
+            {role === "host" && guest.id !== hostId && (
+              <button onClick={() => uninviteGuest(guest.inviteId)}>
+                Remove from guest list
+              </button>
+            )}
           </div>
         ))}
     </>

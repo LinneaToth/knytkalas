@@ -1,4 +1,4 @@
-"server-only";
+import "server-only";
 import { getInvitesByUser } from "@/data/dal/invite/getInvitesByUser";
 
 export const getContributionsByUser = async (id: string) => {

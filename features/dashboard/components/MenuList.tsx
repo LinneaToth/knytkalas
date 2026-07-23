@@ -43,12 +43,12 @@ export default function MenuList({ menuItems }: Props) {
               href={item.href || "#"}
               className={`flex w-full items-center space-x-3 rounded-xl px-4 py-3 text-left font-medium transition-all duration-200 ${
                 isActive
-                  ? "bg-blue-50 text-blue-600 shadow-sm"
-                  : "text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                  ? "text-foreground-light bg-primary-darkest shadow-sm"
+                  : "text-primary-darkest hover:bg-primary-darker hover:text-foreground"
               }`}
             >
               {React.createElement(iconComponent, {
-                className: `h-5 w-5 ${isActive ? "text-blue-500" : "text-gray-400"}`,
+                className: `h-5 w-5 ${isActive ? "text-foreground-light" : "text-foreground"}`,
               })}
 
               <span>{item.label}</span>
