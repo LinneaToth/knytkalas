@@ -10,5 +10,6 @@ export const createContribution = async (
 ) => {
   return await prisma.contribution.create({
     data: contributionData,
+    include: { invite: { select: { eventId: true } } },
   });
 };

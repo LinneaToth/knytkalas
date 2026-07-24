@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/ui/components/Button";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { ListChevronsUpDown, Users } from "lucide-react";
 import { uninviteGuest } from "../services/uninviteGuest";
 
@@ -19,6 +19,16 @@ type Props = {
 
 export default function GuestList({ guests, role, hostId }: Props) {
   const [isExpanded, setIsExpanded] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (isExpanded) {
+      listRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [isExpanded]);
 
   return (
     <>
@@ -34,7 +44,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
 
       {isExpanded &&
         guests.map((guest) => (
-          <div key={"invID" + guest.inviteId} className="mb-2">
+          <div key={"invID" + guest.inviteId} className="mb-2" ref={listRef}>
             <p className="flex">
               {guest.guestName}{" "}
               {guest.totalGuests > 1 && (

@@ -13,6 +13,7 @@ export const getContributionsByEvent = async (id: number) => {
   }[] = [];
 
   invites.forEach((invite) => {
+    if (invite.status === "DECLINED") return;
     invite.contributions.forEach((contribution) => {
       contributions.push({
         contribution: contribution,

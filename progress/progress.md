@@ -360,7 +360,7 @@ I've consistently used import 'server-only' in my DAL files, as per instructions
 
 `pnpm add server-only` I guess? And find and replace all "server only" with import 'server-only'. I'm also actively trying to ensure that all of my service functions check that user is signed in and has some authority over the resource before being allowed to edit stuff.
 
-OOOOH MY GOD is time zone conversion a pain. There, I just needed to vent (working on the update event feature)
+OOOOH MY GOD is time zone conversion a pain. There, I just needed to vent (working on the update event feature). Cherry on top are the hydration errors caused by discrepancies between server and client renders. It will now work for Sweden (and people in the same time zone), but when and if the feature of user's locale is introducecd in the future that needs to be taken care of.
 
 I added functionality for guest to decline/accept invitation. If they are confirmed going, they can add extra guests. It checks if the user is actually authorized (an actual guest) to make rspv changes. Events can be edited, if the user happens to be the host. The person inviting a guest can uninvite them (right now only hosts can invite guests). They can't remove themselves, though. Made some tweaks to the dashboard layout, it still looks like 💩 but it's easier on the eyes as of right now.
 
@@ -369,3 +369,24 @@ I really, really, **REALLY** would like to test my code. However, that wasn't ta
 Tomorrow:
 Make a reusable component for profile editing (same way as I did with events create/edit)
 UI CRUD for Contributions
+
+## [2026-07-23]
+
+Found a usecase for generative AI in this project that I can live with. Had Gemini generate a boilerplate form for me. Saved some repititive work to get started. Also, Claude is the best secretary. "What have I done today, since yesterday's commit?"
+
+useActionState with Next Forms. Spike time! 📖 [Watched a video on Youtube](https://www.youtube.com/watch?v=6b9ob8dqqgk). Do not recommend that one, for the record, but it did paint an image of how to use it. Trying to read [https://react.dev/reference/react/useActionState](and comprehend the docs). Basically, I'll utilize useActionState() in my form client components (yay refactor), and they will give me state (current result of the action), dispatchAction (the function I'm passing to my form) and isPending (automatic loading state).
+
+So right now I have manual state and manual submit handling, the way we were taught in school last year. I'm going to get rid of that and replace it.
+
+My server component that the form calls need prevState (previous state) as argument, even though it isn't used. Then form data as per usual. In the end it returns an object with ok: bool (did it succeed?), the result of the DAL operation OR error message if an error is caught.
+
+Added bring food feature for contributions. New client form (using useActionState and the next Form as described above), formats dietary issues using earlier logic (which I corrected a bit, had wired that one backwards..), calls the DAL for DB entry and does a revalidation of the path (refreshing whats rendered on the screen to reflect the new data).
+
+Contributions are rendered in a list. Now it can point out conflicts between brought food and the users allergies/food avoidances.
+Rudimentary sort function, either by user or category. User can delete their own contributions.
+
+Asked my 14 year old to sit down and do some user testing. Didn't tell her anything about what she was looking at. She correctly deduced that this must be some sort of potluck event coordination service. "You can tell who is coming and let people know what you are bringing". She easily added a contribution (and I found a WI for the backlog: When the optional amt is left out, servings are rendered as 0 in the contribution list, not intended). Event creation was easy enough, until she got to the date part. She tried to enter it by numbers, which messed up the form and her event was not submitted 😢 Generated some frustration on her part, that I will have to remedy once i go full UX/UI/Frontend mode in the next spurt.
+
+I'm going to take some time off the upcoming weeks. The functionality is, more or less, in place now. It's a rickety build, but it is there. I will doubtless discover a lot of quirks and stuff to remedy when I tackle this mainly from user's POV in the next chapter.
+
+Note to self: First thing to tackle next time: put useActionState to use, enable the user in editing their personal settings. Then, make the thing look good! ✨

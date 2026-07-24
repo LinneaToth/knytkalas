@@ -5,15 +5,16 @@ import Logo from "@/features/pageFrame/components/Logo";
 export default function DashboardMenu() {
   const menuItems = [
     { label: "Events", icon: "calendar", href: "/dashboard/events" },
-    {
-      label: "Personal settings",
-      icon: "settings",
-      href: "/dashboard/profile",
-    },
+
     {
       label: "Create event",
       icon: "plusCircle",
       href: "/dashboard/events/create",
+    },
+    {
+      label: "Personal settings",
+      icon: "settings",
+      href: "/dashboard/profile",
     },
   ];
 

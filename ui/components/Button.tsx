@@ -17,6 +17,7 @@ export default function Button({
   href = "",
   onClick,
   width,
+  ...props
 }: Props) {
   let styling =
     " border-1 font-semibold transition-colors duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-5 justify-center ";
@@ -69,8 +70,9 @@ export default function Button({
     );
 
   return (
-    <button onClick={onClick ? onClick : undefined} className={styling}>
+    <button onClick={onClick} className={styling} {...props}>
       {children}
     </button>
   );
 }
+

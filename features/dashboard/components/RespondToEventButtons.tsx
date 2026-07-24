@@ -6,14 +6,13 @@ import { rspv } from "../services/rspv";
 type Props = {
   status: "GOING" | "PENDING" | "DECLINED";
   id?: number;
-  eventId: number;
   totalGuests: number;
 };
 
 export default function RespondToEventButtons({
   status = "PENDING",
   id,
-  totalGuests,
+  totalGuests = 1,
 }: Props) {
   if (!id) return <></>;
   return (
@@ -24,7 +23,7 @@ export default function RespondToEventButtons({
           <h3>
             {totalGuests === 1
               ? "No extra guests"
-              : `I'm bringing ${totalGuests - 1} extra guests`}
+              : `You are bringing ${totalGuests - 1} extra guests`}
           </h3>
           <Button onClick={() => rspv(id, "GOING", 1)}>Add guest</Button>
           {totalGuests > 1 && (

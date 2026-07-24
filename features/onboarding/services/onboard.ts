@@ -2,7 +2,7 @@
 
 import { NewUser } from "@/types/entityTypes";
 import { onboardUser } from "@/data/dal/user/onboardUser";
-import { dietaryIssuesFormatter } from "../utils/dietaryIssuesFormatter";
+import { dietaryIssuesFormatter } from "../../../utils/dietaryIssuesFormatter";
 
 export const onboard = async (user: NewUser) => {
   const avoids = dietaryIssuesFormatter(user.avoids);
