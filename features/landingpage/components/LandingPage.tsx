@@ -4,6 +4,7 @@ import Footer from "@/features/pageFrame/components/Footer";
 import NavBar from "@/features/pageFrame/components/NavBar";
 import { getSessionUserId } from "@/features/auth/services/getSessionUserId";
 import { getUser } from "@/data/dal/user/getUser";
+import JoinTheParty from "./JoinTheParty";
 
 export default async function LandingPage() {
   let currentUser = null;
@@ -16,11 +17,11 @@ export default async function LandingPage() {
   return (
     <>
       <NavBar mode={currentUser ? "signedin" : "notSignedIn"} />
-      <main className="bg-background flex-1 pt-16">
-        <div className="flex flex-col">
-          <Hero />
-          <About />
-        </div>{" "}
+      <main className="bg-background flex flex-1 flex-col justify-center py-16">
+        {" "}
+        <Hero />
+        <About />
+        <JoinTheParty />
       </main>
       <Footer />
     </>

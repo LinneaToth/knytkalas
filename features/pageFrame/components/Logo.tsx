@@ -1,5 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import logo from "@/public/graphics/logo.svg";
 
 export default function Logo() {
   const router = useRouter();
@@ -11,13 +13,19 @@ export default function Logo() {
 
   return (
     <div
-      className="font-bagel flex cursor-pointer items-center text-3xl tracking-wide"
+      className="font-bagel flex cursor-pointer items-center gap-3 text-3xl tracking-wide"
       onClick={goTop}
     >
-      <span className="mr-2">🥦</span>
+      <Image
+        src={logo}
+        alt="Site Logo"
+        className="object-contain"
+        width={30}
+        height={30}
+      />
       <span
         data-text="Knytkalas"
-        className="text-secondary relative z-10 before:absolute before:top-0 before:left-0 before:-z-10 before:content-[attr(data-text)] before:[-webkit-text-stroke:6px_white]"
+        className="text-secondary font-bagel relative z-10 before:absolute before:top-0 before:left-0 before:-z-10 before:content-[attr(data-text)] before:[-webkit-text-stroke:4px_white]"
       >
         Knytkalas
       </span>

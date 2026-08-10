@@ -1,40 +1,45 @@
+"use client";
+
 import Image from "next/image";
 import Button from "@/ui/components/Button";
 import FeatureHeadline from "@/ui/components/FeatureHeadline";
 
+const scrollToAbout = () => {
+  const section = document.getElementById("about");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth", block: "start" });
+  }
+};
+
 export default function Hero() {
   return (
     <div className="relative isolate">
-      <figure className="absolute top-0 left-0 -z-10 h-screen w-screen bg-[url('/graphics/bg.svg')] bg-cover bg-center"></figure>
-      <div className="lg:grid lg:grid-cols-3 lg:grid-rows-2">
-        <section className="relative z-10 mt-8 flex h-screen flex-col items-center justify-center md:px-20 lg:col-span-2">
-          <div className="flex w-full max-w-200 items-center justify-center bg-[url('/graphics/skewed_bg.svg')] bg-contain bg-center bg-no-repeat px-5 py-5 pb-4">
-            <article className="flex flex-col items-center justify-center gap-5 py-3 text-center md:gap-10">
-              <FeatureHeadline size="large" extraStyling="md:mt-[-2rem]">
-                Plan your Potluck
-              </FeatureHeadline>
-              <h2 className="text-foreground-light text-2xl">
-                Effortless coordination of guests and dishes
-              </h2>
-              <p className="text-foreground-light mb-5 max-w-xl text-center text-lg md:text-xl">
-                Organize menus, track guest list and RSVP’s and relax with built
-                in allergy administration. Seamless and collaborative!
-              </p>
-            </article>
+      <figure className="absolute top-0 left-0 -z-10 h-screen w-screen bg-[url('/graphics/bg.svg')] bg-cover bg-center xl:h-200"></figure>
+      <div className="mx-auto max-w-7xl xl:grid xl:grid-cols-3">
+        <section className="relative z-10 flex min-h-screen flex-col items-center justify-center md:px-20 xl:col-span-2 xl:mx-auto xl:h-200 xl:min-h-0">
+          {" "}
+          <FeatureHeadline size="large" extraStyling="">
+            Plan your Potluck
+          </FeatureHeadline>
+          <div className="bg-primary-darkest/70 -mt-2 flex w-full max-w-200 flex-col items-center justify-center gap-3 border border-white/20 p-5 pt-8 pb-12 text-center shadow-lg backdrop-blur-md md:gap-10">
+            <h2 className="text-foreground-light mt-3 text-3xl">
+              Effortless coordination of your event
+            </h2>
+            <p className="text-foreground-light text-md mb-5 max-w-xl text-center">
+              Organize menus, track guest list and RSVP’s and relax with built
+              in allergy administration. Seamless and collaborative!
+            </p>
           </div>
-
-          <nav className="flex w-full max-w-240 items-center justify-end gap-3 p-7 md:pr-25">
-            <Button variant="solid" size="l" href="/onboarding">
+          <nav className="z-20 -mt-15 flex w-full max-w-240 justify-center gap-5 p-8">
+            <Button variant="cta" size="l" href="/onboarding">
               join the party
             </Button>
-            <a href="#about">
-              <Button variant="outline" size="l">
-                read more
-              </Button>
-            </a>
+            <Button variant="solid" size="l" onClick={scrollToAbout}>
+              see how it works
+            </Button>
           </nav>
         </section>
-        <figure className="lg:col-span-1 lg:flex lg:items-center lg:justify-center">
+        <figure className="hidden xl:col-span-1 xl:flex xl:items-center xl:justify-center">
           <Image
             src="/graphics/phone.png"
             alt="Phone mockup"
