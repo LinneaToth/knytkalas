@@ -390,3 +390,34 @@ Asked my 14 year old to sit down and do some user testing. Didn't tell her anyth
 I'm going to take some time off the upcoming weeks. The functionality is, more or less, in place now. It's a rickety build, but it is there. I will doubtless discover a lot of quirks and stuff to remedy when I tackle this mainly from user's POV in the next chapter.
 
 Note to self: First thing to tackle next time: put useActionState to use, enable the user in editing their personal settings. Then, make the thing look good! ✨
+
+## [2026-08-10]
+
+Back after two weeks of enjoying the Swedish summer and not coding. First thing I did was reading through progress.md from start to finish.
+
+In the post for 2026-06-17, I defined the MVP for this app:
+
+- **Landing page**
+  Current status: Not done. There is some boilerplate, but it needs content, refinement and responsiveness. Will be made a feature, with individual work items in my planning.
+- **Google auth (signup/login)**
+  Current status: It works. Needs styling (-> work item).
+- **User details added on signup, including dietary profile.**
+  Current status: Works, nees styling (-> work item)
+- **Dashboard listing events the user hosts or is invited to**
+  Current status: This works. Needs styling (-> work item)
+- **Create/edit event (occasion, date, location, description, ~~host-selected contribution categories~~, contribution deadline).**
+  Current status: ??
+- **Shareable invite links → invite landing page.**
+  Current status: Invite landing page works. -> work item: Generate a link to be copied in the UI. -> work item: Make it look good!
+- **Event details page (host and guest variants)**.
+  Current status: ??
+- **RSVP with editable status**
+  Current status: Works.
+- **Guests add/edit/remove their own contributions within open categories, each tagged with dietary flags.**
+  Current status: ??
+- **Dietary issues shown for both users and contributions, with a filter to see what's safe to eat.**
+  Current status: Needs UI work!!
+
+Today, I worked on the landing page. Handmade some icons in affinity. Worked on content and styling. I'm still not **there** but we're getting closer. I decided against redoing the entire color scheme. My priority is to stick with the plan and getting this project done. Added a favicon and logo. Tweaked the UI some. New CTA section.
+
+![Landing page at the end of the day](./img/18.png)

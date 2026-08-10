@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #EFEFEF;
+  --background: #faf9f9;
   --foreground: #0D1821;
   --foreground-light: #ffffff;
-  --card-background: #F9F9F9;
+  --card-background: #ffffff;
   --primary-lighter: #bee5ff;
   --primary: #7FC8F8;
   --primary-darker: #5AA9E6;
@@ -41,18 +41,15 @@
   --color-inactive: var(--inactive);
   --color-focus: var(--focus);
   --font-sans: var(--font-poppins);
-  --font-bagel: var(--font-bagel);
+  --font-bagel: var(--font-bagel-fat-one);
 
 }
 
 h1 {
-  font-family: var(--font-bagel);
+  font-family: var(--font-tienne);
 
 }
 
-h2 {
-  font-size: 2rem;
-}
 
 h2,
 h3,
@@ -60,6 +57,7 @@ h4,
 h5,
 h6 {
   font-weight: 500;
+  font-family: var(--font-poppins);
 }
 
 /* 

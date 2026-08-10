@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins, Bagel_Fat_One } from "next/font/google";
+import { Poppins, Bagel_Fat_One, Tienne } from "next/font/google";
 import "./globals.css";
 
 const poppins = Poppins({
@@ -8,8 +8,14 @@ const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "800"],
 });
 
+const tienne = Tienne({
+  variable: "--font-tienne",
+  subsets: ["latin"],
+  weight: ["400", "700"],
+});
+
 const bagelFatOne = Bagel_Fat_One({
-  variable: "--font-bagel",
+  variable: "--font-bagel-fat-one",
   subsets: ["latin"],
   weight: ["400"],
 });
@@ -17,6 +23,7 @@ const bagelFatOne = Bagel_Fat_One({
 export const metadata: Metadata = {
   title: "Knytkalas - your effortless potluck planner",
   description: "Easy coordination of guests and dishes",
+  icons: "/graphics/logo.svg",
 };
 
 export default async function RootLayout({
@@ -28,9 +35,9 @@ export default async function RootLayout({
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${poppins.variable} ${bagelFatOne.variable} overscroll-x-none scroll-smooth antialiased`}
+      className={`${poppins.variable} ${bagelFatOne.variable} ${tienne.variable} scroll-smooth antialiased`}
     >
-      <body className="bg-background flex h-screen w-screen flex-col justify-between overflow-hidden overscroll-x-none">
+      <body className="bg-background flex h-screen w-screen flex-col justify-between">
         {children}
       </body>
     </html>
