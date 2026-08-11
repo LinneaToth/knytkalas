@@ -2,11 +2,10 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import CreateInvite from "./CreateInvite";
 import Button from "@/ui/components/Button";
 import { toggleCancelEvent } from "../services/toggleCancelEvent";
 import { getEventDetails } from "../services/getEventDetails";
-import { Users, CalendarDays, MapPin, Clock10 } from "lucide-react";
+import { Pencil, CalendarDays, MapPin, Clock10 } from "lucide-react";
 import ContentBox from "@/ui/components/ContentBox";
 import EventForm from "./EventForm";
 import { updateEvent } from "../services/updateEvent";
@@ -66,19 +65,22 @@ export default function EventDetails({ event, date, time, role }: Props) {
   if (!isEditing) {
     return (
       <ContentBox styling="flex flex-col gap-3 md:col-span-2">
-        {role === "host" && (
-          <button
-            onClick={() => setIsEditing(true)}
-            className="absolute top-5 right-5"
-          >
-            EDIT
-          </button>
-        )}
-        <h2>
-          {eventHasBeen && "Past event"}
-          {event.deletedAt && "Cancelled event"}
-          {!eventHasBeen && !event.deletedAt && "When & Where"}
-        </h2>
+        <div className="flex w-full justify-between">
+          <h2>
+            {eventHasBeen && "Past event"}
+            {event.deletedAt && "Cancelled event"}
+            {!eventHasBeen && !event.deletedAt && "When & Where"}
+          </h2>
+          {role === "host" && (
+            <Button
+              onClick={() => setIsEditing(true)}
+              size="s"
+              variant="outline"
+            >
+              <Pencil size={15} /> EDIT
+            </Button>
+          )}
+        </div>
         {event.description && <p>{event.description}</p>}
         <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
           {" "}

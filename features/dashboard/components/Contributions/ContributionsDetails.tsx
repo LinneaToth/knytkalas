@@ -6,7 +6,7 @@ import { IssueType } from "@/generated/prisma";
 type Props = {
   contributions: Awaited<
     ReturnType<
-      typeof import("../services/getContributionsByEvent").getContributionsByEvent
+      typeof import("../../services/getContributionsByEvent").getContributionsByEvent
     >
   >;
   inviteId: number;
@@ -20,18 +20,16 @@ export default function ContributionsDetails({
 }: Props) {
   return (
     <>
-      <ContentBox>
+      <ContentBox styling="gap-8">
         {" "}
-        <h2>Food at this event</h2>
+        <h2 className="uppercase">Contributions</h2>
         <ContributionsList
           contributions={contributions}
           avoids={avoids}
           usersInviteId={inviteId}
-        />
-      </ContentBox>{" "}
-      <ContentBox>
+        />{" "}
         <CreateContribution inviteId={inviteId} />
-      </ContentBox>
+      </ContentBox>{" "}
     </>
   );
 }

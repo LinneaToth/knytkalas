@@ -3,7 +3,7 @@ import FeatureHeadline from "@/ui/components/FeatureHeadline";
 
 export default function JoinTheParty() {
   return (
-    <div className="bg-card-background mt-10 flex max-w-2xl flex-col items-center justify-center gap-5 self-center rounded-2xl p-10 pt-15 text-center">
+    <div className="bg-card-background mt-10 flex w-screen flex-col items-center justify-center gap-5 self-center p-10 pt-15 text-center">
       <FeatureHeadline size="large" extraStyling="-mt-22 mb-5">
         Join the party
       </FeatureHeadline>

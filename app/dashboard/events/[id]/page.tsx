@@ -6,7 +6,7 @@ import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
 import ResponseDetails from "@/features/dashboard/components/ResponseDetails";
 import GuestDetails from "@/features/dashboard/components/GuestsDetails";
-import ContributionsDetails from "@/features/dashboard/components/ContributionsDetails";
+import ContributionsDetails from "@/features/dashboard/components/Contributions/ContributionsDetails";
 import { getInviteIdByUserAndEvent } from "@/features/dashboard/services/getInviteIdByUserAndEvent";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 

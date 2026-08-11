@@ -421,3 +421,7 @@ In the post for 2026-06-17, I defined the MVP for this app:
 Today, I worked on the landing page. Handmade some icons in affinity. Worked on content and styling. I'm still not **there** but we're getting closer. I decided against redoing the entire color scheme. My priority is to stick with the plan and getting this project done. Added a favicon and logo. Tweaked the UI some. New CTA section.
 
 ![Landing page at the end of the day](./img/18.png)
+
+## [2026-08-11]
+
+Today: Dietary issues in contributions. Make cards of the contributions.

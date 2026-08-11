@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef, useActionState } from "react";
 import Button from "@/ui/components/Button";
 import Form from "next/form";
-import { createContribution } from "../services/createContribution";
+import { createContribution } from "../../services/createContribution";
 import { CategoryType, IssueType } from "@/generated/prisma";
 
 type Props = {
@@ -13,7 +13,6 @@ type Props = {
 export default function CreateContribution({ inviteId }: Props) {
   const [state, dispatch, pending] = useActionState(createContribution, {
     ok: false,
-    contribution: undefined,
     error: undefined,
   });
 
@@ -41,7 +40,7 @@ export default function CreateContribution({ inviteId }: Props) {
 
   return (
     <section>
-      {!state.contribution && formOpen && (
+      {formOpen && (
         <Form
           ref={formRef}
           action={dispatch}
@@ -141,6 +140,7 @@ export default function CreateContribution({ inviteId }: Props) {
       )}
       {!formOpen && (
         <Button
+          variant="outline"
           onClick={() => {
             setFormOpen(true);
           }}
