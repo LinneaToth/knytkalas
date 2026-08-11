@@ -20,7 +20,7 @@ export default function Button({
   ...props
 }: Props) {
   let styling =
-    " border-2 font-medium transition-all duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-5 items-center justify-center text-center rounded-full hover:-translate-y-1 hover:shadow-lg ";
+    " border font-medium transition-all duration-300 focus:outline-none cursor-pointer active:scale-95 flex flex-row gap-3 items-center justify-center text-center rounded-full hover:shadow-lg ";
 
   if (width === "full") styling += " w-full ";
   switch (size) {
@@ -42,7 +42,7 @@ export default function Button({
       break;
     case "outline":
       styling +=
-        " border-foreground text-foreground hover:bg-foreground hover:text-background";
+        " border-primary-darkest text-primary-darkest hover:bg-primary-darkest hover:text-foreground-light";
       break;
     case "ghost":
       styling +=
