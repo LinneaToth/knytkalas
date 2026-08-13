@@ -393,6 +393,8 @@ Note to self: First thing to tackle next time: put useActionState to use, enable
 
 ## [2026-08-10]
 
+(8h)
+
 Back after two weeks of enjoying the Swedish summer and not coding. First thing I did was reading through progress.md from start to finish.
 
 In the post for 2026-06-17, I defined the MVP for this app:
@@ -424,4 +426,20 @@ Today, I worked on the landing page. Handmade some icons in affinity. Worked on 
 
 ## [2026-08-11]
 
-Today: Dietary issues in contributions. Make cards of the contributions.
+(8h)
+
+Contributions UI. Dietary issues, showing all flags and highlighting user's issues.
+
+Adjusted the secondary color (pink) slightly, to have it pass WCAG contrast with white in large text. ("Large text is defined as 14 point (typically 18.66px) and bold or larger, or 18 point (typically 24px) or larger.")
+
+Did some further tweaks on landing page; improved hero graphics and styling.
+
+## [2026-08-11] & [2026-08-12]
+
+(not full working days)
+
+Been working on the UI inside of the dashboard. Goal is to have something decent looking, functional. Bare-bones is ok atm. Wanted to be able to uninvite guests (maybe you'd sent an unintentional invite or acutely found yourself in a disagreement with uncle Ola, who knows) and one big takeaway was cascading deletion with Prisma. Since I have connected relations between my different entities, I need to tell it what happens when invites are deleted. In this case, related contributions go too.
+
+Invite link is taken care of, generation of it from token and serving it through copy in the UI.
+
+Login and signup pages redesigned (onboarding dialogue still to be done, added as workitem to my git hub project)

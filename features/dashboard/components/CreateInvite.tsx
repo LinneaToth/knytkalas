@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Form from "next/form";
 import { createInvite } from "../services/createInvite";
@@ -12,6 +12,15 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   const router = useRouter();
 
+  useEffect(() => {
+    if (success) {
+      const timer = setTimeout(() => {
+        setSuccess(false);
+        setIsActive(false);
+      }, 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [success]);
   const toggleActive = () => {
     setIsActive((oldStatus) => !oldStatus);
   };
@@ -28,15 +37,15 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   if (!isActive) {
     return (
-      <Button onClick={toggleActive} variant="cta" width="full">
-        NEW INVITE
+      <Button onClick={toggleActive} variant="outline">
+        Create new invite
       </Button>
     );
   }
 
   if (error) {
     return (
-      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl py-10 drop-shadow">
+      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-l py-10 drop-shadow">
         <h2>Something went wrong</h2>
         <span>{error}</span>
       </div>
@@ -45,8 +54,8 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   if (success) {
     return (
-      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl py-10 drop-shadow">
-        <h2>Invite sent!</h2>
+      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-l py-10 drop-shadow">
+        <h2>Invite was created!</h2>
         <button
           onClick={() => {
             toggleActive();
@@ -63,7 +72,7 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
     <Form
       action={handleFormAction}
       className={
-        "bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-start justify-start gap-5 rounded-xl p-10 drop-shadow"
+        "text-foreground mt-5 flex w-full flex-col items-start justify-start gap-5"
       }
     >
       <h3>Invite guest</h3>
@@ -77,7 +86,15 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
         className="bg-background text-foreground focus:bg-focus w-full p-3"
       />
       <input type="hidden" name="eventId" value={eventId} />
-      <Button width="full">Send Invite</Button>
+      <Button>Create invite</Button>{" "}
+      <Button
+        onClick={() => {
+          toggleActive();
+          setSuccess(false);
+        }}
+      >
+        Cancel
+      </Button>
     </Form>
   );
 }

@@ -1,5 +1,5 @@
 "use client";
-
+import { UserMinus, UserPlus } from "lucide-react";
 import Button from "@/ui/components/Button";
 import { rspv } from "../services/rspv";
 
@@ -20,27 +20,44 @@ export default function RespondToEventButtons({
       {" "}
       {status === "GOING" && (
         <>
-          <h3>
+          <h3 className="mt-5">
             {totalGuests === 1
               ? "No extra guests"
               : `You are bringing ${totalGuests - 1} extra guests`}
           </h3>
-          <Button onClick={() => rspv(id, "GOING", 1)}>Add guest</Button>
-          {totalGuests > 1 && (
-            <Button onClick={() => rspv(id, "GOING", -1)}>Remove guest</Button>
-          )}
+          <section className="flex items-center gap-3">
+            {" "}
+            {totalGuests > 1 && (
+              <Button
+                size="s"
+                variant="ghost"
+                onClick={() => rspv(id, "GOING", -1)}
+              >
+                <UserMinus /> Remove guest
+              </Button>
+            )}
+            <Button
+              size="s"
+              variant="ghost"
+              onClick={() => rspv(id, "GOING", 1)}
+            >
+              <UserPlus /> Add guest
+            </Button>
+          </section>
         </>
       )}
-      <h3>
+      <h3 className="mt-5 mb-5">
         {status === "PENDING"
           ? "Respond to invitation"
           : "Change your response"}
       </h3>
       {status !== "GOING" && (
-        <Button onClick={() => rspv(id, "GOING", 0)}>I&apos;ll join!</Button>
+        <Button variant="dark" onClick={() => rspv(id, "GOING", 0)}>
+          I&apos;ll join!
+        </Button>
       )}
       {status !== "DECLINED" && (
-        <Button onClick={() => rspv(id, "DECLINED", 0)}>
+        <Button variant="dark" onClick={() => rspv(id, "DECLINED", 0)}>
           Can&apos;t come.
         </Button>
       )}

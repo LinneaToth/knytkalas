@@ -12,7 +12,7 @@ export default async function Page() {
   return (
     <>
       <header className="col-span-2 col-start-2 row-start-1 p-10">
-        <FeatureHeadline size="large">My Events </FeatureHeadline>
+        <h1 className="pl-10 text-4xl">My Events </h1>
       </header>
 
       <section className="col-span-3 col-start-2 row-start-2 w-full scrollbar-none overflow-y-scroll px-10">

@@ -58,7 +58,7 @@ enum CategoryType {
 
 model Contribution {
   id          Int          @id @default(autoincrement())
-  invite      Invite       @relation(fields: [inviteId], references: [id])
+  invite      Invite       @relation(fields: [inviteId], references: [id], onDelete: Cascade)
   inviteId    Int
   name        String
   servings    Int?

@@ -60,6 +60,8 @@ export const getEventsByUser = async (id: string, role: "host" | "guest") => {
       guestsAccepted: totalGuestsAccepted,
       guestsPending: totalGuestsPending,
       guestsDeclined: totalGuestsDeclined,
+      userId: id,
+      description: event.description,
     };
   });
 

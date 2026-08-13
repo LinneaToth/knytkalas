@@ -139,15 +139,16 @@ export default function CreateContribution({ inviteId }: Props) {
         </Form>
       )}
       {!formOpen && (
-        <Button
-          variant="outline"
-          onClick={() => {
-            setFormOpen(true);
-          }}
-          width="full"
-        >
-          Bring something
-        </Button>
+        <div className="flex justify-center">
+          <Button
+            variant="outline"
+            onClick={() => {
+              setFormOpen(true);
+            }}
+          >
+            Bring something
+          </Button>
+        </div>
       )}
     </section>
   );

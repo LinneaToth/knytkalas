@@ -2,10 +2,9 @@
 
 import EventDetails from "@/features/dashboard/components/EventDetails";
 import { getEventDetails } from "@/features/dashboard/services/getEventDetails";
-import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
 import ResponseDetails from "@/features/dashboard/components/ResponseDetails";
-import GuestDetails from "@/features/dashboard/components/GuestsDetails";
+import GuestDetails from "@/features/dashboard/components/Guests/GuestsDetails";
 import ContributionsDetails from "@/features/dashboard/components/Contributions/ContributionsDetails";
 import { getInviteIdByUserAndEvent } from "@/features/dashboard/services/getInviteIdByUserAndEvent";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
@@ -28,9 +27,9 @@ export default async function Page({
   //Time right now only works in Sweden. If locale feature later is introduced; time coversion must be implemented.
   return (
     <>
-      <header className="col-span-3 col-start-2 row-span-1 p-10">
+      <header className="p-10">
         {" "}
-        <FeatureHeadline size="large">{event.occasion}</FeatureHeadline>
+        <h1 className="text-4xl">{event.occasion}</h1>
       </header>
       <div className="col-span-3 col-start-2 row-span-2 row-start-2 grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-10 md:grid-cols-3">
         <section className="flex min-h-0 flex-col gap-5 md:col-span-2 md:col-start-1 md:row-start-1 md:-row-end-1">
@@ -47,7 +46,7 @@ export default async function Page({
           />
           <GuestDetails role={role} event={event} />
         </section>
-        <section className="flex flex-col gap-5 md:col-span-1 md:col-start-3 md:row-start-1 md:-row-end-1">
+        <section className="sticky flex flex-col gap-5 md:col-span-1 md:col-start-3 md:row-start-1 md:-row-end-1">
           <ResponseDetails role={role} event={event} />
         </section>
       </div>

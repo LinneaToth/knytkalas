@@ -24,7 +24,7 @@ export default function ResponseDetails({ role, event }: Props) {
 
   return (
     <ContentBox styling="gap-3">
-      <h2>Status</h2>
+      <h2 className="uppercase">Status</h2>
       <p>
         {role === "host"
           ? "You are arranging this event!"

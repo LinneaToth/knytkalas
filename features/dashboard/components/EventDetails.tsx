@@ -65,22 +65,12 @@ export default function EventDetails({ event, date, time, role }: Props) {
   if (!isEditing) {
     return (
       <ContentBox styling="flex flex-col gap-3 md:col-span-2">
-        <div className="flex w-full justify-between">
-          <h2>
-            {eventHasBeen && "Past event"}
-            {event.deletedAt && "Cancelled event"}
-            {!eventHasBeen && !event.deletedAt && "When & Where"}
-          </h2>
-          {role === "host" && (
-            <Button
-              onClick={() => setIsEditing(true)}
-              size="s"
-              variant="outline"
-            >
-              <Pencil size={15} /> EDIT
-            </Button>
-          )}
-        </div>
+        <h2 className="mr-auto uppercase">
+          {eventHasBeen && "Past event"}
+          {event.deletedAt && "Cancelled event"}
+          {!eventHasBeen && !event.deletedAt && "When & Where"}
+        </h2>
+
         {event.description && <p>{event.description}</p>}
         <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
           {" "}
@@ -96,13 +86,21 @@ export default function EventDetails({ event, date, time, role }: Props) {
         </p>
 
         <p>Hosted by: {role === "host" ? "You! " : event.hostName}</p>
-
-        {role === "host" && !eventHasBeen && (
-          <>
-            <Button variant="outline" width="full" onClick={handleToggleCancel}>
-              {event.deletedAt ? "RE-PUBLISH EVENT" : "CANCEL EVENT"}
+        {role === "host" && (
+          <div className="flex w-full justify-end gap-3">
+            <Button
+              onClick={() => setIsEditing(true)}
+              size="s"
+              variant="outline"
+            >
+              <Pencil size={15} /> Edit
             </Button>
-          </>
+            {!eventHasBeen && (
+              <Button variant="outline" size="s" onClick={handleToggleCancel}>
+                {event.deletedAt ? "Re-publish event" : "Cancel event"}
+              </Button>
+            )}
+          </div>
         )}
       </ContentBox>
     );

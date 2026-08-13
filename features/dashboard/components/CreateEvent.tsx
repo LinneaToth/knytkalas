@@ -21,7 +21,7 @@ export default function CreateEvent() {
 
   if (error) {
     return (
-      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl py-10 drop-shadow">
+      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-l py-10 drop-shadow">
         <h2>Something went wrong</h2>
         <span>{error}</span>
       </div>
@@ -30,7 +30,7 @@ export default function CreateEvent() {
 
   if (success) {
     return (
-      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-xl py-10 drop-shadow">
+      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-l py-10 drop-shadow">
         <h2>Event created successfully!</h2>
         <Link href={`/dashboard/events/${eventId}`}>See event</Link>
       </div>

@@ -1,8 +1,10 @@
+"use client";
+
 import ContentBox from "@/ui/components/ContentBox";
 import PercentageBar from "@/ui/components/PercentageBar";
 import GuestList from "./GuestList";
-import { getEventDetails } from "../services/getEventDetails";
-import CreateInvite from "./CreateInvite";
+import { getEventDetails } from "../../services/getEventDetails";
+import CreateInvite from "../CreateInvite";
 
 type Props = {
   event: Awaited<ReturnType<typeof getEventDetails>>;
@@ -21,27 +23,23 @@ export default function GuestsDetails({ event, role }: Props) {
     {
       label: "Not Attending",
       amount: event.guestsDeclined,
-      color: "var(--accent)",
+      color: "var(--secondary)",
     },
-    { label: "Pending", amount: event.guestsPending, color: "var(--primary)" },
+    { label: "Pending", amount: event.guestsPending, color: "var(--inactive)" },
   ];
 
   return (
-    <ContentBox styling="gap-2">
-      <h2>Guests</h2> <PercentageBar data={guestData} />
+    <ContentBox styling="gap-5 items-center">
+      <h2 className="uppercase">Guests</h2>
+      <GuestList guests={event.guests} role={role} hostId={event.hostId} />
+      <PercentageBar data={guestData} />
       <p>
         Attending: {event.guestsAccepted} /{" "}
         {event.guestsAccepted + event.guestsPending + event.guestsDeclined}
       </p>{" "}
-      <p className="text-sm">
-        {event.guestsAccepted > 0 && `${event.guestsAccepted} confirmed, `}{" "}
-        {event.guestsDeclined > 0 && `${event.guestsDeclined} not attending, `}{" "}
-        {event.guestsPending > 0 && `${event.guestsPending} pending`}
-      </p>
       {role === "host" && !event.deletedAt && (
         <CreateInvite eventId={event.id} />
       )}
-      <GuestList guests={event.guests} role={role} hostId={event.hostId} />
     </ContentBox>
   );
 }

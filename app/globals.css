@@ -10,8 +10,8 @@
   --primary-darker: #5AA9E6;
   --primary-darkest: #304C89;
   --primary-foreground: #0D1821;
-  --secondary: #FF6392;
-  --error: #FF6392;
+  --secondary: #FF5789;
+  --error: #FF5789;
   --secondary-foreground: #0D1821;
   --accent: #FFE45E;
   --accent-foreground: #304C89;
@@ -46,7 +46,7 @@
 }
 
 h1 {
-  font-family: var(--font-tienne);
+  font-family: var(--font-poppins);
 
 }
 

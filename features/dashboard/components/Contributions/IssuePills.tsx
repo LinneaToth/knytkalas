@@ -7,11 +7,11 @@ type Props = {
 
 export default function IssuePills({ alertIssues, otherIssues }: Props) {
   return (
-    <section className={`flex w-full justify-end gap-1`}>
+    <section className={`flex w-full justify-end gap-3`}>
       {alertIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className={`bg-card-background text-primary-darkest rounded-full px-3 py-1 text-xs font-semibold`}
+          className={`bg-card-background text-primary-darkest rounded-full py-1 text-xs font-semibold`}
         >
           ⚠️ {issue}
         </div>
@@ -20,7 +20,7 @@ export default function IssuePills({ alertIssues, otherIssues }: Props) {
       {otherIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className="bg-card-background text-primary-darkest rounded-full px-3 py-1 text-xs"
+          className="bg-card-background text-primary-darkest rounded-full py-1 text-xs"
         >
           {issue}
         </div>

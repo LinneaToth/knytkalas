@@ -3,7 +3,6 @@
 import { IssueType } from "@/generated/prisma";
 import { getContributionsByEvent } from "../../services/getContributionsByEvent";
 import { useState } from "react";
-import { deleteContribution } from "../../services/deleteContribution";
 import { sortContributions } from "../../utils/sortContributions";
 import Button from "@/ui/components/Button";
 import ContributionsCard from "./ContributionsCard";
@@ -20,7 +19,6 @@ export default function ContributionsList({
   usersInviteId,
 }: Props) {
   const [sortBy, setSortBy] = useState<"user" | "category">("user");
-
   if (!contributions) return <></>;
 
   const shownContributions = sortContributions(contributions, sortBy);

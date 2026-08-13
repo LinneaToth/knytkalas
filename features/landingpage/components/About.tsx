@@ -28,7 +28,7 @@ export default function About() {
         time and energy to be spent on far more enjoyable things than scrolling
         for answers in old chats!
       </p>{" "}
-      <div className="my-10 flex flex-col gap-5 md:flex-row md:items-stretch">
+      <div className="my-10 flex flex-col gap-15 md:flex-row md:items-stretch xl:gap-5">
         <AboutCard>
           <figure className="bg-card-background -mt-20 rounded-full p-5 shadow transition-transform duration-300 hover:rotate-6">
             <Image

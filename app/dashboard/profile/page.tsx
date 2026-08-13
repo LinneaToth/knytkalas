@@ -11,7 +11,7 @@ export default async function ProfilePage() {
   return (
     <>
       <header className="col-span-2 col-start-2 row-start-1 p-10">
-        <FeatureHeadline>Personal settings</FeatureHeadline>
+        <h1 className="pl-10 text-4xl">Personal settings</h1>
       </header>
       <section className="col-span-3 col-start-2 row-start-2 p-10">
         <h3>Name:</h3>

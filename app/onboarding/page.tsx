@@ -5,6 +5,7 @@ import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import { isPathSafe } from "@/features/auth/utils/isPathSafe";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
+import NavBar from "@/features/pageFrame/components/NavBar";
 
 export default async function OnboardingPage({
   searchParams,
@@ -25,19 +26,35 @@ export default async function OnboardingPage({
   }
 
   return (
-    <main className="flex h-full items-center justify-center">
-      {" "}
-      <ContentBox>
-        <FeatureHeadline extraStyling="-mt-20 mb-5" size="medium">
-          Join the party!
-        </FeatureHeadline>
-        {user && <OnboardingForm callbackUrl={callbackUrl} />}
-        {!user && (
-          <GoogleLogInButton
-            callbackUrl={`/onboarding?target-url=${callbackUrl}`}
-          />
-        )}
-      </ContentBox>
-    </main>
+    <>
+      <NavBar mode="onboarding" />
+      <main className="bg-opacity-30 flex h-screen w-screen flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
+        <ContentBox
+          styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
+          glass={true}
+        >
+          <h1 className="text-4xl">Join the party!</h1>
+
+          {user && (
+            <>
+              <h2 className="uppercase">
+                We need a few details to get you started
+              </h2>
+              <OnboardingForm callbackUrl={callbackUrl} />
+            </>
+          )}
+          {!user && (
+            <>
+              <h2 className="uppercase">
+                Sign in with your Google account to get started
+              </h2>
+              <GoogleLogInButton
+                callbackUrl={`/onboarding?target-url=${callbackUrl}`}
+              />
+            </>
+          )}
+        </ContentBox>
+      </main>
+    </>
   );
 }

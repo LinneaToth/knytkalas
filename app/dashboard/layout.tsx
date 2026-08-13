@@ -1,4 +1,5 @@
 import DashboardMenu from "@/features/dashboard/components/DashboardMenu";
+import NavBar from "@/features/pageFrame/components/NavBar";
 
 export default async function DashboardLayout({
   children,
@@ -7,10 +8,8 @@ export default async function DashboardLayout({
 }) {
   return (
     <>
-      <main className="bg-background grid h-full min-h-0 w-full max-w-350 flex-1 grid-cols-4 grid-rows-[auto_1fr]">
-        <section className="col-span-1 col-start-1 row-start-1 -row-end-1">
-          <DashboardMenu />
-        </section>
+      <NavBar mode="signedin" />
+      <main className="bg-background mt-20 mr-auto ml-auto h-full min-h-0 w-full max-w-350 flex-1">
         {children}
       </main>
     </>

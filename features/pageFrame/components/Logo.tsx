@@ -2,8 +2,9 @@
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import logo from "@/public/graphics/logo.svg";
+import logoOutline from "@/public/graphics/logo_outline.svg";
 
-export default function Logo() {
+export default function Logo({ outline = false }: { outline?: boolean }) {
   const router = useRouter();
 
   const goTop = () => {
@@ -17,7 +18,7 @@ export default function Logo() {
       onClick={goTop}
     >
       <Image
-        src={logo}
+        src={outline ? logoOutline : logo}
         alt="Site Logo"
         className="object-contain"
         width={30}

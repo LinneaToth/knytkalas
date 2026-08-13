@@ -1,3 +1,4 @@
+import { Trash2 } from "lucide-react";
 import { IssueType } from "@/generated/prisma";
 import AlertIssuePills from "./IssuePills";
 import { getContributionsByEvent } from "../../services/getContributionsByEvent";
@@ -23,29 +24,42 @@ export default function ContributionsCard({
 
   return (
     <li
-      className={`rounded-xl p-3 shadow ${issuesFound.length > 0 ? "border-red-200" : "border-primary"}`}
+      className={`flex flex-col gap-5 rounded-l p-3 shadow ${issuesFound.length > 0 ? "border-red-200" : "border-primary"}`}
     >
-      <p>
-        <span className="font-bold">
-          {capitalize(contribution.contribution.category)}
-        </span>{" "}
-        - {contribution.contribution.name}
-        {Number(contribution.contribution.servings) > 0 &&
-          `- ${contribution.contribution.servings} servings.`}{" "}
-      </p>
-      <p className="text-sm">
-        Brought by {isUsersContribution ? "you" : contribution.guestName}
-      </p>
-      <div className="mt-5 flex justify-between">
-        {" "}
+      <header className="flex justify-between">
+        <h3>
+          <span className="font-bold">
+            {capitalize(contribution.contribution.category)}
+          </span>{" "}
+          - {contribution.contribution.name}
+          {Number(contribution.contribution.servings) > 0 &&
+            `- ${contribution.contribution.servings} servings.`}{" "}
+        </h3>
         {isUsersContribution && (
           <button
             className="text-secondary cursor-pointer"
-            onClick={() => deleteContribution(contribution.contribution.id)}
+            onClick={() => {
+              if (
+                confirm(
+                  `This will permanently delte the contribution ${contribution.contribution.name}.`,
+                )
+              ) {
+                deleteContribution(contribution.contribution.id);
+              }
+            }}
           >
-            DELETE
+            <Trash2 />
           </button>
         )}
+      </header>
+      {contribution.contribution.description && (
+        <p>{contribution.contribution.description}</p>
+      )}
+      <p className="text-sm">
+        Brought by {isUsersContribution ? "you" : contribution.guestName}
+      </p>
+      <div className="flex justify-between">
+        {" "}
         <AlertIssuePills alertIssues={issuesFound} otherIssues={otherIssues} />
       </div>
     </li>

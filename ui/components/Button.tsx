@@ -37,8 +37,7 @@ export default function Button({
 
   switch (variant) {
     case "solid":
-      styling +=
-        " border-transparent bg-secondary text-secondary-foreground hover:brightness-110";
+      styling += ` border-transparent bg-secondary ${size === "l" ? "text-foreground-light" : "text-foreground"} hover:brightness-110`;
       break;
     case "outline":
       styling +=
