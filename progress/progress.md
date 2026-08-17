@@ -443,3 +443,5 @@ Been working on the UI inside of the dashboard. Goal is to have something decent
 Invite link is taken care of, generation of it from token and serving it through copy in the UI.
 
 Login and signup pages redesigned (onboarding dialogue still to be done, added as workitem to my git hub project)
+
+## [2026-08-13]
