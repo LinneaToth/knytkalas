@@ -1,13 +1,8 @@
-import FeatureHeadline from "@/ui/components/FeatureHeadline";
 import { getUsersEvents } from "@/features/dashboard/services/getUsersEvents";
 import EventList from "@/features/dashboard/components/EventList";
-import { redirect } from "next/navigation";
 
 export default async function Page() {
   const usersEvents = await getUsersEvents("all");
-
-  if (usersEvents.length === 1)
-    redirect(`/dashboard/events/${usersEvents[0].id}`);
 
   return (
     <>
