@@ -445,3 +445,21 @@ Invite link is taken care of, generation of it from token and serving it through
 Login and signup pages redesigned (onboarding dialogue still to be done, added as workitem to my git hub project)
 
 ## [2026-08-13]
+
+Today we are doing AI. Throughout the project, Claude and Gemini have been project reviewers, tutors and cheerleaders, but not allowed into code crafting (with one exception, Gemini made a boilerplate form for me once). However, now that I am close to a working MVP and have a design system in place (however unpolished it still may be), I want to shoehorn in a tab of AI work in here as well. I prepared my prompt, and had Gemini polish it. Claude got authorization to implement UI finish on two views: Onboarding (where you enter your name and dietary issues) and event invite. So, into Claude it went, as you can follow in the process below:
+
+![Claude CLI screenshot](./img/claude1.png)
+![Claude CLI screenshot](./img/claude2.png)
+![Claude CLI screenshot](./img/claude3.png)
+![Claude CLI screenshot](./img/claude4.png)
+![Claude CLI screenshot](./img/claude5.png)
+![Claude CLI screenshot](./img/claude6.png)
+![Claude CLI screenshot](./img/claude7.png)
+![Claude CLI screenshot](./img/claude8.png)
+![Claude CLI screenshot](./img/claude9.png)
+![Claude CLI screenshot](./img/claude10.png)
+![Claude CLI screenshot](./img/claude11.png)
+
+We also discussed and went into a solution regarding a code smell, where I had a database mutation following a GET request(invite was "automatically" claimed when someone else than the host was loading the page). Not optimal. Now claiming is an explicit action, like it should have been from the start.
+
+It did what it was supposed to do and saved me some time. I don't know how I feel about it. But there it is. Generative AI. In my project. Check ✅
