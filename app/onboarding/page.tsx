@@ -18,7 +18,7 @@ export default async function OnboardingPage({
     ? targetParam.slice(1)
     : targetParam;
   const target = "/" + slashFreeTarget;
-  const callbackUrl = isPathSafe(target) ? target : "/";
+  const callbackUrl = isPathSafe(target) ? target : "/dashboard";
   const user = await getCurrentUser();
 
   if (user?.onboarded) {

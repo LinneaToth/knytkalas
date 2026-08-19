@@ -31,14 +31,17 @@ export default async function Page({
         {" "}
         <h1 className="text-4xl">{event.occasion}</h1>
       </header>
-      <div className="col-span-3 col-start-2 row-span-2 row-start-2 grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-10 md:grid-cols-3">
-        <section className="flex min-h-0 flex-col gap-5 md:col-span-2 md:col-start-1 md:row-start-1 md:-row-end-1">
+      <div className="grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-10 md:grid-cols-3">
+        <section className="col-span-3 flex min-h-0 flex-col gap-5 md:col-start-1 md:row-start-1 lg:col-span-2">
           <EventDetails
             event={event}
             date={event.date.toLocaleDateString("sv-SE")}
             time={event.date.toLocaleTimeString("sv-SE").slice(0, -3)}
             role={role}
           />{" "}
+          <div className="lg:hidden">
+            <ResponseDetails role={role} event={event} className="md:hidden" />
+          </div>
           <ContributionsDetails
             contributions={contributions}
             inviteId={usersInviteId}
@@ -46,7 +49,8 @@ export default async function Page({
           />
           <GuestDetails role={role} event={event} />
         </section>
-        <section className="sticky flex flex-col gap-5 md:col-span-1 md:col-start-3 md:row-start-1 md:-row-end-1">
+        <section className="hidden flex-col gap-5 md:-row-end-1 lg:col-span-1 lg:col-start-3 lg:row-start-1 lg:flex">
+          {" "}
           <ResponseDetails role={role} event={event} />
         </section>
       </div>

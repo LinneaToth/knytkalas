@@ -463,3 +463,11 @@ Today we are doing AI. Throughout the project, Claude and Gemini have been proje
 We also discussed and went into a solution regarding a code smell, where I had a database mutation following a GET request(invite was "automatically" claimed when someone else than the host was loading the page). Not optimal. Now claiming is an explicit action, like it should have been from the start.
 
 It did what it was supposed to do and saved me some time. I don't know how I feel about it. But there it is. Generative AI. In my project. Check ✅
+
+## [2026-08-19]
+
+Not really spending a lot of time on this today, but I had some minutes and looked over my backlog. Most of it looks good, I'll tend to the last items during fall. I realised I had forgotten one view during my Claude session (the view where the user sees their settings; in later versions they should obviously be able to edit them, too, but here we are, sticking to the MVP), so that was quickly fixed.
+
+Fixed navbar responsiveness.
+
+A while ago, when my 14 year old test-ran this app, she encountered some unintuitive issues with entering the date. Today I learned that there is a way of opening the picker of input fields through .showPicker. So that was implemented on the date/time field, to hopefull resolve that.

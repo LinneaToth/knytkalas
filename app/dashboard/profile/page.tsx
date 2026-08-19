@@ -1,8 +1,9 @@
 "use server";
 
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
-import FeatureHeadline from "@/ui/components/FeatureHeadline";
+import ContentBox from "@/ui/components/ContentBox";
 import { redirect } from "next/navigation";
+import { User, Utensils } from "lucide-react";
 
 export default async function ProfilePage() {
   const currentUser = await getCurrentUser();
@@ -10,22 +11,35 @@ export default async function ProfilePage() {
 
   return (
     <>
-      <header className="col-span-2 col-start-2 row-start-1 p-10">
-        <h1 className="pl-10 text-4xl">Personal settings</h1>
+      <header className="p-10">
+        <h1 className="text-4xl">Knytkalas Profile</h1>
       </header>
-      <section className="col-span-3 col-start-2 row-start-2 p-10">
-        <h3>Name:</h3>
-        {currentUser.name}
-        <h3>Registered dietary avoidance:</h3>
-        {currentUser.avoids.length === 0 && "None registered"}
-        {currentUser.avoids.length > 0 && (
-          <ul>
-            {currentUser.avoids.map((avoid) => (
-              <li key={avoid}>{avoid}</li>
-            ))}
-          </ul>
-        )}
-      </section>
+      <div className="px-10">
+        <ContentBox styling="gap-5">
+          <p className="flex items-center gap-3">
+            <User size={18} />
+            {currentUser.name}
+          </p>
+
+          <h3 className="flex items-center gap-3">
+            <Utensils size={18} />
+            Registered dietary issues
+          </h3>
+          {currentUser.avoids.length === 0 && <p>None registered</p>}
+          {currentUser.avoids.length > 0 && (
+            <div className="flex flex-wrap gap-2">
+              {currentUser.avoids.map((avoid) => (
+                <span
+                  key={avoid}
+                  className="bg-primary-lighter text-primary-darkest rounded-full px-3 py-1 text-xs font-medium"
+                >
+                  {avoid}
+                </span>
+              ))}
+            </div>
+          )}
+        </ContentBox>
+      </div>
     </>
   );
 }

@@ -1,5 +1,6 @@
 import Form from "next/form";
 import Button from "@/ui/components/Button";
+import DateField from "../../../ui/components/DateField";
 import { formatDate } from "../utils/formatDate";
 
 type Props = {
@@ -51,7 +52,7 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
       />
 
       <label htmlFor="date">Date & start time *</label>
-      <input
+      <DateField
         type="datetime-local"
         name="date"
         id="date"
@@ -65,7 +66,7 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
       />
 
       <label htmlFor="responseDeadline">Respond by latest </label>
-      <input
+      <DateField
         type="date"
         name="responseDeadline"
         id="responseDeadline"

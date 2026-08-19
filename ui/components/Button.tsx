@@ -17,6 +17,7 @@ export default function Button({
   href = "",
   onClick,
   width,
+  className,
   ...props
 }: Props) {
   let styling =
@@ -61,15 +62,17 @@ export default function Button({
       break;
   }
 
+  const combinedStyling = className ? `${styling} ${className}` : styling;
+
   if (href)
     return (
-      <Link href={href} className={styling}>
+      <Link href={href} className={combinedStyling} onClick={onClick}>
         {children}
       </Link>
     );
 
   return (
-    <button onClick={onClick} className={styling} {...props}>
+    <button onClick={onClick} className={combinedStyling} {...props}>
       {children}
     </button>
   );

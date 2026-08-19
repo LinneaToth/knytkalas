@@ -48,10 +48,16 @@ export default function EventCard({ event }: Props) {
         </span>
         <section className="col-span-1 col-start-1 row-start-2 flex flex-col gap-3">
           <h3>Date and time</h3>
-          <p className={`${deletedAt && "line-through"} flex gap-3`}>
-            <CalendarDays />
-            {date.toLocaleDateString()} <Watch />{" "}
-            {date.toLocaleTimeString().slice(0, -3)}
+          <p
+            className={`${deletedAt && "line-through"} flex flex-col gap-3 md:flex-row`}
+          >
+            <span className="flex gap-3">
+              <CalendarDays />
+              {date.toLocaleDateString()}
+            </span>
+            <span className="flex gap-3">
+              <Watch /> {date.toLocaleTimeString().slice(0, -3)}
+            </span>
           </p>
         </section>{" "}
         <section className="col-span-1 row-start-2 flex flex-col gap-3 md:col-start-1 md:row-start-3">

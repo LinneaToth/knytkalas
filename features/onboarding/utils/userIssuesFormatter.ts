@@ -1,20 +1,22 @@
 import { IssueType } from "@/generated/prisma";
 import { isIssueType } from "@/utils/isIssueType";
 
-export const dietaryIssuesFormatter = (issues: IssueType[]) => {
+export const userIssuesFormatter = (issues: IssueType[]) => {
   let formattedIssues: IssueType[];
   formattedIssues = issues.filter(isIssueType);
 
-  const isAnimalBased =
-    formattedIssues.includes("DAIRY") ||
-    formattedIssues.includes("EGG") ||
-    formattedIssues.includes("FISH") ||
-    formattedIssues.includes("MEAT") ||
-    formattedIssues.includes("SHELLFISH") ||
-    formattedIssues.includes("LACTOSE");
+  const isVegan = formattedIssues.includes("ANIMALBASED");
 
-  if (isAnimalBased) {
-    formattedIssues = [...formattedIssues, "ANIMALBASED"];
+  if (isVegan) {
+    formattedIssues = [
+      ...formattedIssues,
+      "EGG",
+      "MEAT",
+      "DAIRY",
+      "LACTOSE",
+      "FISH",
+      "SHELLFISH",
+    ];
     formattedIssues = [...new Set(formattedIssues)];
   }
 

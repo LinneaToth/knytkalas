@@ -2,10 +2,10 @@
 
 import { NewUser } from "@/types/entityTypes";
 import { onboardUser } from "@/data/dal/user/onboardUser";
-import { dietaryIssuesFormatter } from "../../../utils/dietaryIssuesFormatter";
+import { userIssuesFormatter } from "../utils/userIssuesFormatter";
 
 export const onboard = async (user: NewUser) => {
-  const avoids = dietaryIssuesFormatter(user.avoids);
+  const avoids = userIssuesFormatter(user.avoids);
   try {
     await onboardUser({ ...user, avoids });
     return { success: "User registered" };

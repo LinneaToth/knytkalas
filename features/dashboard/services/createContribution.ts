@@ -1,7 +1,7 @@
 "use server";
 import { createContribution as createContributionDAL } from "@/data/dal/contribution/createContribution";
 import { CategoryType, Contribution, IssueType } from "@/generated/prisma";
-import { dietaryIssuesFormatter } from "@/utils/dietaryIssuesFormatter";
+import { contributionsIssuesFormatter } from "../utils/contributionsIssuesFormatter";
 import { revalidatePath } from "next/cache";
 
 type StateType = { ok?: boolean; contribution?: Contribution; error?: string };
@@ -12,7 +12,7 @@ export const createContribution = async (
 ): Promise<StateType> => {
   try {
     const contains = formData.getAll("contains") as IssueType[] | null;
-    const dietaryIssues = dietaryIssuesFormatter(contains || []);
+    const dietaryIssues = contributionsIssuesFormatter(contains || []);
     const contributionCreateData = {
       name: formData.get("name") as string,
       servings: Number(formData.get("servings") as string),

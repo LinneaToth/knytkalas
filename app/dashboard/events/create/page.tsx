@@ -4,13 +4,15 @@ import ContentBox from "@/ui/components/ContentBox";
 
 export default async function CreateEventPage() {
   return (
-    <div className="px-10">
+    <>
       <header className="p-10">
         <h1 className="text-4xl">Create Event </h1>
       </header>
-      <ContentBox styling="col-span-3 mb-auto">
-        <CreateEvent />
-      </ContentBox>
-    </div>
+      <div className="px-10">
+        <ContentBox styling="col-span-3 mb-auto">
+          <CreateEvent />
+        </ContentBox>
+      </div>
+    </>
   );
 }
