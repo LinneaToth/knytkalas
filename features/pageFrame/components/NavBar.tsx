@@ -27,9 +27,11 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
           <Button variant="ghost" href="/login">
             log in
           </Button>
-          <Button variant="cta" href="/onboarding">
-            sign up
-          </Button>
+          <span className="hidden md:inline">
+            <Button variant="cta" href="/onboarding">
+              sign up
+            </Button>
+          </span>
         </nav>
       )}
 

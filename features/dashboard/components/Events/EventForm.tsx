@@ -73,7 +73,9 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
         className="w-full"
       />
 
-      <Button>{eventData ? "Update event" : "Create Event"}</Button>
+      <Button variant="dark">
+        {eventData ? "Update event" : "Create Event"}
+      </Button>
     </Form>
   );
 }

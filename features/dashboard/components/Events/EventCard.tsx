@@ -23,7 +23,7 @@ export default function EventCard({ event }: Props) {
   return (
     <Link href={`/dashboard/events/${id}`} key={event.occasion + event.id}>
       <article
-        className={`bg-card-background text-foreground rounded-l border-l-10 p-10 drop-shadow ${accent} grid cursor-pointer grid-cols-2 grid-rows-4 gap-3 md:grid-rows-3`}
+        className={`bg-card-background text-foreground rounded-l border border-l-10 border-white/20 p-10 shadow-xl shadow-black/5 drop-shadow backdrop-blur-md backdrop-saturate-105 ${accent} grid cursor-pointer grid-cols-2 grid-rows-4 gap-3 md:grid-rows-3`}
       >
         <header className="col-span-2 col-start-1 row-span-1 row-start-1 flex flex-col">
           <h2 className="uppercase">

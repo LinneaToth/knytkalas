@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 import ContentBox from "@/ui/components/ContentBox";
 import { redirect } from "next/navigation";
 import { User, Utensils } from "lucide-react";
+import IssuePills from "@/features/dashboard/components/Contributions/IssuePills";
 
 import DeleteAccountButton from "@/features/dashboard/components/DeleteAccountButton";
 
@@ -29,16 +30,11 @@ export default async function ProfilePage() {
           </h3>
           {currentUser.avoids.length === 0 && <p>None registered</p>}
           {currentUser.avoids.length > 0 && (
-            <div className="flex flex-wrap gap-2">
-              {currentUser.avoids.map((avoid) => (
-                <span
-                  key={avoid}
-                  className="bg-primary-lighter text-primary-darkest rounded-full px-3 py-1 text-xs font-medium"
-                >
-                  {avoid}
-                </span>
-              ))}
-            </div>
+            <IssuePills
+              alertIssues={[]}
+              otherIssues={currentUser.avoids}
+              justify="start"
+            />
           )}
         </ContentBox>
         <DeleteAccountButton userId={currentUser.id} />

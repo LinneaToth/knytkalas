@@ -37,7 +37,7 @@ export default async function RootLayout({
       data-scroll-behavior="smooth"
       className={`${poppins.variable} ${bagelFatOne.variable} ${tienne.variable} scroll-smooth antialiased`}
     >
-      <body className="bg-background flex h-screen w-screen flex-col justify-between">
+      <body className="flex h-screen w-screen flex-col justify-between bg-[url('/graphics/bg_monocolor.svg')] bg-cover">
         {children}
       </body>
     </html>

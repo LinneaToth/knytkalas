@@ -3,21 +3,18 @@ export const borderColor = (
     ReturnType<typeof import("../services/getUsersEvents").getUsersEvents>
   >[number],
 ): string => {
-  const month = e.date.getMonth();
-
   if (e.deletedAt) {
     return "border-l-inactive";
   }
 
   const borderClasses = {
-    primary: "border-l-primary",
+    inactive: "border-l-inactive",
     success: "border-l-success",
-    accent: "border-l-accent",
-    secondary: "border-l-secondary",
+    error: "border-l-error",
   };
 
-  if (month < 3 || month === 11) return borderClasses.primary;
-  if (month < 6) return borderClasses.success;
-  if (month < 9) return borderClasses.accent;
-  return borderClasses.secondary;
+  if (e.acceptedStatus === "PENDING") return borderClasses.inactive;
+  if (e.acceptedStatus === "GOING") return borderClasses.success;
+  if (e.acceptedStatus === "DECLINED") return borderClasses.error;
+  return "border-l-primary";
 };

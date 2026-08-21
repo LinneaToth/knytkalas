@@ -22,21 +22,8 @@ export default function ContributionsDetails({
   inviteId,
   avoids,
 }: Props) {
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    if (isExpanded) {
-      const timer = setTimeout(() => {
-        listRef.current?.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }, 250);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isExpanded]);
 
   return (
     <ContentBox styling="gap-8">
@@ -59,7 +46,7 @@ export default function ContributionsDetails({
       </header>
 
       <div
-        className={`grid transition-all duration-500 ease-in-out ${
+        className={`grid transition-all duration-150 ease-in-out ${
           isExpanded
             ? "grid-rows-[1fr] opacity-100"
             : "grid-rows-[0fr] opacity-0"

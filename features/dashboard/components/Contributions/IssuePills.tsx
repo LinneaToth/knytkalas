@@ -3,15 +3,22 @@ import { IssueType } from "@/generated/prisma";
 type Props = {
   alertIssues: IssueType[];
   otherIssues: IssueType[];
+  justify: "end" | "start" | "center";
 };
 
-export default function IssuePills({ alertIssues, otherIssues }: Props) {
+export default function IssuePills({
+  alertIssues,
+  otherIssues,
+  justify,
+}: Props) {
+  const flexJustify = "justify-" + justify;
+
   return (
-    <section className={`flex w-full justify-end gap-3`}>
+    <section className={`flex w-full ${flexJustify} gap-3`}>
       {alertIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className={`bg-card-background text-primary-darkest rounded-full py-1 text-xs font-semibold`}
+          className={`bg-card-background text-primary-darkest rounded-full p-2 text-xs font-semibold`}
         >
           ⚠️ {issue}
         </div>
@@ -20,7 +27,7 @@ export default function IssuePills({ alertIssues, otherIssues }: Props) {
       {otherIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className="bg-card-background text-primary-darkest rounded-full py-1 text-xs"
+          className="bg-card-background text-primary-darkest rounded-full p-2 text-xs"
         >
           {issue}
         </div>

@@ -485,3 +485,17 @@ Added a delete account button on the profile page, wired to an existing DAL func
 Ran into a couple of issues on deployment, most of which were cases of looking up ways to do things. However, there was a problem with the pre-rendering of one of my pages. Somewhere down the line, I had turned a page.tsx into a client component, in order to be able to access the calling URL. Wrapping the troublesome component in a suspense-tag solves that problem, since there is a fallback to show until the needed data is available.
 
 Migrated my db to Neon by `DATABASE_URL="<connection string here>" npx prisma migrate deploy`
+
+Final boss was google auth, but with some tweaks the thing is finally LIVE 🥳
+
+![Knytkalas.net deployed with Vercel](./img/19.png)
+
+Live app called for user testing; which immediately generated a nice pile of backlog items. Bugs were found, reactions and opinions were shared.
+
+![User feedback](./img/20.png)
+
+✅ Invite link was generated with localhost as base url, remedied with an env variable in Vercel
+
+✅ Dashboard was boring to look at, with its grey background. Quickly added a faded version of the landing page hero for bg.
+
+With that, sprint "functional ui" is closed and the next chapter truly is opened - Refinement!

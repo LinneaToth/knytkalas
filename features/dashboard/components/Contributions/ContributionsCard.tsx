@@ -1,6 +1,6 @@
 import { Trash2 } from "lucide-react";
 import { IssueType } from "@/generated/prisma";
-import AlertIssuePills from "./IssuePills";
+import IssuePills from "./IssuePills";
 import { getContributionsByEvent } from "../../services/getContributionsByEvent";
 import { deleteContribution } from "../../services/deleteContribution";
 import { capitalize } from "@/utils/capitalize";
@@ -60,7 +60,11 @@ export default function ContributionsCard({
       </p>
       <div className="flex justify-between">
         {" "}
-        <AlertIssuePills alertIssues={issuesFound} otherIssues={otherIssues} />
+        <IssuePills
+          alertIssues={issuesFound}
+          otherIssues={otherIssues}
+          justify="end"
+        />
       </div>
     </li>
   );
