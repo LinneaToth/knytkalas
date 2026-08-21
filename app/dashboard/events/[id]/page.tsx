@@ -23,6 +23,7 @@ export default async function Page({
   const contributions = await getContributionsByEvent(event.id);
   const role = user.id === event.hostId ? "host" : "guest";
   const usersInviteId = await getInviteIdByUserAndEvent(user.id, event.id);
+  const userAvoids = user.onboarded ? user.avoids : [];
 
   //Time right now only works in Sweden. If locale feature later is introduced; time coversion must be implemented.
   return (
@@ -40,12 +41,12 @@ export default async function Page({
             role={role}
           />{" "}
           <div className="lg:hidden">
-            <ResponseDetails role={role} event={event} className="md:hidden" />
+            <ResponseDetails role={role} event={event} />
           </div>
           <ContributionsDetails
             contributions={contributions}
             inviteId={usersInviteId}
-            avoids={user.avoids}
+            avoids={userAvoids}
           />
           <GuestDetails role={role} event={event} />
         </section>

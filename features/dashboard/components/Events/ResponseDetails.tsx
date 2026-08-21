@@ -1,4 +1,3 @@
-import Button from "@/ui/components/Button";
 import ContentBox from "@/ui/components/ContentBox";
 import { getEventDetails } from "../../services/getEventDetails";
 import RespondToEventButtons from "./RespondToEventButtons";
@@ -35,8 +34,7 @@ export default function ResponseDetails({ role, event }: Props) {
       <RespondToEventButtons
         status={event.status || "PENDING"}
         id={event.userInviteId}
-        eventId={event.id}
-        totalGuests={event.userInviteGuests}
+        totalGuests={event.userInviteGuests || 1}
       />
     </ContentBox>
   );

@@ -1,5 +1,5 @@
 type Props = {
-  role: "guest" | "host";
+  role: string;
   status?: "GOING" | "PENDING" | "DECLINED";
 };
 
