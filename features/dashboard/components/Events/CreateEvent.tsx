@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState } from "react";
-import { createEvent } from "../services/createEvent";
+import { createEvent } from "../../services/createEvent";
 import EventForm from "./EventForm";
 
 export default function CreateEvent() {

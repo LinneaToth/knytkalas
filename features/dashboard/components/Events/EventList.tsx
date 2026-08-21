@@ -1,6 +1,6 @@
 import EventCard from "./EventCard";
-import { orderByDate } from "../utils/orderByDate";
-import { getUsersEvents } from "../services/getUsersEvents";
+import { orderByDate } from "../../utils/orderByDate";
+import { getUsersEvents } from "../../services/getUsersEvents";
 
 type Props = {
   events: Awaited<ReturnType<typeof getUsersEvents>>;

@@ -471,3 +471,13 @@ Not really spending a lot of time on this today, but I had some minutes and look
 Fixed navbar responsiveness.
 
 A while ago, when my 14 year old test-ran this app, she encountered some unintuitive issues with entering the date. Today I learned that there is a way of opening the picker of input fields through .showPicker. So that was implemented on the date/time field, to hopefull resolve that.
+
+## [2026-08-21]
+
+Last day of summer break, in hindsight I am very grateful for my decision to spend part of it on a solid foundation for my graduation project. It means I will be able to focus fully on my upcoming internship, LIA 2, and the time that I do find to spend on this project will be about finesse rather than panic.
+
+I'm thinking I will deploy it through Vercel and Neon today, raw as it is.
+
+[According to GDPR.eu, I don't need a cookie banner / user's active consent for essential cookies](https://gdpr.eu/cookies/) to comply with GDPR and EPD. I only have better-auths's session cookie, to gate access to dashboard and releated content.
+
+Added a delete account button on the profile page, wired to an existing DAL function through a new service. Did a component restructure, moved event related components to an event subfolder in app/dashboard/components. Had some issues with stale imports that weren't automatically updated (as they usually are w vs code?). Footer got an overhaul, added informational components for about/terms and conditions/privacy. Gen AI helped w drafts for the legal texts. [Visited Stack Overflow](https://stackoverflow.com/questions/76567184/html-dialog-element-in-react-js) and consulted with Gemini for my info modals, using <dialog>. Hero image was slightly tweaked and optimized for deploy. Removed some leftover boilerplate graphics.

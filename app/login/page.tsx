@@ -22,6 +22,7 @@ export default function LoginPage() {
           <h2 className="uppercase">
             Please sign in using your Google account
           </h2>
+
           <GoogleLogInButton callbackUrl={callbackUrl} />
           <p>
             Don&apos;t have an account yet?{" "}

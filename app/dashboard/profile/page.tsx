@@ -5,6 +5,8 @@ import ContentBox from "@/ui/components/ContentBox";
 import { redirect } from "next/navigation";
 import { User, Utensils } from "lucide-react";
 
+import DeleteAccountButton from "@/features/dashboard/components/DeleteAccountButton";
+
 export default async function ProfilePage() {
   const currentUser = await getCurrentUser();
   if (!currentUser?.onboarded) redirect("/login");
@@ -15,7 +17,7 @@ export default async function ProfilePage() {
         <h1 className="text-4xl">Knytkalas Profile</h1>
       </header>
       <div className="px-10">
-        <ContentBox styling="gap-5">
+        <ContentBox styling="gap-5 mb-10">
           <p className="flex items-center gap-3">
             <User size={18} />
             {currentUser.name}
@@ -39,6 +41,7 @@ export default async function ProfilePage() {
             </div>
           )}
         </ContentBox>
+        <DeleteAccountButton userId={currentUser.id} />
       </div>
     </>
   );

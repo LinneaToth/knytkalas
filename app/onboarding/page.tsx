@@ -50,7 +50,11 @@ export default async function OnboardingPage({
               </h2>
               <GoogleLogInButton
                 callbackUrl={`/onboarding?target-url=${callbackUrl}`}
-              />
+              />{" "}
+              <p className="italic">
+                This is a student project. <br />
+                Sign up is currently only available for invited participants.
+              </p>
             </>
           )}
         </ContentBox>

@@ -46,8 +46,8 @@ export default function Hero() {
           <Image
             src="/graphics/phone.png"
             alt="Phone mockup"
-            width={1850}
-            height={2787}
+            width={900}
+            height={1356}
           />
         </figure>
       </div>

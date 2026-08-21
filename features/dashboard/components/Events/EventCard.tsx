@@ -1,6 +1,6 @@
 import Link from "next/link";
-import { borderColor } from "../utils/borderColor";
-import { getUsersEvents } from "../services/getUsersEvents";
+import { borderColor } from "../../utils/borderColor";
+import { getUsersEvents } from "../../services/getUsersEvents";
 import { Watch, CalendarDays, MapPin } from "lucide-react";
 import ResponseStatus from "./ResponseStatus";
 

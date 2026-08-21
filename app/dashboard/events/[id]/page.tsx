@@ -1,9 +1,9 @@
 "use server";
 
-import EventDetails from "@/features/dashboard/components/EventDetails";
+import EventDetails from "@/features/dashboard/components/Events/EventDetails";
 import { getEventDetails } from "@/features/dashboard/services/getEventDetails";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
-import ResponseDetails from "@/features/dashboard/components/ResponseDetails";
+import ResponseDetails from "@/features/dashboard/components/Events/ResponseDetails";
 import GuestDetails from "@/features/dashboard/components/Guests/GuestsDetails";
 import ContributionsDetails from "@/features/dashboard/components/Contributions/ContributionsDetails";
 import { getInviteIdByUserAndEvent } from "@/features/dashboard/services/getInviteIdByUserAndEvent";

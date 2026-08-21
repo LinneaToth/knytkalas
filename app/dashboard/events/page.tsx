@@ -1,5 +1,5 @@
 import { getUsersEvents } from "@/features/dashboard/services/getUsersEvents";
-import EventList from "@/features/dashboard/components/EventList";
+import EventList from "@/features/dashboard/components/Events/EventList";
 
 export default async function Page() {
   const usersEvents = await getUsersEvents("all");

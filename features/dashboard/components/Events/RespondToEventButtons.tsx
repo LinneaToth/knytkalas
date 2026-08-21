@@ -1,7 +1,7 @@
 "use client";
 import { UserMinus, UserPlus } from "lucide-react";
 import Button from "@/ui/components/Button";
-import { rspv } from "../services/rspv";
+import { rspv } from "../../services/rspv";
 
 type Props = {
   status: "GOING" | "PENDING" | "DECLINED";

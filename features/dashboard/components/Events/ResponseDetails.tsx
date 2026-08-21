@@ -1,6 +1,6 @@
 import Button from "@/ui/components/Button";
 import ContentBox from "@/ui/components/ContentBox";
-import { getEventDetails } from "../services/getEventDetails";
+import { getEventDetails } from "../../services/getEventDetails";
 import RespondToEventButtons from "./RespondToEventButtons";
 
 type Props = {

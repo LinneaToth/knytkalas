@@ -3,12 +3,12 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/ui/components/Button";
-import { toggleCancelEvent } from "../services/toggleCancelEvent";
-import { getEventDetails } from "../services/getEventDetails";
+import { toggleCancelEvent } from "../../services/toggleCancelEvent";
+import { getEventDetails } from "../../services/getEventDetails";
 import { Pencil, CalendarDays, MapPin, Clock10 } from "lucide-react";
 import ContentBox from "@/ui/components/ContentBox";
 import EventForm from "./EventForm";
-import { updateEvent } from "../services/updateEvent";
+import { updateEvent } from "../../services/updateEvent";
 
 type EventDetails = Awaited<ReturnType<typeof getEventDetails>>;
 

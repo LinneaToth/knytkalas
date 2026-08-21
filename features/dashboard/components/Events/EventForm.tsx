@@ -1,7 +1,7 @@
 import Form from "next/form";
 import Button from "@/ui/components/Button";
-import DateField from "../../../ui/components/DateField";
-import { formatDate } from "../utils/formatDate";
+import DateField from "../../../../ui/components/DateField";
+import { formatDate } from "../../utils/formatDate";
 
 type Props = {
   handleFormAction: (formData: FormData) => Promise<void>;

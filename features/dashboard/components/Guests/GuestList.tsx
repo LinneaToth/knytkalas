@@ -1,5 +1,5 @@
 import { useState } from "react";
-import ResponseStatus from "../ResponseStatus";
+import ResponseStatus from "../Events/ResponseStatus";
 import { uninviteGuest } from "../../services/uninviteGuest";
 import { Link, Check } from "lucide-react";
 import { getInviteLink } from "../../services/getInviteLink";

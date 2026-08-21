@@ -1,8 +1,58 @@
+"use client";
+
+import InfoModal from "@/ui/components/InfoModal";
+import { useState } from "react";
+import PrivacyModal from "./PrivacyModal";
+import AboutModal from "./AboutModal";
+import TermsModal from "./TermsModal";
+
+type ModalState = "privacy" | "about" | "terms" | null;
+
 export default function Footer() {
+  const [modalState, setModalState] = useState<ModalState>(null);
+
   return (
-    <footer className="bg-primary-darkest text-foreground-light flex h-32 w-full flex-col items-center justify-between px-8 py-8 shadow-md">
-      <span>Privacy Policy | Terms and conditions | About Knytkalas.net</span>
-      <span>© {new Date().getFullYear()} Knytkalas.net</span>
-    </footer>
+    <>
+      <footer className="bg-primary-darkest text-foreground-light flex h-32 w-full flex-col items-center justify-between px-8 py-8 shadow-md">
+        <nav>
+          <button
+            className="cursor-pointer"
+            onClick={() => setModalState("privacy")}
+          >
+            Privacy Policy
+          </button>{" "}
+          |{" "}
+          <button
+            className="cursor-pointer"
+            onClick={() => setModalState("terms")}
+          >
+            Terms and conditions
+          </button>{" "}
+          |{" "}
+          <button
+            className="cursor-pointer"
+            onClick={() => setModalState("about")}
+          >
+            About Knytkalas.net
+          </button>
+        </nav>
+        <span>© {new Date().getFullYear()} Knytkalas.net</span>
+      </footer>
+
+      <PrivacyModal
+        isOpen={modalState === "privacy"}
+        onClose={() => setModalState(null)}
+      />
+
+      <AboutModal
+        isOpen={modalState === "about"}
+        onClose={() => setModalState(null)}
+      />
+
+      <TermsModal
+        isOpen={modalState === "terms"}
+        onClose={() => setModalState(null)}
+      />
+    </>
   );
 }

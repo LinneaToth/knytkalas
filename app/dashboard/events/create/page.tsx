@@ -1,5 +1,5 @@
 "use server";
-import CreateEvent from "@/features/dashboard/components/CreateEvent";
+import CreateEvent from "@/features/dashboard/components/Events/CreateEvent";
 import ContentBox from "@/ui/components/ContentBox";
 
 export default async function CreateEventPage() {
