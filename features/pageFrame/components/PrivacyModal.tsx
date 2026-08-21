@@ -19,10 +19,6 @@ export default function PrivacyModal({ isOpen, onClose }: Props) {
       </p>
       <ol className="flex list-decimal flex-col gap-3">
         <li>
-          <h2>Who is responsible for your data</h2> This Service is operated by
-          Linnéa Toth, who will respond to inquiries regarding your data.
-        </li>
-        <li>
           <h2>What we collect</h2>
           <ul className="flex flex-col gap-3">
             <li>
