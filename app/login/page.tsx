@@ -1,15 +1,19 @@
 "use client";
 
+import { Suspense } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { GoogleLogInButton } from "@/features/auth/components/GoogleLogInButton";
 import ContentBox from "@/ui/components/ContentBox";
 import NavBar from "@/features/pageFrame/components/NavBar";
 
-export default function LoginPage() {
+function GoogleLogInButtonWithCallback() {
   const searchParams = useSearchParams();
   const callbackUrl = searchParams.get("target-url") || "";
+  return <GoogleLogInButton callbackUrl={callbackUrl} />;
+}
 
+export default function LoginPage() {
   return (
     <>
       <NavBar mode="notSignedIn" />
@@ -23,7 +27,11 @@ export default function LoginPage() {
             Please sign in using your Google account
           </h2>
 
-          <GoogleLogInButton callbackUrl={callbackUrl} />
+          {/* Suspense attempts to render whatever children is in there; if something is missing it takes a fallback argument */}
+          <Suspense fallback={<GoogleLogInButton callbackUrl="" />}>
+            <GoogleLogInButtonWithCallback />
+          </Suspense>
+
           <p>
             Don&apos;t have an account yet?{" "}
             <Link href="/onboarding" className="underline">
