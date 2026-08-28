@@ -499,3 +499,11 @@ Live app called for user testing; which immediately generated a nice pile of bac
 ✅ Dashboard was boring to look at, with its grey background. Quickly added a faded version of the landing page hero for bg.
 
 With that, sprint "functional ui" is closed and the next chapter truly is opened - Refinement!
+
+## [2026-08-28]
+
+- Fixed a time formatting issue on the invite page
+- Event cards had a redundantly rounded left border; taken care of.
+- Same roundness on "host" pill as rspv-status pill.
+
+Invited a classmate for testing, and did some user testing on his project (which looked great!). He had an ambitious google form to catch feedback. That was a nice touch, which inspired me a bit.

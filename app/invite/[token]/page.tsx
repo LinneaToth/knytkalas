@@ -100,7 +100,11 @@ export default async function Page({
           </p>
           <p className="flex gap-3">
             <Clock10 />
-            Start time: {event.date.toLocaleTimeString().slice(0, -3)}
+            Start time:{" "}
+            {event.date.toLocaleTimeString([], {
+              hour: "numeric",
+              minute: "2-digit",
+            })}
           </p>
           <p className="flex gap-3">
             <MapPin />
