@@ -29,16 +29,16 @@ export default function RespondToEventButtons({
             {" "}
             {totalGuests > 1 && (
               <Button
-                size="s"
-                variant="ghost"
+                size="sm"
+                variant="secondary"
                 onClick={() => rspv(id, "GOING", -1)}
               >
                 <UserMinus /> Remove guest
               </Button>
             )}
             <Button
-              size="s"
-              variant="ghost"
+              size="sm"
+              variant="secondary"
               onClick={() => rspv(id, "GOING", 1)}
             >
               <UserPlus /> Add guest

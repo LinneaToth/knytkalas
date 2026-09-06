@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Button from "@/ui/components/Button";
-import FeatureHeadline from "@/ui/components/FeatureHeadline";
+import { PartyPopper } from "lucide-react";
 
 const scrollToAbout = () => {
   const section = document.getElementById("about");
@@ -34,10 +34,16 @@ export default function Hero() {
             </p>
           </div>
           <nav className="z-20 flex w-full max-w-240 justify-start gap-5">
-            <Button variant="cta" size="l" href="/onboarding">
+            <Button variant="primary" size="lg" href="/onboarding">
+              <PartyPopper />
               join the party
             </Button>
-            <Button variant="solid" size="l" onClick={scrollToAbout}>
+            <Button
+              variant="dark"
+              size="lg"
+              onClick={scrollToAbout}
+              className="border-white text-white hover:bg-white/10"
+            >
               see how it works
             </Button>
           </nav>

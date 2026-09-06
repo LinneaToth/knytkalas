@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { usePathname } from "next/navigation";
 import Logo from "./Logo";
 import Button from "../../../ui/components/Button";
 import { SignOutButton } from "@/features/auth/components/SignOutButton";
@@ -12,6 +13,27 @@ type Props = {
 
 export default function NavBar({ mode = "notSignedIn" }: Props) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const pathname = usePathname();
+
+  const navItems = [
+    {
+      href: "/dashboard/events",
+      label: "Events",
+      active:
+        pathname.startsWith("/dashboard/events") &&
+        pathname !== "/dashboard/events/create",
+    },
+    {
+      href: "/dashboard/events/create",
+      label: "Create event",
+      active: pathname === "/dashboard/events/create",
+    },
+    {
+      href: "/dashboard/profile",
+      label: "Profile",
+      active: pathname.startsWith("/dashboard/profile"),
+    },
+  ];
 
   return (
     <header
@@ -24,14 +46,12 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
 
       {mode === "notSignedIn" && (
         <nav className="flex items-center gap-2 sm:gap-4">
-          <Button variant="ghost" href="/login">
+          <Button variant="light" href="/login" size="sm">
             log in
           </Button>
-          <span className="hidden md:inline">
-            <Button variant="cta" href="/onboarding">
-              sign up
-            </Button>
-          </span>
+          <Button variant="primary" href="/onboarding" size="sm">
+            sign up
+          </Button>
         </nav>
       )}
 
@@ -39,15 +59,16 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
       {mode === "signedin" && (
         <>
           <nav className="border-card-background/70 mr-auto ml-5 hidden justify-start gap-3 border-l pl-5 lg:flex">
-            <Button href="/dashboard/events" variant="ghost">
-              Events
-            </Button>
-            <Button href="/dashboard/events/create" variant="ghost">
-              Create event
-            </Button>
-            <Button href="/dashboard/profile" variant="ghost">
-              Profile
-            </Button>
+            {navItems.map((item) => (
+              <Button
+                key={item.href}
+                href={item.href}
+                variant={item.active ? "light" : "ghost"}
+                size="sm"
+              >
+                {item.label}
+              </Button>
+            ))}
           </nav>
 
           <div className="hidden lg:block">
@@ -56,12 +77,12 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
 
           {/*mobile menu btn*/}
           <button
-            className="flex items-center justify-center p-2 text-current lg:hidden"
+            className="flex h-11 w-11 items-center justify-center rounded-full bg-white/45 hover:cursor-pointer lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-expanded={isMobileMenuOpen}
             aria-label="Toggle navigation"
           >
-            {isMobileMenuOpen ? <X color="white" /> : <Menu color="white" />}
+            {isMobileMenuOpen ? <X /> : <Menu />}
           </button>
 
           {/*Mobile drop down*/}
@@ -71,27 +92,17 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               <nav className="flex flex-col gap-3">
-                <Button
-                  href="/dashboard/events"
-                  variant="ghost"
-                  className="w-full text-left"
-                >
-                  Events
-                </Button>
-                <Button
-                  href="/dashboard/events/create"
-                  variant="ghost"
-                  className="w-full text-left"
-                >
-                  Create event
-                </Button>
-                <Button
-                  href="/dashboard/profile"
-                  variant="ghost"
-                  className="w-full text-left"
-                >
-                  Profile
-                </Button>
+                {navItems.map((item) => (
+                  <Button
+                    key={item.href}
+                    href={item.href}
+                    variant={item.active ? "light" : "ghost"}
+                    size="sm"
+                    className="w-full"
+                  >
+                    {item.label}
+                  </Button>
+                ))}
               </nav>
               <hr className="border-card-background/20" />
               <div className="w-full">

@@ -10,12 +10,12 @@ export default function PrivacyModal({ isOpen, onClose }: Props) {
   return (
     <InfoModal isOpen={isOpen} onClose={onClose}>
       <h1>Privacy Policy</h1>
-      <p>Last updated: 2026-08-21</p>
+      <p>Last updated: 2026-09-06</p>
       <p>
-        Knytkalas ("the Service") is a student project built as part of a higher
-        vocational education (in Swedish "Yrkeshögskola, YH") graduation
-        project. This policy explains what personal data is collected when you
-        use it, and how it's handled.
+        Knytkalas.net is a student project built as part of a higher vocational
+        education (in Swedish "Yrkeshögskola, YH") graduation project. This
+        policy explains what personal data is collected when you use it, and how
+        it's handled.
       </p>
       <ol className="flex list-decimal flex-col gap-3">
         <li>
@@ -61,14 +61,14 @@ export default function PrivacyModal({ isOpen, onClose }: Props) {
         <li>
           <h2>Why we use it</h2>
           <ul className="flex flex-col gap-3">
-            <li>To let you sign in and use the Service</li>
+            <li>To let you sign in and use Knytkalas.net</li>
             <li>
               To let hosts organize events and guests coordinate contributions
               (contract necessity)
             </li>
             <li>
-              To keep the Service secure (legitimate interest — e.g. session/IP
-              logging to detect abuse)
+              To keep Knytkalas.net secure (legitimate interest — e.g.
+              session/IP logging to detect abuse)
             </li>
           </ul>
         </li>
@@ -119,8 +119,8 @@ export default function PrivacyModal({ isOpen, onClose }: Props) {
           own terms).
         </li>
         <li>
-          <h2>Changes</h2> We may update this policy as the Service changes. We
-          will update the "last updated" date above when we do.
+          <h2>Changes</h2> We may update this policy as Knytkalas.net changes.
+          We will update the "last updated" date above when we do.
         </li>
       </ol>
     </InfoModal>

@@ -37,7 +37,7 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   if (!isActive) {
     return (
-      <Button onClick={toggleActive} variant="outline">
+      <Button onClick={toggleActive} variant="secondary">
         Create new invite
       </Button>
     );

@@ -99,7 +99,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
                 </button>
               )}
 
-              <ResponseStatus status={guest.status} role={role} />
+              <ResponseStatus status={guest.status} />
             </section>
           </div>
         );

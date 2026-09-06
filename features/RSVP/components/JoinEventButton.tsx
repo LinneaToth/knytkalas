@@ -29,7 +29,7 @@ export default function JoinEventButton({ token, eventId }: Props) {
 
   return (
     <>
-      <Button variant="cta" onClick={handleClick} disabled={pending}>
+      <Button variant="primary" onClick={handleClick} disabled={pending}>
         {pending ? "Joining..." : "Join this event"}
       </Button>
       {error && <p className="text-error">{error}</p>}

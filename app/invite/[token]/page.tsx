@@ -68,7 +68,7 @@ export default async function Page({
                 : "This invite has already been claimed!"}
             </h1>
             {isHost && (
-              <Button variant="cta" href={`/dashboard/events/${event.id}/`}>
+              <Button variant="primary" href={`/dashboard/events/${event.id}/`}>
                 Back to event
               </Button>
             )}
@@ -122,7 +122,7 @@ export default async function Page({
           )}
 
           {isHost && (
-            <Button variant="cta" href={`/dashboard/events/${event.id}/`}>
+            <Button variant="primary" href={`/dashboard/events/${event.id}/`}>
               Back to event
             </Button>
           )}
@@ -132,7 +132,7 @@ export default async function Page({
                 New user? Sign up to join the event!
               </Button>
               <Button
-                variant="outline"
+                variant="secondary"
                 href={`/login?target-url=/invite/${token}/`}
               >
                 Returning user? Sign in to join this event!

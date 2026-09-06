@@ -28,15 +28,15 @@ export default function ContributionsList({
       <div className="flex content-center justify-end gap-3">
         <p className="mr-auto">Sort by: </p>
         <Button
-          size="s"
-          variant={sortBy === "category" ? "dark" : "outline"}
+          size="sm"
+          variant={sortBy === "category" ? "dark" : "secondary"}
           onClick={() => setSortBy("category")}
         >
           Categories
         </Button>{" "}
         <Button
-          size="s"
-          variant={sortBy === "user" ? "dark" : "outline"}
+          size="sm"
+          variant={sortBy === "user" ? "dark" : "secondary"}
           onClick={() => setSortBy("user")}
         >
           User
