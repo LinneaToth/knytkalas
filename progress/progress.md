@@ -480,7 +480,7 @@ I'm thinking I will deploy it through Vercel and Neon today, raw as it is.
 
 [According to GDPR.eu, I don't need a cookie banner / user's active consent for essential cookies](https://gdpr.eu/cookies/) to comply with GDPR and EPD. I only have better-auths's session cookie, to gate access to dashboard and releated content.
 
-Added a delete account button on the profile page, wired to an existing DAL function through a new service. Did a component restructure, moved event related components to an event subfolder in app/dashboard/components. Had some issues with stale imports that weren't automatically updated (as they usually are w vs code?). Footer got an overhaul, added informational components for about/terms and conditions/privacy. Gen AI helped w drafts for the legal texts. [Visited Stack Overflow](https://stackoverflow.com/questions/76567184/html-dialog-element-in-react-js) and consulted with Gemini for my info modals, using <dialog>. Hero image was slightly tweaked and optimized for deploy. Removed some leftover boilerplate graphics.
+Added a delete account button on the profile page, wired to an existing DAL function through a new service. Did a component restructure, moved event related components to an event subfolder in app/dashboard/components. Had some issues with stale imports that weren't automatically updated (as they usually are w vs code?). Footer got an overhaul, added informational components for about/terms and conditions/privacy. Gen AI helped w drafts for the legal texts. [Visited Stack Overflow](https://stackoverflow.com/questions/76567184/html-dialog-element-in-react-js) and consulted with Gemini for my info modals, using `dialog`-tag. Hero image was slightly tweaked and optimized for deploy. Removed some leftover boilerplate graphics.
 
 Ran into a couple of issues on deployment, most of which were cases of looking up ways to do things. However, there was a problem with the pre-rendering of one of my pages. Somewhere down the line, I had turned a page.tsx into a client component, in order to be able to access the calling URL. Wrapping the troublesome component in a suspense-tag solves that problem, since there is a fallback to show until the needed data is available.
 
@@ -507,3 +507,25 @@ With that, sprint "functional ui" is closed and the next chapter truly is opened
 - Same roundness on "host" pill as rspv-status pill.
 
 Invited a classmate for testing, and did some user testing on his project (which looked great!). He had an ambitious google form to catch feedback. That was a nice touch, which inspired me a bit.
+
+## [2026-09-04]
+
+After two weeks out in real life during internship, I am even more motivated to expand the horizon regarding AI. Where can it augment my workflow, how, and where do I draw the line? Good thing I have this personal lab for learning going on.
+
+I decided to try out Claude Design, to see how it can help me polish my current state of things. I referenced it to my repo, and gave it a bunch of screenshots to work with. Apart from hitting the cap almost immediately, it was a joy to work with. Very interactive and intuitive, with immediate visual feedback.
+
+Anyway, I created a branch and told Claude to enjoy itself and implement the changes. If the claude design session was a success, that proved to be the opposite experience. It generated a tonne of code, I felt like I lost control of my project AND the end result wasn't really nice. Good, that is where I will draw the line as of now and in this project. I will keep the design sketches I made in Claude design, and use it as a reference while I refine the UI by hand. Let's switch back to the main branch!
+
+## [2026-09-06]
+
+SUNDAY and overhaul time. Starting with Button.tsx, we are getting rid of inconsistent and confusing variants; replacing them with primary, secondary etc. Loading state is added, for a better user experience. Took more than an hour, including going through the following massive list of errors through tsc --noemit.
+
+Navbar was second in line for cleanup. It had no route specific styling, now it renders differently based on whati s active.
+
+Caught a WCAG contrast fail in the hero background vs font; adjusted the lightness to reach an acceptable level. Way darker than I would like, but hey, I prefer not excluding people.
+
+Updated some wording in terms/about/privacy, while I looked over the footing component. Just some small tweaks, making it look okay on mobile.
+
+Working on learning to use Records in typescript. It maps a collection of keys towards related properties. [This page was helpful.](https://www.typescriptlang.org/docs/handbook/utility-types.html)
+
+I tried letting Claude write a pill component for me, which I implemented step-by-step. I find this approach easier to digest, than just sending it out on a field trip in my code. I learn things and I adjust the code as I go, making it fit my plans. However, I constantly need to look out for stuff it just gets wrong.

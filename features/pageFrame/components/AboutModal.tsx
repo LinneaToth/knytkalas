@@ -10,7 +10,7 @@ export default function AboutModal({ isOpen, onClose }: Props) {
   return (
     <InfoModal isOpen={isOpen} onClose={onClose}>
       <h1>About</h1>
-      <p>Last updated: 2026-08-21</p>
+      <p>Last updated: 2026-09-06</p>
       <p className="bg-primary-darkest w-auto rounded-full text-center text-white">
         THIS PROJECT IS STILL A WORK IN PROGRESS, DEADLINE IS IN DECEMBER 2026
       </p>
@@ -33,10 +33,9 @@ export default function AboutModal({ isOpen, onClose }: Props) {
       </p>
       <p>
         For my degree project, I wanted to build something that solved a problem
-        I have been running into: The chaos of coordinating a potluck over a
-        Messenger thread, where nobody can tell who is bringing what, who is
-        avoiding which ingredient, or who is even coming. Knytkalas is my answer
-        to that.
+        I have been running into in real life: The chaos of coordinating a
+        potluck over a Messenger thread, where nobody can tell who is bringing
+        what, who is avoiding stuff, and who is even coming?
       </p>
       <p>
         I also used this project to push past what the curriculum strictly
@@ -50,13 +49,14 @@ export default function AboutModal({ isOpen, onClose }: Props) {
       </p>
       <p>
         This final project permits AI-assisted work. I have used Claude and
-        Gemini deliberately: As an architecture sounding board, a debugging
-        partner, and a reviewer of my own code. I cherish understanding and
-        craftsmanship; the actual implementation stays mine. On a few narrow,
-        explicitly scoped occasions (restyling specific UI flows to match an
-        established design pattern) I had Claude write and implement the code
+        Gemini deliberatel, as a sounding board, debugging partner and a
+        reviewer of my own code. I cherish understanding and craftsmanship. I
+        have strived to keep ownership of the crafting itself. On a few narrow,
+        explicitly scoped occasions I had Claude write and implement the code
         directly, as a conscious choice to showcase my ability to effectively
-        collaborate with generative AI.
+        collaborate with generative AI. On that note, I have also scrapped a
+        branch where I let Claude run wild. That was when and where I found my
+        current line drawn towards LLM augmentation.
       </p>
       <p>
         The full source code is public on GitHub:{" "}

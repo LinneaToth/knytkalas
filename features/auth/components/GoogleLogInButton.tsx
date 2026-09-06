@@ -16,7 +16,7 @@ export function GoogleLogInButton({ callbackUrl }: Props) {
     callbackURL: pathIsSafe ? url : "/",
   };
   return (
-    <Button variant="solid" onClick={() => signIn.social(config)} size="l">
+    <Button variant="primary" onClick={() => signIn.social(config)} size="lg">
       <LogIn /> Sign in with Google
     </Button>
   );

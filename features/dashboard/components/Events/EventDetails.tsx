@@ -90,13 +90,17 @@ export default function EventDetails({ event, date, time, role }: Props) {
           <div className="flex w-full justify-end gap-3">
             <Button
               onClick={() => setIsEditing(true)}
-              size="s"
-              variant="outline"
+              size="sm"
+              variant="secondary"
             >
               <Pencil size={15} /> Edit
             </Button>
             {!eventHasBeen && (
-              <Button variant="outline" size="s" onClick={handleToggleCancel}>
+              <Button
+                variant="secondary"
+                size="sm"
+                onClick={handleToggleCancel}
+              >
                 {event.deletedAt ? "Re-publish event" : "Cancel event"}
               </Button>
             )}

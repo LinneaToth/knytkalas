@@ -1,5 +1,6 @@
 import Button from "@/ui/components/Button";
 import FeatureHeadline from "@/ui/components/FeatureHeadline";
+import { PartyPopper } from "lucide-react";
 
 export default function JoinTheParty() {
   return (
@@ -8,14 +9,13 @@ export default function JoinTheParty() {
         Join the party
       </FeatureHeadline>
       <p className="max-w-3xl">
-        All you need to do to get started is to sign up with your existing
-        Google account.
+        One tap with your Google account and you are in. No password, no setup.
       </p>{" "}
-      <Button variant="cta" size="l" href="/onboarding">
-        sign up
+      <Button variant="primary" size="lg" href="/onboarding">
+        <PartyPopper /> sign up
       </Button>{" "}
       <p className="max-w-3xl">
-        It really is <span className="italic">that easy</span>! Welcome to
+        It really is <span className="italic">that</span> easy! Welcome to
         Knytkalas!
       </p>
     </div>

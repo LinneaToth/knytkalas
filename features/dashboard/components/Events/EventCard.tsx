@@ -32,13 +32,12 @@ export default function EventCard({ event }: Props) {
           </h2>
           <p className="mt-5">{description}</p>{" "}
         </header>{" "}
-        <div className="col-start-2 row-start-1 ml-auto inline-flex gap-3">
-          <ResponseStatus status={usersStatus} role={event.role} />
-          {event.role === "host" && (
-            <span className="bg-primary-darkest text-foreground-light flex h-8 w-15 items-center justify-center rounded-full px-2 py-1 text-xs font-medium shadow-sm">
-              Host
-            </span>
-          )}
+        <div className="col-start-2 row-start-1 ml-auto inline-flex gap-3 self-start">
+          <ResponseStatus
+            perspective="self"
+            isHost={event.role === "host"}
+            status={usersStatus}
+          />
         </div>
         {event.role === "guest" && <h3>Hosted by {event.hostName}</h3>}{" "}
         <span className="col-span-2 col-start-1 row-span-1 row-start-3 flex w-full flex-col flex-wrap justify-center gap-1 md:col-span-1 md:col-start-2 md:row-start-2">

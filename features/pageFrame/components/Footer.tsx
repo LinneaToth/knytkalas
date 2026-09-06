@@ -14,26 +14,26 @@ export default function Footer() {
   return (
     <>
       <footer className="bg-primary-darkest text-foreground-light flex h-32 w-full flex-col items-center justify-between px-8 py-8 shadow-md">
-        <nav>
+        <nav className="pb-3">
           <button
-            className="cursor-pointer"
+            className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("privacy")}
           >
-            Privacy Policy
+            Privacy
           </button>{" "}
           |{" "}
           <button
-            className="cursor-pointer"
+            className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("terms")}
           >
-            Terms and conditions
+            Terms
           </button>{" "}
           |{" "}
           <button
-            className="cursor-pointer"
+            className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("about")}
           >
-            About Knytkalas.net
+            About
           </button>
         </nav>
         <span>© {new Date().getFullYear()} Knytkalas.net</span>

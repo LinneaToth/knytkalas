@@ -1,29 +1,47 @@
+import Pill from "@/ui/components/Pill";
+import { Check, Hourglass, X, Crown } from "lucide-react";
+
 type Props = {
-  role: string;
   status?: "GOING" | "PENDING" | "DECLINED";
+  isHost?: boolean;
+  perspective?: "self" | "other";
 };
 
-export default function ResponseStatus({ role, status = "PENDING" }: Props) {
-  const borderColor =
-    status === "GOING"
-      ? "border-success"
-      : status === "PENDING"
-        ? "border-inactive"
-        : "border-error";
+export default function ResponseStatus({
+  status = "PENDING",
+  isHost = false,
+  perspective = "other",
+}: Props) {
+  const self = perspective === "self";
+
+  if (isHost)
+    return (
+      <Pill tone="info" variant="filled" icon={<Crown size={12} />}>
+        You host
+      </Pill>
+    );
+
+  if (status === "GOING")
+    return (
+      <Pill tone="success" variant="soft" icon={<Check size={12} />}>
+        {self ? "You're going" : "Going"}
+      </Pill>
+    );
+
+  if (status === "DECLINED")
+    return (
+      <Pill tone="error" variant="soft" icon={<X size={12} />}>
+        {self ? "Can't make it" : "Declined"}
+      </Pill>
+    );
 
   return (
-    <div
-      className={`${borderColor} bg-card-background flex h-8 items-center justify-center rounded-2xl border p-3 px-2 py-1 text-center text-xs font-medium shadow-sm`}
+    <Pill
+      tone={self ? "accent" : "neutral"}
+      variant={self ? "filled" : "soft"}
+      icon={<Hourglass size={12} />}
     >
-      <span>
-        {status === "GOING"
-          ? "Going"
-          : status === "DECLINED"
-            ? "Not going"
-            : role === "guest"
-              ? "Host is awaiting your response"
-              : "Pending"}
-      </span>
-    </div>
+      {self ? "Needs your answer" : "Pending"}
+    </Pill>
   );
 }
