@@ -26,7 +26,7 @@ export default function ContentBox({
   };
 
   const surface = glass
-    ? "bg-card-background/50 backdrop-blur-md backdrop-saturate-[1.1] ring-1 ring-inset ring-white/50 shadow-[0_20px_40px_-16px_rgba(48,76,137,0.20)]"
+    ? "bg-card-background/60 backdrop-blur-md backdrop-saturate-[1.1] ring-1 ring-inset ring-white/50 shadow-[0_20px_40px_-16px_rgba(48,76,137,0.20)]"
     : {
         flat: "bg-card-background ring-1 ring-inset ring-primary-darkest/20",
         resting:

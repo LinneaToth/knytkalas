@@ -18,7 +18,7 @@ export default async function ProfilePage() {
         <h1 className="text-4xl">Knytkalas Profile</h1>
       </header>
       <div className="px-10">
-        <ContentBox styling="gap-5 mb-10">
+        <ContentBox styling="gap-5 mb-10" glass={true}>
           <p className="flex items-center gap-3">
             <User size={18} />
             {currentUser.name}
@@ -31,8 +31,8 @@ export default async function ProfilePage() {
           {currentUser.avoids.length === 0 && <p>None registered</p>}
           {currentUser.avoids.length > 0 && (
             <IssuePills
-              alertIssues={[]}
-              otherIssues={currentUser.avoids}
+              alertIssues={currentUser.avoids}
+              otherIssues={[]}
               justify="start"
             />
           )}

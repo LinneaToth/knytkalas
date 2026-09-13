@@ -529,3 +529,8 @@ Updated some wording in terms/about/privacy, while I looked over the footing com
 Working on learning to use Records in typescript. It maps a collection of keys towards related properties. [This page was helpful.](https://www.typescriptlang.org/docs/handbook/utility-types.html)
 
 I tried letting Claude write a pill component for me, which I implemented step-by-step. I find this approach easier to digest, than just sending it out on a field trip in my code. I learn things and I adjust the code as I go, making it fit my plans. However, I constantly need to look out for stuff it just gets wrong.
+
+## [2026-09-13]
+
+Worked on the appearance of content box, a container component that is heavily used throughout the project. Worked on the appearance of the event cards inside the dashboard. ResponseStatus got a cancelled state - both the host and guest cases now render a "Cancelled" pill when the event is deleted, on top of the existing GOING/PENDING/DECLINED handling. Trimmed some repetitive copy on the landing page (Hero, About),
+tidied up a few inputs and buttons, swapped in a slightly updated phone graphic.

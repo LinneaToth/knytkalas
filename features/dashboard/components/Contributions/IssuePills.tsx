@@ -18,7 +18,7 @@ export default function IssuePills({
       {alertIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className={`bg-card-background text-primary-darkest rounded-full p-2 text-xs font-semibold`}
+          className={`bg-card-background text-primary-darkest rounded-full px-3 py-2 text-xs font-semibold`}
         >
           ⚠️ {issue}
         </div>
@@ -27,7 +27,7 @@ export default function IssuePills({
       {otherIssues.map((issue) => (
         <div
           key={"issue" + issue}
-          className="bg-card-background text-primary-darkest rounded-full p-2 text-xs"
+          className="bg-card-background text-primary-darkest rounded-full px-3 py-2 text-xs"
         >
           {issue}
         </div>

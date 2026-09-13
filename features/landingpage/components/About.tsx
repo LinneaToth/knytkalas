@@ -17,12 +17,6 @@ export default function About() {
         Is anybody else bringing salad? Are the vegans covered? Who is going?
         Where is it at? When?
       </p>
-      <p className="max-w-3xl">
-        Knytkalas.net serves to facilitate for any potluck host and guest,
-        keeping the organizational cognitive load to a bare minimum. Save your
-        time and energy for more enjoyable things than scrolling for answers in
-        old chats!
-      </p>{" "}
       <div className="my-10 flex flex-col gap-15 md:flex-row md:items-stretch xl:gap-5">
         <AboutCard>
           <figure className="bg-card-background -mt-20 rounded-full p-5 shadow transition-transform duration-300 hover:rotate-6">
