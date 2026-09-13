@@ -25,9 +25,6 @@ export default function Hero() {
             </span>
           </h1>
           <div className="flex w-full max-w-200 flex-col items-start justify-center gap-3 py-5">
-            <h2 className="mt-3 text-4xl">
-              Effortless coordination of your event
-            </h2>
             <p className="text-md mb-5 max-w-xl">
               Organize menus, track guest list and RSVP’s and relax with built
               in allergy administration. Seamless and collaborative!

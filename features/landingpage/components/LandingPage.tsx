@@ -12,7 +12,9 @@ export default async function LandingPage() {
   try {
     const id = await getSessionUserId();
     currentUser = await getUser(id);
-  } catch (e) {}
+  } catch (e) {
+    console.log(e);
+  }
 
   return (
     <>

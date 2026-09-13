@@ -9,5 +9,9 @@ export default function DeleteAccountButton({ userId }: { userId: string }) {
       deleteAccount(userId);
   };
 
-  return <Button onClick={onDelete}>Delete account</Button>;
+  return (
+    <Button onClick={onDelete} className="mr-auto ml-auto w-60">
+      Delete account
+    </Button>
+  );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import InfoModal from "@/ui/components/InfoModal";
 import { useState } from "react";
 import PrivacyModal from "./PrivacyModal";
 import AboutModal from "./AboutModal";
@@ -13,22 +12,20 @@ export default function Footer() {
 
   return (
     <>
-      <footer className="bg-primary-darkest text-foreground-light flex h-32 w-full flex-col items-center justify-between px-8 py-8 shadow-md">
-        <nav className="pb-3">
+      <footer className="bg-primary-darkest text-foreground-light flex h-32 w-full flex-col items-center justify-between px-8 py-8 shadow-md md:h-20 md:flex-row md:items-center">
+        <nav className="pb-3 md:pb-0">
           <button
             className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("privacy")}
           >
             Privacy
-          </button>{" "}
-          |{" "}
+          </button>
           <button
             className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("terms")}
           >
             Terms
-          </button>{" "}
-          |{" "}
+          </button>
           <button
             className="hover:text-accent cursor-pointer px-3 md:px-6"
             onClick={() => setModalState("about")}
