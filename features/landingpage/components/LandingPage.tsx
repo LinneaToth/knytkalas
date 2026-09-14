@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import Hero from "./Hero";
 import About from "./About";
 import Footer from "@/features/pageFrame/components/Footer";
@@ -19,10 +21,19 @@ export default async function LandingPage() {
   return (
     <>
       <NavBar mode={currentUser ? "signedin" : "notSignedIn"} />
-      <main className="bg-background flex flex-1 flex-col justify-center py-16">
+      <main className="bg-background flex flex-1 flex-col justify-center gap-10 py-16">
         {" "}
         <Hero />
-        <About />
+        <About />{" "}
+        <figure className="flex w-full justify-center">
+          <Image
+            width="800"
+            height="702"
+            src="/graphics/party-people.png"
+            alt="Join the party"
+            className="w-full max-w-md"
+          />{" "}
+        </figure>
         <JoinTheParty />
       </main>
       <Footer />
