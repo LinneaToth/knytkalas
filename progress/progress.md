@@ -534,3 +534,9 @@ I tried letting Claude write a pill component for me, which I implemented step-b
 
 Worked on the appearance of content box, a container component that is heavily used throughout the project. Worked on the appearance of the event cards inside the dashboard. ResponseStatus got a cancelled state - both the host and guest cases now render a "Cancelled" pill when the event is deleted, on top of the existing GOING/PENDING/DECLINED handling. Trimmed some repetitive copy on the landing page (Hero, About),
 tidied up a few inputs and buttons, swapped in a slightly updated phone graphic.
+
+## [2026-09-14]
+
+I WAS going to implement ux/ui changes to the event page. I did not. Ended up spending hours on exploring an idea I had for graphics. Made a sketch by hand and had gemini interpret it as a 3D-model figure, from there I went exploring in Affinity-land. Updated landing page with it.
+
+![screenshot from affinity](./img/21.png)

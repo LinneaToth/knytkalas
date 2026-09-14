@@ -13,11 +13,7 @@ export default function About() {
       <h3 className="text-primary-darkest text-5xl">
         From invite to the last bite
       </h3>
-      <p className="max-w-3xl">
-        Is anybody else bringing salad? Are the vegans covered? Who is going?
-        Where is it at? When?
-      </p>
-      <div className="my-10 flex flex-col gap-15 md:flex-row md:items-stretch xl:gap-5">
+      <div className="my-10 mt-10 mt-20 flex flex-col gap-15 md:flex-row md:items-stretch xl:gap-5">
         <AboutCard>
           <figure className="bg-card-background -mt-20 rounded-full p-5 shadow transition-transform duration-300 hover:rotate-6">
             <Image
