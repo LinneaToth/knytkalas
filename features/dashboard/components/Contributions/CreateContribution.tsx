@@ -44,7 +44,7 @@ export default function CreateContribution({ inviteId }: Props) {
         <Form
           ref={formRef}
           action={dispatch}
-          className="flex max-w-md flex-col gap-4"
+          className="flex max-w-md flex-col gap-4 px-[1px]"
         >
           <h2>
             {state.error
@@ -57,11 +57,11 @@ export default function CreateContribution({ inviteId }: Props) {
               Name of Dish/Item
             </label>
             <input
+              className="input-field"
               type="text"
               id="name"
               name="name"
               required
-              className="rounded border p-2"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -72,7 +72,7 @@ export default function CreateContribution({ inviteId }: Props) {
               id="category"
               name="category"
               required
-              className="rounded border bg-white p-2"
+              className="input-field"
             >
               <option value="">Select a category</option>
               {CATEGORIES.map((cat) => (
@@ -91,7 +91,7 @@ export default function CreateContribution({ inviteId }: Props) {
               id="servings"
               name="servings"
               min="1"
-              className="rounded border p-2"
+              className="input-field"
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -105,7 +105,7 @@ export default function CreateContribution({ inviteId }: Props) {
                   <input type="checkbox" name="contains" value={issue} />
                   <span className="text-sm">
                     {issue.toLowerCase() === "animalbased"
-                      ? "animal based ingredients"
+                      ? "other animal based "
                       : issue.toLowerCase()}
                   </span>
                 </label>
@@ -120,7 +120,7 @@ export default function CreateContribution({ inviteId }: Props) {
               id="description"
               name="description"
               rows={3}
-              className="rounded border p-2"
+              className="input-field"
             ></textarea>
           </div>
           <div className="mt-2 flex gap-3">

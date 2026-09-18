@@ -49,7 +49,12 @@ export default function NavBar({ mode = "notSignedIn" }: Props) {
           <Button variant="light" href="/login" size="sm">
             log in
           </Button>
-          <Button variant="primary" href="/onboarding" size="sm">
+          <Button
+            variant="primary"
+            href="/onboarding"
+            size="sm"
+            className="hidden lg:block"
+          >
             sign up
           </Button>
         </nav>

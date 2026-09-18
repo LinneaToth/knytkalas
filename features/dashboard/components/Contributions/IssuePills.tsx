@@ -14,7 +14,7 @@ export default function IssuePills({
   const flexJustify = "justify-" + justify;
 
   return (
-    <section className={`flex w-full ${flexJustify} gap-3`}>
+    <section className={`flex w-full ${flexJustify} flex-wrap gap-3`}>
       {alertIssues.map((issue) => (
         <div
           key={"issue" + issue}

@@ -9,7 +9,7 @@ export default async function DashboardLayout({
   return (
     <>
       <NavBar mode="signedin" />
-      <main className="mt-20 mr-auto ml-auto w-full max-w-350 flex-1">
+      <main className="mt-20 mr-auto mb-20 ml-auto w-full max-w-350 flex-1">
         {children}
       </main>
       <Footer />

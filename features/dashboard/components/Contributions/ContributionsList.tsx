@@ -26,8 +26,9 @@ export default function ContributionsList({
   return (
     <section>
       <div className="flex content-center justify-end gap-3">
-        <p className="mr-auto">Sort by: </p>
+        <p className="mr-auto">group by: </p>
         <Button
+          hoverMove={false}
           size="sm"
           variant={sortBy === "category" ? "dark" : "secondary"}
           onClick={() => setSortBy("category")}
@@ -35,6 +36,7 @@ export default function ContributionsList({
           Categories
         </Button>{" "}
         <Button
+          hoverMove={false}
           size="sm"
           variant={sortBy === "user" ? "dark" : "secondary"}
           onClick={() => setSortBy("user")}

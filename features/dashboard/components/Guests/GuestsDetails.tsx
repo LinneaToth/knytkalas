@@ -14,6 +14,8 @@ type Props = {
 export default function GuestsDetails({ event, role }: Props) {
   if (!event) return <></>;
 
+  const eventHasBeen = event.date < new Date();
+
   const guestData = [
     {
       label: "Attending",
@@ -29,7 +31,7 @@ export default function GuestsDetails({ event, role }: Props) {
   ];
 
   return (
-    <ContentBox styling="gap-5 items-center">
+    <ContentBox styling="gap-5 items-center" glass={true}>
       <h2 className="uppercase">Guests</h2>
       <GuestList guests={event.guests} role={role} hostId={event.hostId} />
       <PercentageBar data={guestData} />
@@ -37,7 +39,7 @@ export default function GuestsDetails({ event, role }: Props) {
         Attending: {event.guestsAccepted} /{" "}
         {event.guestsAccepted + event.guestsPending + event.guestsDeclined}
       </p>{" "}
-      {role === "host" && !event.deletedAt && (
+      {role === "host" && !event.deletedAt && !eventHasBeen && (
         <CreateInvite eventId={event.id} />
       )}
     </ContentBox>

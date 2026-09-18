@@ -4,14 +4,14 @@ import { PartyPopper } from "lucide-react";
 
 export default function JoinTheParty() {
   return (
-    <div className="bg-card-background mt-10 flex w-screen flex-col items-center justify-center gap-5 self-center p-10 pt-15 text-center">
+    <div className="bg-card-background mt-10 flex w-full flex-col items-center justify-center gap-5 self-center p-10 pt-15 text-center">
       <FeatureHeadline size="large" extraStyling="-mt-22 mb-5">
         Join the party
       </FeatureHeadline>
       <p className="max-w-3xl">
-        One tap with your Google account and you are in. No password, no setup.
+        One tap with your Google account and you are in!
       </p>{" "}
-      <Button variant="primary" size="lg" href="/onboarding">
+      <Button variant="primary" size="lg" href="/onboarding" hoverMove={true}>
         <PartyPopper /> sign up
       </Button>{" "}
       <p className="max-w-3xl">

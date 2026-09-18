@@ -25,7 +25,7 @@ export default function RespondToEventButtons({
               ? "No extra guests"
               : `You are bringing ${totalGuests - 1} extra guests`}
           </h3>
-          <section className="flex items-center gap-3">
+          <section className="flex flex-row items-stretch gap-3 lg:flex-col 2xl:flex-row">
             {" "}
             {totalGuests > 1 && (
               <Button
@@ -38,7 +38,7 @@ export default function RespondToEventButtons({
             )}
             <Button
               size="sm"
-              variant="secondary"
+              variant="primary"
               onClick={() => rspv(id, "GOING", 1)}
             >
               <UserPlus /> Add guest

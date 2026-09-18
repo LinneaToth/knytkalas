@@ -24,6 +24,7 @@ export default async function Page({
   const role = user.id === event.hostId ? "host" : "guest";
   const usersInviteId = await getInviteIdByUserAndEvent(user.id, event.id);
   const userAvoids = user.onboarded ? user.avoids : [];
+  const eventHasBeen = event.date < new Date();
 
   //Time right now only works in Sweden. If locale feature later is introduced; time coversion must be implemented.
   return (
@@ -47,6 +48,7 @@ export default async function Page({
             contributions={contributions}
             inviteId={usersInviteId}
             avoids={userAvoids}
+            eventHasBeen={eventHasBeen}
           />
           <GuestDetails role={role} event={event} />
         </section>
