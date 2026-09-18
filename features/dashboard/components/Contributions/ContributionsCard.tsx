@@ -24,7 +24,7 @@ export default function ContributionsCard({
 
   return (
     <li
-      className={`flex flex-col gap-5 rounded-l p-3 shadow ${issuesFound.length > 0 ? "border-red-200" : "border-primary"}`}
+      className={`flex flex-col gap-5 rounded-2xl border p-5 shadow ${issuesFound.length > 0 ? "border-error bg-error/10" : "border-primary bg-card-background/60"}`}
     >
       <header className="flex justify-between">
         <h3>
@@ -32,8 +32,6 @@ export default function ContributionsCard({
             {capitalize(contribution.contribution.category)}
           </span>{" "}
           - {contribution.contribution.name}
-          {Number(contribution.contribution.servings) > 0 &&
-            `- ${contribution.contribution.servings} servings.`}{" "}
         </h3>
         {isUsersContribution && (
           <button
@@ -56,6 +54,8 @@ export default function ContributionsCard({
         <p>{contribution.contribution.description}</p>
       )}
       <p className="text-sm">
+        {Number(contribution.contribution.servings) > 0 &&
+          `${contribution.contribution.servings} servings -`}{" "}
         Brought by {isUsersContribution ? "you" : contribution.guestName}
       </p>
       <div className="flex justify-between">

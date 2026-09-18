@@ -15,18 +15,20 @@ type Props = {
   >;
   inviteId: number;
   avoids?: IssueType[];
+  eventHasBeen: boolean;
 };
 
 export default function ContributionsDetails({
   contributions,
   inviteId,
   avoids,
+  eventHasBeen,
 }: Props) {
   const [isExpanded, setIsExpanded] = useState(true);
   const listRef = useRef<HTMLDivElement>(null);
 
   return (
-    <ContentBox styling="gap-8">
+    <ContentBox styling="gap-8" glass={true}>
       <header className="flex items-center justify-between" ref={listRef}>
         <h2 className="uppercase">Contributions</h2>
         <button
@@ -58,7 +60,7 @@ export default function ContributionsDetails({
             avoids={avoids}
             usersInviteId={inviteId}
           />
-          <CreateContribution inviteId={inviteId} />
+          {!eventHasBeen && <CreateContribution inviteId={inviteId} />}
         </div>
       </div>
     </ContentBox>

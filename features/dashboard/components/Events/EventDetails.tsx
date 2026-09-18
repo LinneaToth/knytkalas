@@ -45,7 +45,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
 
   if (isEditing) {
     return (
-      <ContentBox styling="flex flex-col gap-3 md:col-span-2">
+      <ContentBox styling="flex flex-col gap-3 md:col-span-2" glass={true}>
         <h2>Editing Event</h2>
         <EventForm
           handleFormAction={onSave}
@@ -64,46 +64,60 @@ export default function EventDetails({ event, date, time, role }: Props) {
 
   if (!isEditing) {
     return (
-      <ContentBox styling="flex flex-col gap-3 md:col-span-2">
+      <ContentBox styling="flex flex-col gap-5 md:col-span-2" glass={true}>
         <h2 className="mr-auto uppercase">
-          {eventHasBeen && "Past event"}
+          {eventHasBeen && `We hope you had a good time!`}
           {event.deletedAt && "Cancelled event"}
           {!eventHasBeen && !event.deletedAt && "When & Where"}
         </h2>
 
         {event.description && <p>{event.description}</p>}
-        <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
-          {" "}
-          <CalendarDays /> {date}
-        </p>
-        <p className={`${event.deletedAt ? "line-through" : ""} flex gap-3`}>
-          <Clock10 />
-          Start time: {time}
-        </p>
-        <p className="flex gap-3">
-          <MapPin />{" "}
-          {event.location ? event.location : "Location to be decided"}
-        </p>
+        <article className="flex w-full flex-col items-stretch gap-3 py-5 md:justify-between xl:flex-row">
+          <div
+            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
+          >
+            <figure className="icon-figure">
+              <CalendarDays color="white" />
+            </figure>{" "}
+            {date}
+          </div>
+          <div
+            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
+          >
+            <figure className="icon-figure">
+              {" "}
+              <Clock10 color="white" />
+            </figure>
+            Start time: {time}
+          </div>
+          <div className="bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60">
+            <figure className="icon-figure">
+              <MapPin color="white" />
+            </figure>{" "}
+            {event.location ? event.location : "Location to be decided"}
+          </div>
+        </article>
 
         <p>Hosted by: {role === "host" ? "You! " : event.hostName}</p>
-        {role === "host" && (
+        {role === "host" && !eventHasBeen && (
           <div className="flex w-full justify-end gap-3">
             <Button
+              hoverMove={false}
               onClick={() => setIsEditing(true)}
               size="sm"
               variant="secondary"
             >
               <Pencil size={15} /> Edit
             </Button>
-            {!eventHasBeen && (
-              <Button
-                variant="secondary"
-                size="sm"
-                onClick={handleToggleCancel}
-              >
-                {event.deletedAt ? "Re-publish event" : "Cancel event"}
-              </Button>
-            )}
+
+            <Button
+              hoverMove={false}
+              variant="secondary"
+              size="sm"
+              onClick={handleToggleCancel}
+            >
+              {event.deletedAt ? "Re-publish event" : "Cancel event"}
+            </Button>
           </div>
         )}
       </ContentBox>

@@ -20,7 +20,7 @@ export default async function Page({
     return (
       <>
         <NavBar mode="onboarding" />
-        <main className="bg-opacity-30 flex h-screen w-screen flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
+        <main className="bg-opacity-30 flex h-screen w-full flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
           <ContentBox
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}
@@ -38,7 +38,7 @@ export default async function Page({
     return (
       <>
         <NavBar mode="onboarding" />
-        <main className="bg-opacity-30 flex h-screen w-screen flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
+        <main className="bg-opacity-30 flex h-screen w-full flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
           <ContentBox
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}
@@ -57,7 +57,7 @@ export default async function Page({
     return (
       <>
         <NavBar mode={currentUser ? "signedin" : "onboarding"} />
-        <main className="bg-opacity-30 flex h-screen w-screen flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
+        <main className="bg-opacity-30 flex h-screen w-full flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
           <ContentBox
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}

@@ -10,7 +10,7 @@ export default async function Page() {
         <h1 className="text-4xl">My Events </h1>
       </header>
 
-      <section className="col-span-3 col-start-2 row-start-2 mb-20 w-full scrollbar-none overflow-y-scroll px-10">
+      <section className="col-span-3 col-start-2 row-start-2 w-full scrollbar-none overflow-y-scroll px-10">
         {usersEvents.length > 0 && <EventList events={usersEvents} />}
         {usersEvents.length === 0 &&
           "You currently have no events. You should create one!"}

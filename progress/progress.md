@@ -540,3 +540,7 @@ tidied up a few inputs and buttons, swapped in a slightly updated phone graphic.
 I WAS going to implement ux/ui changes to the event page. I did not. Ended up spending hours on exploring an idea I had for graphics. Made a sketch by hand and had gemini interpret it as a 3D-model figure, from there I went exploring in Affinity-land. Updated landing page with it.
 
 ![screenshot from affinity](./img/21.png)
+
+## [2026-09-18]
+
+UX refinement phase goes on. I picked up a Tailwind trick at internship this week, utility classes! Got rid of a lot of clunky repeated inline styling in my form inputs. Kept working on the event page, and poked around in other places while I was at it..

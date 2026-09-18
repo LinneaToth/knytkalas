@@ -30,7 +30,7 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
         placeholder="Occasion"
         required
         defaultValue={eventData?.occasion}
-        className="bg-background text-foreground focus:bg-focus w-full rounded-lg p-3"
+        className="input-field"
       />
 
       <label htmlFor="description">Description</label>
@@ -39,7 +39,7 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
         id="description"
         placeholder="Description"
         defaultValue={eventData?.description}
-        className="bg-background text-foreground focus:bg-focus w-full rounded-lg p-3"
+        className="input-field"
       />
       <label htmlFor="location">Location</label>
       <input
@@ -48,7 +48,7 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
         id="location"
         placeholder="Location"
         defaultValue={eventData?.location}
-        className="bg-background text-foreground focus:bg-focus w-full rounded-lg p-3"
+        className="input-field"
       />
 
       <label htmlFor="date">Date & start time *</label>

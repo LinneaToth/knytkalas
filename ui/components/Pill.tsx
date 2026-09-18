@@ -67,7 +67,7 @@ export default function Pill({
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full font-medium whitespace-nowrap ${sizeCls} ${shellCls} ${className}`}
+      className={`inline-flex h-fit items-center gap-1.5 rounded-full font-medium whitespace-nowrap ${sizeCls} ${shellCls} ${className}`}
     >
       {dot && <span className={`h-1.5 w-1.5 rounded-full ${dot}`} />}
       {!dot && icon}

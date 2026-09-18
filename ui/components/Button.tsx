@@ -18,6 +18,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   width?: "full" | null;
   loading?: boolean;
   disabled?: boolean;
+  hoverMove?: boolean;
 }
 
 export default function Button({
@@ -30,10 +31,11 @@ export default function Button({
   className,
   disabled = false,
   loading = false,
+  hoverMove = true,
   ...props
 }: Props) {
   let styling =
-    " border font-medium  transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/35 cursor-pointer active:scale-95 flex flex-row gap-3 items-center justify-center text-center rounded-full disabled:opacity-60 disabled:cursor-not-allowed disabled:pointer-events-none ";
+    " border font-medium  transition-all duration-200 focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-primary/35 cursor-pointer active:scale-95 flex flex-row gap-3 items-center justify-center text-center rounded-full disabled:opacity-60 disabled:cursor-not-allowed disabled:pointer-events-none  ";
 
   if (width === "full") styling += " w-full ";
   switch (size) {
@@ -47,13 +49,16 @@ export default function Button({
       styling += " px-8 py-4 text-lg ";
       break;
     case "icon":
-      styling += " h-11 w-11 md:h-9 md:w-9 p-0 shrink-0 ";
+      styling +=
+        " h-11 w-11 md:h-9 md:w-9 p-0 shrink-0 hover:-translate-y-[1px]";
       break;
   }
 
+  if (hoverMove) styling += " hover:-translate-y-[1px] ";
+
   switch (variant) {
     case "primary":
-      styling += ` border-transparent bg-accent text-accent-foreground shadow-[0_6px_16px_-4px_rgba(48,76,137,0.35)] hover:-translate-y-[1px] hover:rotate-[-1deg] hover:shadow-[0_12px_24px_-8px_rgba(48,76,137,0.45)] `;
+      styling += ` border-transparent bg-accent text-accent-foreground shadow-[0_6px_16px_-4px_rgba(48,76,137,0.35)] hover:shadow-[0_12px_24px_-8px_rgba(48,76,137,0.45)] `;
       break;
     case "secondary":
       styling +=
@@ -69,11 +74,11 @@ export default function Button({
       break;
     case "dark":
       styling +=
-        " border-transparent bg-primary-darkest text-foreground-light shadow-[0_6px_16px_-4px_rgba(48,76,137,0.35)] hover:-translate-y-[1px] hover:rotate-[-1deg] ";
+        " border-transparent bg-primary-darkest text-foreground-light shadow-[0_6px_16px_-4px_rgba(48,76,137,0.35)]   ";
       break;
     case "light":
       styling +=
-        " border-transparent bg-white text-foreground shadow-[0_2px_10px_-3px_rgba(48,76,137,0.3)] hover:-translate-y-[1px] hover:shadow-[0_6px_16px_-6px_rgba(48,76,137,0.4)] ";
+        " border-transparent bg-white text-foreground shadow-[0_2px_10px_-3px_rgba(48,76,137,0.3)]  hover:shadow-[0_6px_16px_-6px_rgba(48,76,137,0.4)] ";
       break;
     case "ghost":
       styling +=
