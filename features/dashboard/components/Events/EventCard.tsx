@@ -45,6 +45,7 @@ export default function EventCard({ event, dateString, timeString }: Props) {
       >
         <header className="col-span-2 col-start-1 row-span-1 row-start-1 flex flex-col">
           <h2 className="uppercase">{occasion}</h2>
+          {event.role === "guest" && <h3>Hosted by {event.hostName}</h3>}{" "}
           <p className="mt-5">{description}</p>{" "}
         </header>{" "}
         <div className="col-start-2 row-start-1 -mr-10 ml-auto inline-flex gap-3 self-start">
@@ -55,7 +56,6 @@ export default function EventCard({ event, dateString, timeString }: Props) {
             eventStatus={eventDeleted ? "CANCELLED" : "ACTIVE"}
           />
         </div>
-        {event.role === "guest" && <h3>Hosted by {event.hostName}</h3>}{" "}
         <span className="col-span-2 col-start-1 row-span-1 row-start-4 flex w-full flex-col flex-wrap justify-center gap-3 md:col-span-1 md:col-start-2 md:row-start-2">
           <h3>Guests</h3>
           <div className="flex flex-row gap-3">
