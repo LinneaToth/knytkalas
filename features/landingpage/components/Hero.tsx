@@ -47,7 +47,7 @@ export default function Hero() {
               onClick={scrollToAbout}
               className="border-white text-white hover:bg-white/10"
             >
-              see how it works
+              read more
             </Button>
           </nav>
         </section>

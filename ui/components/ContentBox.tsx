@@ -1,4 +1,5 @@
 import { ReactNode } from "react";
+import LoadingSpinner from "./LoadingSpinner";
 
 type Accent = "primary" | "going" | "declined" | "archive" | "invite";
 
@@ -8,6 +9,7 @@ type Props = {
   glass?: boolean;
   elevation?: "flat" | "resting" | "raised";
   accent?: Accent;
+  loading?: boolean;
 };
 
 export default function ContentBox({
@@ -16,6 +18,7 @@ export default function ContentBox({
   glass = false,
   elevation = "resting",
   accent,
+  loading = false,
 }: Props) {
   const accentClass: Record<Accent, string> = {
     primary: "bg-accent",
@@ -37,10 +40,15 @@ export default function ContentBox({
 
   return (
     <section
-      className={`text-foreground flex flex-col rounded-3xl p-10 transition-all duration-300 ${
+      className={`text-foreground flex flex-col rounded-3xl p-6 transition-all duration-300 md:p-10 ${
         accent ? "relative overflow-hidden" : ""
       } ${surface} ${styling}`}
     >
+      {loading && (
+        <div className="bg-card-background/50 absolute top-0 left-0 flex h-full w-full items-center justify-center rounded-3xl backdrop-blur-md">
+          <LoadingSpinner />
+        </div>
+      )}
       {accent && (
         <div
           className={`absolute inset-x-0 top-0 h-1.5 ${accentClass[accent]}`}

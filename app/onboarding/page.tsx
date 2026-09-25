@@ -33,7 +33,7 @@ export default async function OnboardingPage({
           styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
           glass={true}
         >
-          <h1 className="text-4xl">Join the party!</h1>
+          <h1 className="text-h1">Join the party!</h1>
 
           {user && (
             <>

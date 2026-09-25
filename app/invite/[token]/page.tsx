@@ -25,7 +25,7 @@ export default async function Page({
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}
           >
-            <h1 className="text-4xl">Invite not found</h1>
+            <h1 className="text-h1">Invite not found</h1>
           </ContentBox>
         </main>
       </>
@@ -43,7 +43,7 @@ export default async function Page({
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}
           >
-            <h1 className="text-4xl">Event not found</h1>
+            <h1 className="text-h1">Event not found</h1>
           </ContentBox>
         </main>
       </>
@@ -62,7 +62,7 @@ export default async function Page({
             styling="gap-5 text-center bg-opacity-30 backdrop-blur-lg p-10"
             glass={true}
           >
-            <h1 className="text-4xl">
+            <h1 className="text-h1">
               {isHost
                 ? `This invite was claimed by ${invite.guestName}!`
                 : "This invite has already been claimed!"}
@@ -88,7 +88,7 @@ export default async function Page({
           styling="gap-5 text-left bg-opacity-30 backdrop-blur-lg p-10"
           glass={true}
         >
-          <h1 className="text-4xl">
+          <h1 className="text-h1">
             {isHost
               ? `This invite is for ${invite.guestName}`
               : `You are invited to ${event.occasion}`}

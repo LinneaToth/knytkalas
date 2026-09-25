@@ -544,3 +544,7 @@ I WAS going to implement ux/ui changes to the event page. I did not. Ended up sp
 ## [2026-09-18]
 
 UX refinement phase goes on. I picked up a Tailwind trick at internship this week, utility classes! Got rid of a lot of clunky repeated inline styling in my form inputs. Kept working on the event page, and poked around in other places while I was at it..
+
+## [2026-09-25]
+
+During today's short session, I DRY:ed up some styling by adding a text-h1 utility class. Created a loading spinner component and added a loading state to my UI component ContentBox. Had a time/date hydration error, AGAIN, which I fixed by formatting the string before sending it off to the component. Did some reworking of the guest list and the contribution cards. Had some quirks on the responsive side that I remedied.

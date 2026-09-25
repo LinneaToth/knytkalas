@@ -19,7 +19,7 @@ export default function LoginPage() {
       <NavBar mode="notSignedIn" />
       <main className="bg-opacity-30 flex h-screen w-full flex-col items-center justify-center bg-[url('/graphics/bg.svg')] bg-cover p-10 backdrop-blur-lg">
         <ContentBox styling="gap-5 text-center" glass={true}>
-          <h1 className="text-4xl">Welcome back to Knytkalas!</h1>
+          <h1 className="text-h1">Welcome back to Knytkalas!</h1>
           <h2 className="uppercase">
             Please sign in using your Google account
           </h2>

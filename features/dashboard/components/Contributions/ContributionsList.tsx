@@ -11,12 +11,14 @@ type Props = {
   contributions: Awaited<ReturnType<typeof getContributionsByEvent>>;
   avoids?: IssueType[];
   usersInviteId: number;
+  eventHasBeen: boolean;
 };
 
 export default function ContributionsList({
   contributions,
   avoids,
   usersInviteId,
+  eventHasBeen,
 }: Props) {
   const [sortBy, setSortBy] = useState<"user" | "category">("user");
   if (!contributions) return <></>;
@@ -62,6 +64,7 @@ export default function ContributionsList({
                 issuesFound={issuesFound}
                 contribution={contribution}
                 usersInviteId={usersInviteId}
+                eventHasBeen={eventHasBeen}
               />
             );
           })

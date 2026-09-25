@@ -76,7 +76,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
           <div
             className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
           >
-            <figure className="icon-figure">
+            <figure className="icon-figure-success">
               <CalendarDays color="white" />
             </figure>{" "}
             {date}
@@ -84,14 +84,14 @@ export default function EventDetails({ event, date, time, role }: Props) {
           <div
             className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
           >
-            <figure className="icon-figure">
+            <figure className="icon-figure-success">
               {" "}
               <Clock10 color="white" />
             </figure>
             Start time: {time}
           </div>
           <div className="bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60">
-            <figure className="icon-figure">
+            <figure className="icon-figure-success">
               <MapPin color="white" />
             </figure>{" "}
             {event.location ? event.location : "Location to be decided"}

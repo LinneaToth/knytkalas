@@ -6,9 +6,9 @@ export default async function CreateEventPage() {
   return (
     <>
       <header className="p-10">
-        <h1 className="text-4xl">Create Event </h1>
+        <h1 className="text-h1">Create Event </h1>
       </header>
-      <div className="px-10">
+      <div className="px-5 md:px-10">
         <ContentBox styling="col-span-3 mb-auto" glass={true}>
           <CreateEvent />
         </ContentBox>

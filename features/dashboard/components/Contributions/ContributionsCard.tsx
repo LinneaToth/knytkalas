@@ -9,12 +9,14 @@ type Props = {
   issuesFound: IssueType[];
   contribution: Awaited<ReturnType<typeof getContributionsByEvent>>[number];
   usersInviteId: number;
+  eventHasBeen: boolean;
 };
 
 export default function ContributionsCard({
   issuesFound,
   contribution,
   usersInviteId,
+  eventHasBeen,
 }: Props) {
   const isUsersContribution = contribution.inviteId === usersInviteId;
 
@@ -24,7 +26,7 @@ export default function ContributionsCard({
 
   return (
     <li
-      className={`flex flex-col gap-5 rounded-2xl border p-5 shadow ${issuesFound.length > 0 ? "border-error bg-error/10" : "border-primary bg-card-background/60"}`}
+      className={`flex flex-col gap-5 rounded-2xl border border-l-6 p-5 shadow ${issuesFound.length > 0 ? "border-error bg-error/10" : "border-primary bg-card-background/60"}`}
     >
       <header className="flex justify-between">
         <h3>
@@ -33,7 +35,7 @@ export default function ContributionsCard({
           </span>{" "}
           - {contribution.contribution.name}
         </h3>
-        {isUsersContribution && (
+        {isUsersContribution && !eventHasBeen && (
           <button
             className="text-secondary cursor-pointer"
             onClick={() => {

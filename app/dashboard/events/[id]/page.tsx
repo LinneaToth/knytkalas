@@ -31,9 +31,9 @@ export default async function Page({
     <>
       <header className="p-10">
         {" "}
-        <h1 className="text-4xl">{event.occasion}</h1>
+        <h1 className="text-h1">{event.occasion}</h1>
       </header>
-      <div className="grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-10 md:grid-cols-3">
+      <div className="grid min-h-0 w-full grid-cols-1 gap-6 overflow-y-auto px-5 md:grid-cols-3 md:px-10">
         <section className="col-span-3 flex min-h-0 flex-col gap-5 md:col-start-1 md:row-start-1 lg:col-span-2">
           <EventDetails
             event={event}
