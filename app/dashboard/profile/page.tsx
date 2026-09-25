@@ -15,9 +15,9 @@ export default async function ProfilePage() {
   return (
     <>
       <header className="p-10">
-        <h1 className="text-4xl">Knytkalas Profile</h1>
+        <h1 className="text-h1">Knytkalas Profile</h1>
       </header>
-      <div className="px-10">
+      <div className="px-5 md:px-10">
         <ContentBox styling="gap-5 mb-10" glass={true}>
           <p className="flex items-center gap-3">
             <User size={18} />

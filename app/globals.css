@@ -64,10 +64,15 @@
   @apply bg-error rounded-full p-2;
 }
 
+@utility text-h1 {
+  @apply text-3xl font-bold text-primary-darkest text-center lg:text-start lg:ml-8 w-full
+}
+
 
 
 h1 {
   font-family: var(--font-poppins);
+
 
 }
 

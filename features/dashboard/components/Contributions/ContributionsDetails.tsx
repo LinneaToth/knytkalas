@@ -30,7 +30,7 @@ export default function ContributionsDetails({
   return (
     <ContentBox styling="gap-8" glass={true}>
       <header className="flex items-center justify-between" ref={listRef}>
-        <h2 className="uppercase">Contributions</h2>
+        <h2 className="uppercase">On the table</h2>
         <button
           onClick={() => setIsExpanded(!isExpanded)}
           className="flex transition-transform duration-200 hover:cursor-pointer"
@@ -59,6 +59,7 @@ export default function ContributionsDetails({
             contributions={contributions}
             avoids={avoids}
             usersInviteId={inviteId}
+            eventHasBeen={eventHasBeen}
           />
           {!eventHasBeen && <CreateContribution inviteId={inviteId} />}
         </div>
