@@ -548,3 +548,34 @@ UX refinement phase goes on. I picked up a Tailwind trick at internship this wee
 ## [2026-09-25]
 
 During today's short session, I DRY:ed up some styling by adding a text-h1 utility class. Created a loading spinner component and added a loading state to my UI component ContentBox. Had a time/date hydration error, AGAIN, which I fixed by formatting the string before sending it off to the component. Did some reworking of the guest list and the contribution cards. Had some quirks on the responsive side that I remedied.
+
+## [2026-10-02]
+
+Seeing as I see an end to this project on the horizon - I have some layout issues and error handling that NEEDS to be done before turn-in, the rest is honestly just "nice to have" and not within my MVP-scope - I figured it would be nice to get started on the report. I added the report as an epic to the github project, and started a feature for the setup and layout of the file. I like Affinity, so I decided to create my document there. Went in, installed the fonts to match with the app and translated the colors to swatches.
+
+Meanwhile, it struck me that this tedious mapping would have been an excellent chore for Claude.. With this week's newly gained insights on MCP's (namely Figma's), I found a way to connect the two. Sadly, there is currently only support for Claude desktop. I was going to set up a simple master layout for the text pages, but figured I might as well throw my LLM-service at it and see what happened.
+
+"I want you to create page layouts (master pages) for me. Use only font poppins with appropriate styling and the existing swatches."
+
+However, it quickly reached a blocker. It cannot autonomosly create master layouts, due to the exposed Affinity scripts in their MCP. Bummer. I had to create empty layouts for Claude, before it could fill it with some text boxes. At that rate it almost began to seem like a waste of time, since it was the scaffolding I was after cutting corners on. But I wasn't ready to give up just yet, so I created the pages for it. Now, Claude, if you could please map my intended typography styling to style settings in Affinity, that would really make me happy.. And of course it cannot create styles from scratch either. This exercise proved to be both token- and time consuming, but it is very interesting to explore the possibilities and limitations. Totally worth it!
+
+In regards to the github project and planning; I have been cutting myself some slack on the methodology. I'm a solo dev and I decided it is fine if I am not militant about dissecting epics into features before adding work items. I have not been super ambitious about writing user stories either. Had I been collaborating with other people, being stricter on the agile stuff would have been a big focus; for sure.
+
+## [2026-10-09]
+
+I went on a side quest, adding branding and other details needed in order to open up registration with google for the public. However, I soon ran into issues. The domain is not registered to me (yes it is). The branding may not be mine (yes.. Yes, it is). I don't have any information about privacy and terms and conditions. YES, I, in fact, do! I was welcome to file an appeal and wait for a couple of days for a response. How about no. Into the backlog you go. For this project we'll be absolutely fine with the test user cap of 100..! I am going to ask the source of this entire venture, my family, to provide me with their gmails for whitelisting, so we can plan an event for testing some time soon.
+
+Error handling. A topic long overdue. [Today I went to the docs for a well neede spike, reading up on error handling in Next.js](https://nextjs.org/docs/app/getting-started/error-handling).
+
+It tells me to create an error.tsx inside a route segment, and to export a React component telling the user something went wrong. It also mentions sending the error to an error logging service. That would be fenomenal, but I am sticking to my scope. Into the backlog that goes. Back to the error files.
+
+Apparently Next.js errors will handle errors through these error boundaries, that are created by adding these error.tsx:es. Errors during rendering will then bubble up to the nearest parent error boundary. I added one to the /dashboard subroute, meaning it will preserve the layout with nav bar and possibility of going somewhere else when things go wrong in there. I also added one to the top, if something went wrong before signing in. It would be really nice to develop the UX side of things with these error pages; I'll add that to the back log. For now I'm happy that they are implemented and prevent the site from totally crashing. Note to self & backlog, the docs also mentions adding "retry" through props.
+
+![Error message in dashboard layout](./img/22.png)
+
+![Thrown error](./img/23.png)
+
+To ponder next time I work on this, hopefully tomorrow:
+
+- Do I throw errors in my DA? Where do I catch these, services? What then?
+- Auth checks in DAL according to the docs, as already implemented in onboardUser. Throw if fail.

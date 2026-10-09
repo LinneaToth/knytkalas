@@ -26,7 +26,7 @@ export default function ContributionsCard({
 
   return (
     <li
-      className={`flex flex-col gap-5 rounded-2xl border border-l-6 p-5 shadow ${issuesFound.length > 0 ? "border-error bg-error/10" : "border-primary bg-card-background/60"}`}
+      className={`flex flex-col gap-5 rounded-2xl border p-5 shadow ${issuesFound.length > 0 ? "border-error bg-error/10" : "border-primary bg-card-background/60"}`}
     >
       <header className="flex justify-between">
         <h3>
