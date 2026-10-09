@@ -42,7 +42,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
         return (
           <div
             key={"invID" + guest.inviteId}
-            className={`bg-card-background/60 relative mb-2 flex flex-col gap-5 rounded-2xl border-1 border-l-6 p-5 ${
+            className={`bg-card-background/60 relative mb-2 flex flex-col gap-5 rounded-2xl border-1 p-5 ${
               guest.status === "GOING"
                 ? "border-success"
                 : guest.status === "PENDING"
