@@ -579,3 +579,24 @@ To ponder next time I work on this, hopefully tomorrow:
 
 - Do I throw errors in my DA? Where do I catch these, services? What then?
 - Auth checks in DAL according to the docs, as already implemented in onboardUser. Throw if fail.
+
+## [2026-10-16]
+
+In the app, two types of errors occur. Expected errors, like when a user tries to submit a partially filled out form, or unexpected errors where something is actually "broken".
+The docs, previously linked in the last log entry, tells to handle the expected errors with return values, rather than throwing errors. Meanwhile, unexpected errors are where errors should be thrown and caught with an error boundary.
+
+proxy.ts → optimistic check: "is there a session cookie?" → redirect to /login
+DAL (data/dal) → secure check: who is this, are they allowed, return a safe DTO. Throws on violations.
+Server actions → parse and validate input, call the DAL, return { error } for expected cases
+Pages (RSC) → call the DAL, notFound() when nothing comes back, render
+Client → useActionState / useTransition, show { error }, boundaries catch the rest
+
+# [2026-10-17]
+
+I have a feeling I did this in the wrong order, not spending enough time on error handling from the beginning. Oh well, learning by doing. Extended spike here, reading up on error handling in next.js.
+
+Not sure I have covered active scope revision I did during the work. If not, here goes:
+
+- Dropped editing contributions. Deleting and re-adding if needed covers what is sufficient for my MVP
+- Higlighting dietary issues with contributions gave a clearer overview.
+- I think I initially had an idea about the host defining categories for each party. I scratched that.
