@@ -7,7 +7,7 @@ export const getUser = async (id: string) => {
     where: { id: id },
   });
 
-  if (!user) throw new Error("No matching user found in Database");
+  if (!user) return null;
 
   if (!user.onboarded)
     return {

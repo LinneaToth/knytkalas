@@ -34,7 +34,7 @@ export const getEvent = async (id: number) => {
     },
   });
 
-  if (!event) throw new Error("No matching event found in Database");
+  if (!event) return null; //Will result in a fitting 404 further up
 
   const totalGuestsAccepted = countGuests("GOING", event);
   const totalGuestsPending = countGuests("PENDING", event);

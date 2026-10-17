@@ -595,6 +595,15 @@ Client → useActionState / useTransition, show { error }, boundaries catch the 
 
 I have a feeling I did this in the wrong order, not spending enough time on error handling from the beginning. Oh well, learning by doing. Extended spike here, reading up on error handling in next.js.
 
+First thing I did today was to check for error thrown on expected mishaps, since the docs are clear about returning a descriptive object instead of throwing in those cases.
+
+After doing C# tutorials it feels completely wild returning objects with error: message, but that's what I am doing for expected errors in my DAL functions now. It of course had some cascading consequences, where I had to follow the trail and adjust what services and other layers expected and handled. It seems like the point of the division is for the error message (in the returned object, not thrown) to actually reach the user? Or at least it is an important effect.
+
+I had to refresh my knowledge on the "new" hook useActionState when refactoring the OnboardingForm component. When I'm not squeezed like a lemonadeized lemon for time and energy, I will do an in-depth dive on this. Right now I'll leave it where I kind of know how to use it with a form.
+
+I remember feeling "duktig" when implementing some try/catches throughout; but during this round I found that some of them only resulted in swallowed errors. That's taken care of now.
+
+Side note:
 Not sure I have covered active scope revision I did during the work. If not, here goes:
 
 - Dropped editing contributions. Deleting and re-adding if needed covers what is sufficient for my MVP

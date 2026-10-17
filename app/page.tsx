@@ -12,7 +12,7 @@ export default async function Home() {
   }
 
   const user = await getUser(userId);
-  if (user.onboarded) redirect("/dashboard");
+  if (user && user.onboarded) redirect("/dashboard");
 
   return <LandingPage />;
 }

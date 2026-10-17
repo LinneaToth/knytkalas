@@ -1,5 +1,7 @@
 "use server";
 
+import { notFound } from "next/navigation";
+
 import EventDetails from "@/features/dashboard/components/Events/EventDetails";
 import { getEventDetails } from "@/features/dashboard/services/getEventDetails";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
@@ -15,8 +17,10 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const event = await getEventDetails(Number(id));
-  if (!event) return <h2>Event not found</h2>;
+  const eventId = Number(id);
+  if (!Number.isInteger(eventId)) return notFound(); //404 if id is not a valid int, no lookups needed
+  const event = await getEventDetails(eventId);
+  if (!event) return notFound(); //404 if event not found or user not authorized to see it
   const user = await getCurrentUser();
   if (!user) return <h2>User not signed in</h2>; //SHOULD BE REPLACED WITH A REDIRECT TO SOMETHING THAT PROMPTS USER TO SIGN IN
 
