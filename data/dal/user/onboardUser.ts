@@ -8,6 +8,7 @@ import type { NewUser } from "@/types/entityTypes";
 
 export const onboardUser = async (user: NewUser) => {
   const id = await getSessionUserId();
+  if (!id) throw new Error("No session found"); //Function should only be called when a session exists -> if none is found, throw error
   const currentUser = await getUser(id);
 
   if (!currentUser) throw new Error("Session exists but user not found"); //Thrown error is valid, because there should be an active session if this function is ever fired

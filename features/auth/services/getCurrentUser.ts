@@ -5,10 +5,7 @@ import { getUser } from "@/data/dal/user/getUser";
 import { getSessionUserId } from "./getSessionUserId";
 
 export const getCurrentUser = async () => {
-  try {
-    const userId = await getSessionUserId();
-    return await getUser(userId);
-  } catch {
-    return undefined;
-  }
+  const userId = await getSessionUserId();
+  if (!userId) return null;
+  return await getUser(userId);
 };

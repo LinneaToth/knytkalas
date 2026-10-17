@@ -10,12 +10,13 @@ export const deleteContribution = async (contributionId: number) => {
     getCurrentUser(),
     getContribution(contributionId),
   ]);
+
+  if (!contribution) return { error: "Contribution not found" };
   const invite = await getInvite(contribution.inviteId);
 
-  if (!currentUser) throw new Error("User not found");
-  if (!contribution) throw new Error("Contribution not found");
+  if (!currentUser) throw new Error("User not found"); //If there is no user but there is a contribution, something is broken. Not expected. Error thrown.
   if (invite?.guestId !== currentUser.id)
-    throw new Error("User is not authorized to delete this contribution");
+    throw new Error("User is not authorized to delete this contribution"); //Proxy.ts guarantees a session when someone's in /dashboard, so a missing user means something is broken. Error thrown.
 
   await deleteContributionDAL(contributionId);
 

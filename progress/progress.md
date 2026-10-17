@@ -603,6 +603,10 @@ I had to refresh my knowledge on the "new" hook useActionState when refactoring 
 
 I remember feeling "duktig" when implementing some try/catches throughout; but during this round I found that some of them only resulted in swallowed errors. That's taken care of now.
 
+What a rabbit hole, this error handling business is. Hello new acquaintance useTransition. This hook comes with a pending state and a space for a callback method (always called action, [according to the docs](https://react.dev/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)). This enables handling returned error objects (expected issues) differently from thrown unexpected errors. The latter ends the transition and will let the error bubble up and reach an error boundary. The former can be dealt with in the UI.
+
+I had Claude act secretary for me and blasted some really bad upbeat music in my headphone, while cursing my way through the chains and my saturday.
+
 Side note:
 Not sure I have covered active scope revision I did during the work. If not, here goes:
 
