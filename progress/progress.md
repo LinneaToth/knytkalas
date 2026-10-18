@@ -633,3 +633,5 @@ getInviteIdByUserAndEvent.ts was a duplicate, getEventDetails.ts already took ca
 Got a complaint from an iPhone 12 user, that the kerning in the hero was ugly on smaller screens. Indeed it was, added a custom breakpoint xs to accommodate for styling that fits the smallest of screens.
 
 Also fixed a bug that had people redirected to landing page when people signed up from the login route. Better auth apparently has a built in method for that, yay, newUserCallbackUrl. No need for manual redirects, if you're new you're just sent to onboarding with your next target as where you originally wanted to go.
+
+Listed dietary issues for guests on the event page, added a util that converts to a vegan pill if all animal based things are checked.

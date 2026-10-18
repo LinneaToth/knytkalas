@@ -7,6 +7,7 @@ import { Link, Check, X } from "lucide-react";
 import { getInviteLink } from "../../services/getInviteLink";
 import type { IssueType } from "@/generated/prisma";
 import IssuePills from "../Contributions/IssuePills";
+import { formatAllergies } from "../../utils/formatAllergies";
 
 type Props = {
   guests: {
@@ -70,6 +71,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
       {error && <p className="text-error">{error}</p>}
       {guests.map((guest) => {
         const isCopied = copiedId === guest.inviteId;
+        const formattedAllergies = formatAllergies(guest.allergies);
 
         //Card grid: name | status on mobile with the copy link below the name, name | copy link | status from sm. Allergies span the full bottom row
         return (
@@ -134,7 +136,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
             {guest.allergies.length > 0 && (
               <div className="col-span-full">
                 <IssuePills
-                  alertIssues={guest.allergies}
+                  alertIssues={formattedAllergies}
                   otherIssues={[]}
                   justify="start"
                 />

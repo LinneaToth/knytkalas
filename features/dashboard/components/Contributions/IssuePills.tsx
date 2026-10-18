@@ -1,7 +1,7 @@
 import { IssueType } from "@/generated/prisma";
 
 type Props = {
-  alertIssues: IssueType[];
+  alertIssues: string[];
   otherIssues: IssueType[];
   justify: "end" | "start" | "center";
 };
