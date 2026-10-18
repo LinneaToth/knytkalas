@@ -2,14 +2,16 @@
 import { getEvent } from "@/data/dal/event/getEvent";
 import { updateEvent as updateEventDAL } from "@/data/dal/event/updateEvent";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
+import { getEventFormFields } from "../utils/eventFormFields";
 
 export const updateEvent = async (eventId: number, formData: FormData) => {
-  const occasion = formData.get("occasion") as string;
-  const date = formData.get("date") as string;
+  const fields = getEventFormFields(formData);
+  const { date } = fields;
 
-  if (isNaN(new Date(date).getTime())) return { error: "Invalid date" };
+  //Expected errors return the fields too, so the form can be refilled with what the user typed
+  if (isNaN(new Date(date).getTime())) return { error: "Invalid date", fields };
   if (new Date(date) < new Date())
-    return { error: "Event date must be in the future" }; //User may well be expected to enter an old or invalid date, no error thrown
+    return { error: "Event date must be in the future", fields }; //User may well be expected to enter an old or invalid date, no error thrown
 
   const [user, event] = await Promise.all([
     getCurrentUser(),
@@ -22,12 +24,12 @@ export const updateEvent = async (eventId: number, formData: FormData) => {
     throw new Error("User is not authorized to update this event"); //controls should not appear if user is not the host.
 
   await updateEventDAL(eventId, {
-    occasion,
+    occasion: fields.occasion,
     date: new Date(date).toISOString(),
-    responseDeadline: formData.get("responseDeadline")
-      ? new Date(formData.get("responseDeadline") as string).toISOString()
+    responseDeadline: fields.responseDeadline
+      ? new Date(fields.responseDeadline).toISOString()
       : null,
-    description: formData.get("description") as string | null,
-    location: formData.get("location") as string | null,
+    description: fields.description || null,
+    location: fields.location || null,
   });
 };

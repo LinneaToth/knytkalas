@@ -9,11 +9,13 @@ import { Pencil, CalendarDays, MapPin, Clock10 } from "lucide-react";
 import ContentBox from "@/ui/components/ContentBox";
 import EventForm from "./EventForm";
 import { updateEvent } from "../../services/updateEvent";
+import { formatDate } from "../../utils/formatDate";
+import type { EventFormFields } from "../../utils/eventFormFields";
 
 //getEventDetails returns null when there is no event, but events/[id]/page.tsx calls notFound() in that case, so this component never receives null. NonNullable removes null from the type
 type EventDetails = NonNullable<Awaited<ReturnType<typeof getEventDetails>>>;
 
-type SaveState = { error: string } | undefined;
+type SaveState = { error: string; fields: EventFormFields } | undefined;
 
 type Props = {
   event: EventDetails;
@@ -59,13 +61,19 @@ export default function EventDetails({ event, date, time, role }: Props) {
         <h2>Editing Event</h2>
         <EventForm
           handleFormAction={saveAction}
-          eventData={{
-            occasion: event.occasion,
-            description: event.description || "",
-            location: event.location || "",
-            date: event.date,
-            responseDeadline: event.responseDeadline ?? undefined,
-          }}
+          mode="edit"
+          //After an expected error: what the user typed. Otherwise: the saved event, formatted the way the inputs expect
+          eventData={
+            saveState?.fields ?? {
+              occasion: event.occasion,
+              description: event.description || "",
+              location: event.location || "",
+              date: formatDate(event.date),
+              responseDeadline: event.responseDeadline
+                ? formatDate(event.responseDeadline).slice(0, 10) //date input wants YYYY-MM-DD
+                : "",
+            }
+          }
           pending={isSaving}
           onCancel={onCancel}
         />

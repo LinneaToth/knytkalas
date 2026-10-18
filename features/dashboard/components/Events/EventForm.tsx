@@ -1,23 +1,20 @@
 import Form from "next/form";
 import Button from "@/ui/components/Button";
 import DateField from "../../../../ui/components/DateField";
-import { formatDate } from "../../utils/formatDate";
+import type { EventFormFields } from "../../utils/eventFormFields";
 
 type Props = {
   handleFormAction: (formData: FormData) => void | Promise<void>;
-  eventData?: {
-    occasion?: string;
-    description?: string;
-    location?: string;
-    date?: Date;
-    responseDeadline?: Date;
-  };
+  mode: "create" | "edit";
+  //Strings in the same format the inputs use. React 19 resets the form to these after every action, so after an expected error they should be what the user typed
+  eventData?: Partial<EventFormFields>;
   pending?: boolean;
   onCancel?: () => void; //Optional, only shown when editing. Lives in here so it can share a row with the submit button
 };
 
 export default function EventForm({
   handleFormAction,
+  mode,
   eventData,
   pending,
   onCancel,
@@ -63,11 +60,7 @@ export default function EventForm({
         type="datetime-local"
         name="date"
         id="date"
-        defaultValue={
-          eventData?.date instanceof Date
-            ? formatDate(eventData.date)
-            : undefined
-        }
+        defaultValue={eventData?.date}
         className="w-full"
         required
       />
@@ -77,6 +70,7 @@ export default function EventForm({
         type="date"
         name="responseDeadline"
         id="responseDeadline"
+        defaultValue={eventData?.responseDeadline}
         className="w-full"
       />
 
@@ -87,7 +81,7 @@ export default function EventForm({
           loading={pending}
           className="w-full md:w-auto"
         >
-          {eventData ? "Update event" : "Create event"}
+          {mode === "edit" ? "Update event" : "Create event"}
         </Button>
         {onCancel && (
           //type="button" so it doesn't submit the form it's inside
