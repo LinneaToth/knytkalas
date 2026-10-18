@@ -1,16 +1,14 @@
 "use client";
-import { useState, useEffect } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useEffect, useActionState } from "react";
 import Form from "next/form";
 import { createInvite } from "../services/createInvite";
 import Button from "@/ui/components/Button";
 
+type CreateState = { error: string } | undefined;
+
 export default function CreateInvite({ eventId }: { eventId: number }) {
   const [isActive, setIsActive] = useState(false);
-  const [error, setError] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
-
-  const router = useRouter();
 
   useEffect(() => {
     if (success) {
@@ -25,15 +23,18 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
     setIsActive((oldStatus) => !oldStatus);
   };
 
-  const handleFormAction = async (formData: FormData): Promise<void> => {
-    try {
-      await createInvite(formData);
-      setSuccess(true);
-      router.refresh();
-    } catch (error) {
-      setError((error as Error).message);
-    }
+  //Expected errors are returned and shown in the form. Thrown errors reach the nearest error boundary. No router.refresh() needed, createInvite calls revalidatePath
+  const handleCreate = async (prevState: CreateState, formData: FormData) => {
+    const result = await createInvite(formData);
+    if (result?.error) return result;
+    setSuccess(true);
   };
+
+  //Hooks must be called before the early returns below
+  const [state, createAction, isCreating] = useActionState(
+    handleCreate,
+    undefined,
+  );
 
   if (!isActive) {
     return (
@@ -44,15 +45,6 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
       >
         Create new invite
       </Button>
-    );
-  }
-
-  if (error) {
-    return (
-      <div className="bg-card-background text-foreground mt-5 flex w-full cursor-pointer flex-col items-center justify-center rounded-l py-10 drop-shadow">
-        <h2>Something went wrong</h2>
-        <span>{error}</span>
-      </div>
     );
   }
 
@@ -74,7 +66,7 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   return (
     <Form
-      action={handleFormAction}
+      action={createAction}
       className={
         "text-foreground mt-5 flex w-full flex-col items-start justify-start gap-5"
       }
@@ -90,8 +82,9 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
         className="bg-background text-foreground focus:bg-focus w-full p-3"
       />
       <input type="hidden" name="eventId" value={eventId} />
+      {state?.error && <p className="text-error">{state.error}</p>}
       <div className="flex w-full flex-col items-center gap-3 md:flex-row md:justify-center">
-        <Button type="submit" className="w-full md:w-auto">
+        <Button type="submit" loading={isCreating} className="w-full md:w-auto">
           Create invite
         </Button>
         {/* type="button" so it doesn't submit the form it's inside */}
@@ -101,6 +94,7 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
             toggleActive();
             setSuccess(false);
           }}
+          disabled={isCreating}
           className="w-full md:w-auto"
         >
           Cancel
