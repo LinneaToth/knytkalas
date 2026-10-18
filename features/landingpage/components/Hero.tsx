@@ -18,7 +18,7 @@ export default function Hero() {
       <div className="mx-auto max-w-7xl p-5 xl:grid xl:grid-cols-3">
         <section className="text-foreground-light relative z-10 flex min-h-screen flex-col items-start justify-center px-10 pb-20 xl:col-span-2 xl:mx-auto xl:h-150 xl:min-h-0 xl:justify-end xl:px-20">
           {" "}
-          <h1 className="text-foreground-light text-6xl font-semibold">
+          <h1 className="text-foreground-light xs:text-6xl text-5xl font-semibold">
             Plan your{" "}
             <span className="hover:text-secondary *: cursor-default transition-all duration-500 ease-in-out">
               Potluck

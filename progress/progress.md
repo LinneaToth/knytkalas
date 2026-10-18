@@ -629,3 +629,7 @@ Found some issues with buttons width in certain breakpoints inside /dashboard. P
 When reaching the last "chain" on my list, I let in Claude and gave it a longer rein.
 
 getInviteIdByUserAndEvent.ts was a duplicate, getEventDetails.ts already took care of the same thing. Its one call was replaced.
+
+Got a complaint from an iPhone 12 user, that the kerning in the hero was ugly on smaller screens. Indeed it was, added a custom breakpoint xs to accommodate for styling that fits the smallest of screens.
+
+Also fixed a bug that had people redirected to landing page when people signed up from the login route. Better auth apparently has a built in method for that, yay, newUserCallbackUrl. No need for manual redirects, if you're new you're just sent to onboarding with your next target as where you originally wanted to go.

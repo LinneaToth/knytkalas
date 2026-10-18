@@ -8,6 +8,7 @@ export default async function Home() {
   if (!userId) return <LandingPage />;
 
   const user = await getUser(userId);
+  if (user && !user.onboarded) redirect("/onboarding");
   if (user && user.onboarded) redirect("/dashboard");
 
   return <LandingPage />;

@@ -42,6 +42,7 @@
   --color-focus: var(--focus);
   --font-sans: var(--font-poppins);
   --font-bagel: var(--font-bagel-fat-one);
+  --breakpoint-xs: 425px;
 }
 
 @utility input-field {

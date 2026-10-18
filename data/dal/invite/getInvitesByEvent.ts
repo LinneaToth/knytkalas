@@ -13,11 +13,15 @@ export const getInvitesByEvent = async (eventId: number) => {
       status: true,
       invById: true,
       guestId: true,
+      guest: {
+        select: {
+          avoids: true,
+        },
+      },
       contributions: true,
       eventId: true,
       guestName: true,
       totalGuests: true,
-
       event: {
         select: {
           occasion: true,

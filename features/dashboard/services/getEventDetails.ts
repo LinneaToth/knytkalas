@@ -28,6 +28,7 @@ export const getEventDetails = async (eventId: number) => {
     status: invite.status,
     contributions: invite.contributions,
     totalGuests: invite.totalGuests,
+    allergies: invite.guest?.avoids ?? [],
   }));
 
   const userInvite = relatedInvites.find((invite) => invite.guestId === userId);

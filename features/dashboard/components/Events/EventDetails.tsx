@@ -92,9 +92,9 @@ export default function EventDetails({ event, date, time, role }: Props) {
         </h2>
 
         {event.description && <p>{event.description}</p>}
-        <article className="flex w-full flex-col items-stretch gap-3 py-5 md:justify-between xl:flex-row">
+        <article className="flex w-full flex-col items-stretch gap-3 py-5 xl:flex-row">
           <div
-            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
+            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 flex items-center gap-3 rounded-2xl p-5 xl:flex-1`}
           >
             <figure className="icon-figure-success">
               <CalendarDays color="white" />
@@ -102,7 +102,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
             {date}
           </div>
           <div
-            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60`}
+            className={`${event.deletedAt ? "line-through" : ""} bg-card-background/60 flex items-center gap-3 rounded-2xl p-5 xl:flex-1`}
           >
             <figure className="icon-figure-success">
               {" "}
@@ -110,7 +110,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
             </figure>
             Start time: {time}
           </div>
-          <div className="bg-card-background/60 2xl flex items-center gap-3 rounded-2xl p-5 2xl:min-w-60">
+          <div className="bg-card-background/60 flex items-center gap-3 rounded-2xl p-5 xl:flex-1">
             <figure className="icon-figure-success">
               <MapPin color="white" />
             </figure>{" "}

@@ -5,6 +5,8 @@ import ResponseStatus from "../Events/ResponseStatus";
 import { uninviteGuest } from "../../services/uninviteGuest";
 import { Link, Check, X } from "lucide-react";
 import { getInviteLink } from "../../services/getInviteLink";
+import type { IssueType } from "@/generated/prisma";
+import IssuePills from "../Contributions/IssuePills";
 
 type Props = {
   guests: {
@@ -13,6 +15,7 @@ type Props = {
     status: "GOING" | "PENDING" | "DECLINED";
     totalGuests: number;
     inviteId: number;
+    allergies: IssueType[];
   }[];
   role: "host" | "guest";
   hostId: string;
@@ -68,10 +71,11 @@ export default function GuestList({ guests, role, hostId }: Props) {
       {guests.map((guest) => {
         const isCopied = copiedId === guest.inviteId;
 
+        //Card grid: name | status on mobile with the copy link below the name, name | copy link | status from sm. Allergies span the full bottom row
         return (
           <div
             key={"invID" + guest.inviteId}
-            className={`bg-card-background/60 relative mb-2 flex flex-col gap-5 rounded-2xl border-1 p-5 ${
+            className={`bg-card-background/60 mb-2 grid grid-cols-[1fr_auto] items-start gap-3 rounded-2xl border-1 p-5 sm:grid-cols-[1fr_auto_auto] ${
               guest.status === "GOING"
                 ? "border-success"
                 : guest.status === "PENDING"
@@ -79,7 +83,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
                   : "border-error"
             }`}
           >
-            <section className="flex flex-col">
+            <section className="col-start-1 row-start-1 flex flex-col">
               <div className="flex flex-row items-center justify-start gap-2">
                 <p className="">
                   {guest.guestName}{" "}
@@ -99,33 +103,43 @@ export default function GuestList({ guests, role, hostId }: Props) {
                   </button>
                 )}
               </div>
-            </section>{" "}
-            <section className="absolute top-5 right-5 flex flex-row items-start gap-3">
-              <div className="flex w-full flex-wrap items-center gap-3">
-                {role === "host" && guest.status === "PENDING" && (
-                  <button
-                    className={`text-primary-darkest border-primary-darkest flex h-fit cursor-pointer items-center justify-center rounded-xl border p-3 px-2 py-1 text-center text-xs text-[11px] font-medium shadow-sm transition-all duration-20 ${
-                      isCopied
-                        ? "border-success bg-success/10 text-success"
-                        : "bg-card-background hover:bg-gray-50"
-                    }`}
-                    onClick={() => handleCopy(guest.inviteId)}
-                    disabled={isCopied || isCopying}
-                  >
-                    {isCopied ? (
-                      <>
-                        <Check size="12" /> Copied!
-                      </>
-                    ) : (
-                      <>
-                        <Link size="12" /> Copy invite link
-                      </>
-                    )}
-                  </button>
-                )}
-              </div>
-              <ResponseStatus status={guest.status} />
             </section>
+            {/* Explicit placement: the button comes before the status in the code but sits below it on mobile */}
+            {role === "host" && guest.status === "PENDING" && (
+              <div className="col-start-1 row-start-2 sm:col-start-2 sm:row-start-1">
+                <button
+                  className={`text-primary-darkest border-primary-darkest flex h-fit cursor-pointer items-center justify-center rounded-xl border p-3 px-2 py-1 text-center text-xs text-[11px] font-medium shadow-sm transition-all duration-20 ${
+                    isCopied
+                      ? "border-success bg-success/10 text-success"
+                      : "bg-card-background hover:bg-gray-50"
+                  }`}
+                  onClick={() => handleCopy(guest.inviteId)}
+                  disabled={isCopied || isCopying}
+                >
+                  {isCopied ? (
+                    <>
+                      <Check size="12" /> Copied!
+                    </>
+                  ) : (
+                    <>
+                      <Link size="12" /> Copy invite link
+                    </>
+                  )}
+                </button>
+              </div>
+            )}
+            <div className="col-start-2 row-start-1 sm:col-start-3">
+              <ResponseStatus status={guest.status} />
+            </div>
+            {guest.allergies.length > 0 && (
+              <div className="col-span-full">
+                <IssuePills
+                  alertIssues={guest.allergies}
+                  otherIssues={[]}
+                  justify="start"
+                />
+              </div>
+            )}
           </div>
         );
       })}

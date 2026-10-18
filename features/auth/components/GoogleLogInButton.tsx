@@ -14,6 +14,7 @@ export function GoogleLogInButton({ callbackUrl }: Props) {
   const config = {
     provider: "google",
     callbackURL: pathIsSafe ? url : "/",
+    newUserCallbackURL: `/onboarding?target-url=${pathIsSafe ? url : "/"}`,
   };
   return (
     <Button variant="primary" onClick={() => signIn.social(config)} size="lg">
