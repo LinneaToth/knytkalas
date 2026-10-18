@@ -11,7 +11,8 @@ export const uninviteGuest = async (inviteId: number) => {
     getInvite(inviteId),
   ]);
 
-  if (!invite || !user) throw new Error("Invite or user not found");
+  if (!user) throw new Error("User not found"); //A proper user can only trigger this from /dashboard, where proxy.ts requires a session. No session means a direct call or something broken. Not expected, error thrown.
+  if (!invite) return { error: "Invite not found" };
 
   const notInviting =
     user.id !== invite.invById && user.id !== invite.event.hostId;

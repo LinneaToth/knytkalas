@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useTransition } from "react";
 import ResponseStatus from "../Events/ResponseStatus";
 import { uninviteGuest } from "../../services/uninviteGuest";
 import { Link, Check, X } from "lucide-react";
@@ -18,6 +20,20 @@ type Props = {
 
 export default function GuestList({ guests, role, hostId }: Props) {
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition(); //Shared for the whole list, only one uninvite at a time
+
+  const handleUninvite = (inviteId: number, guestName: string) => {
+    if (!confirm(`This will uninvite ${guestName} from this event.`)) return;
+
+    //confirm() stays outside the transition, so pending only covers the server call.
+    //Thrown errors reach the nearest error boundary, expected ones are stored in the error state. No router.refresh() needed, uninviteGuest calls revalidatePath
+    startTransition(async () => {
+      setError(null);
+      const result = await uninviteGuest(inviteId);
+      if (result?.error) setError(result.error);
+    });
+  };
 
   const handleCopy = async (inviteId: number) => {
     const inviteLink = await getInviteLink(inviteId);
@@ -36,6 +52,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
 
   return (
     <div className="flex w-full flex-col gap-5">
+      {error && <p className="text-error">{error}</p>}
       {guests.map((guest) => {
         const isCopied = copiedId === guest.inviteId;
 
@@ -60,16 +77,11 @@ export default function GuestList({ guests, role, hostId }: Props) {
                 </p>{" "}
                 {role === "host" && guest.id !== hostId && (
                   <button
-                    className="text-secondary flex h-8 cursor-pointer items-center justify-center rounded-xl text-center text-xs font-medium transition-all duration-20"
-                    onClick={() => {
-                      if (
-                        confirm(
-                          `This will uninvite ${guest.guestName} from this event.`,
-                        )
-                      ) {
-                        uninviteGuest(guest.inviteId);
-                      }
-                    }}
+                    className="text-secondary flex h-8 cursor-pointer items-center justify-center rounded-xl text-center text-xs font-medium transition-all duration-20 disabled:cursor-not-allowed disabled:opacity-60"
+                    onClick={() =>
+                      handleUninvite(guest.inviteId, guest.guestName)
+                    }
+                    disabled={pending}
                   >
                     <X size="20" />
                   </button>
