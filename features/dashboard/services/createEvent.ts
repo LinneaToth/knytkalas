@@ -1,49 +1,45 @@
 "use server";
+import { redirect } from "next/navigation";
 import { createEvent as createEventDAL } from "@/data/dal/event/createEvent";
 import { createInvite as createInviteDAL } from "@/data/dal/invite/createInvite";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
+import { getEventFormFields } from "../utils/eventFormFields";
 
 export const createEvent = async (formData: FormData) => {
-  const occasion = formData.get("occasion") as string;
-  const date = formData.get("date") as string;
-  const description = formData.get("description") as string;
-  const location = formData.get("location") as string;
-  const responseDeadline = formData.get("responseDeadline") as string;
+  const fields = getEventFormFields(formData);
+  const { date } = fields;
 
-  try {
-    const user = await getCurrentUser();
+  //Expected errors return the fields too, so the form can be refilled with what the user typed
+  if (isNaN(new Date(date).getTime())) return { error: "Invalid date", fields };
+  if (new Date(date) < new Date())
+    return { error: "Event date must be in the future", fields };
 
-    if (!user) throw new Error("Cannot create event without signed in user");
+  const user = await getCurrentUser();
+  if (!user) throw new Error("Cannot create event without signed in user"); //Proxy ensures a signed in user in /dashboard; a missing user means something is broken. Error thrown.
 
-    if (new Date(date) < new Date())
-      throw new Error("Event date must be in the future");
-
-    const event = await createEventDAL({
-      occasion,
-      date: new Date(date).toISOString(),
-      responseDeadline: responseDeadline
-        ? new Date(responseDeadline).toISOString()
-        : null,
-      description: description || null,
-      location: location || null,
-      host: {
-        connect: {
-          id: user.id,
-        },
+  const event = await createEventDAL({
+    occasion: fields.occasion,
+    date: new Date(date).toISOString(),
+    responseDeadline: fields.responseDeadline
+      ? new Date(fields.responseDeadline).toISOString()
+      : null,
+    description: fields.description || null,
+    location: fields.location || null,
+    host: {
+      connect: {
+        id: user.id,
       },
-    });
+    },
+  });
 
-    await createInviteDAL({
-      event: { connect: { id: event.id } },
-      invBy: { connect: { id: user.id } },
-      guest: { connect: { id: user.id } },
-      guestName: user?.name ?? "EVENT HOST",
-      status: "GOING",
-    });
+  await createInviteDAL({
+    event: { connect: { id: event.id } },
+    invBy: { connect: { id: user.id } },
+    guest: { connect: { id: user.id } },
+    guestName: user.name ?? "EVENT HOST",
+    status: "GOING",
+  });
 
-    return event;
-  } catch (error) {
-    console.error("Error creating event:", error);
-    throw new Error("Failed to create event");
-  }
+  //redirect() works by throwing, so nothing after it runs. It has to come after the host invite is created, and must not be inside a try/catch
+  redirect(`/dashboard/events/${event.id}`);
 };

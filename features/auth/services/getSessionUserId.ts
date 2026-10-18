@@ -8,7 +8,7 @@ export const getSessionUserId = cache(async () => {
     headers: await headers(),
   });
 
-  if (!session?.user) throw new Error("No user is currently signed in");
+  if (!session?.user) return null;
 
   const { id } = session.user;
 

@@ -10,22 +10,23 @@ export const rspv = async (
   guestChange?: number,
 ) => {
   const invite = await getInvite(id);
-  if (!invite) throw new Error("Invite not found");
-  try {
-    const updatedData: {
-      status?: "PENDING" | "GOING" | "DECLINED";
-      totalGuests?: number;
-    } = {};
-    if (newStatus) updatedData.status = newStatus;
-    if (guestChange) updatedData.totalGuests = invite.totalGuests + guestChange;
+  if (!invite) return { error: "Invite not found" }; //Invites may very well be deleted. Expected error not to find them.
 
-    const userIsGuest = (await getCurrentUserId()) === invite.guestId;
-    if (!userIsGuest)
-      throw new Error("User is not authorized to change this RSVP");
-    await updateInvite(id, updatedData);
-    revalidatePath(`/dashboard/events/${invite.event.id}`);
-  } catch (e) {
-    console.log(e);
-    throw new Error("Failed to update RSVP status");
-  }
+  const currentUserId = await getCurrentUserId();
+  if (!currentUserId) throw new Error("No session found"); //Server actions are public endpoints, so proxy.ts doesn't protect them. Without this, null (no session) === null (unclaimed invite) would pass the check below
+
+  const userIsGuest = currentUserId === invite.guestId;
+  if (!userIsGuest)
+    throw new Error("User is not authorized to change this RSVP"); //The buttons should only appear on one's own invite, if you see them for someone else that's an unexpected error.
+
+  const updatedData: {
+    status?: "PENDING" | "GOING" | "DECLINED";
+    totalGuests?: number;
+  } = {};
+  if (newStatus) updatedData.status = newStatus;
+  if (guestChange)
+    updatedData.totalGuests = Math.max(1, invite.totalGuests + guestChange); //We dont want negative guests
+
+  await updateInvite(id, updatedData);
+  revalidatePath(`/dashboard/events/${invite.event.id}`);
 };

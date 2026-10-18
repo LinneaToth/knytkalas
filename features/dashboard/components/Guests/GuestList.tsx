@@ -1,4 +1,6 @@
-import { useState } from "react";
+"use client";
+
+import { useState, useTransition } from "react";
 import ResponseStatus from "../Events/ResponseStatus";
 import { uninviteGuest } from "../../services/uninviteGuest";
 import { Link, Check, X } from "lucide-react";
@@ -18,24 +20,51 @@ type Props = {
 
 export default function GuestList({ guests, role, hostId }: Props) {
   const [copiedId, setCopiedId] = useState<number | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition(); //Shared for the whole list, only one uninvite at a time
 
-  const handleCopy = async (inviteId: number) => {
-    const inviteLink = await getInviteLink(inviteId);
+  const handleUninvite = (inviteId: number, guestName: string) => {
+    if (!confirm(`This will uninvite ${guestName} from this event.`)) return;
 
-    if (inviteLink) {
-      navigator.clipboard.writeText(inviteLink);
+    //confirm() stays outside the transition, so pending only covers the server call.
+    //Thrown errors reach the nearest error boundary, expected ones are stored in the error state. No router.refresh() needed, uninviteGuest calls revalidatePath
+    startTransition(async () => {
+      setError(null);
+      const result = await uninviteGuest(inviteId);
+      if (result?.error) setError(result.error);
+    });
+  };
+
+  const [isCopying, startCopyTransition] = useTransition(); //Separate from uninvite, so copying doesn't disable the uninvite buttons
+
+  const handleCopy = (inviteId: number) => {
+    startCopyTransition(async () => {
+      setError(null);
+      const result = await getInviteLink(inviteId);
+      //"in" narrows the type: after this, TypeScript knows result is { link }
+      if ("error" in result) {
+        setError(result.error);
+        return;
+      }
+
+      //A targeted try/catch is right here: the clipboard can be refused by the browser (permissions, no https), and that is something we can actually handle by showing the link instead
+      try {
+        await navigator.clipboard.writeText(result.link);
+      } catch {
+        setError(`Couldn't copy the link, copy it manually: ${result.link}`);
+        return;
+      }
+
       setCopiedId(inviteId);
-
       setTimeout(() => {
         setCopiedId(null);
       }, 2000);
-    } else {
-      alert("Failed to copy invite link. Please try again.");
-    }
+    });
   };
 
   return (
     <div className="flex w-full flex-col gap-5">
+      {error && <p className="text-error">{error}</p>}
       {guests.map((guest) => {
         const isCopied = copiedId === guest.inviteId;
 
@@ -60,16 +89,11 @@ export default function GuestList({ guests, role, hostId }: Props) {
                 </p>{" "}
                 {role === "host" && guest.id !== hostId && (
                   <button
-                    className="text-secondary flex h-8 cursor-pointer items-center justify-center rounded-xl text-center text-xs font-medium transition-all duration-20"
-                    onClick={() => {
-                      if (
-                        confirm(
-                          `This will uninvite ${guest.guestName} from this event.`,
-                        )
-                      ) {
-                        uninviteGuest(guest.inviteId);
-                      }
-                    }}
+                    className="text-secondary flex h-8 cursor-pointer items-center justify-center rounded-xl text-center text-xs font-medium transition-all duration-20 disabled:cursor-not-allowed disabled:opacity-60"
+                    onClick={() =>
+                      handleUninvite(guest.inviteId, guest.guestName)
+                    }
+                    disabled={pending}
                   >
                     <X size="20" />
                   </button>
@@ -86,7 +110,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
                         : "bg-card-background hover:bg-gray-50"
                     }`}
                     onClick={() => handleCopy(guest.inviteId)}
-                    disabled={isCopied}
+                    disabled={isCopied || isCopying}
                   >
                     {isCopied ? (
                       <>

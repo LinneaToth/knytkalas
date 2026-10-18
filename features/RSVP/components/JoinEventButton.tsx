@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/ui/components/Button";
 import { claimInvite } from "../services/claimInvite";
@@ -12,19 +12,20 @@ type Props = {
 
 export default function JoinEventButton({ token, eventId }: Props) {
   const router = useRouter();
-  const [pending, setPending] = useState(false);
+  const [pending, startTransition] = useTransition(); //pending is true while the action is running
   const [error, setError] = useState<string | null>(null);
 
-  const handleClick = async () => {
-    setPending(true);
-    setError(null);
-    try {
-      await claimInvite(token);
+  const handleClick = () => {
+    startTransition(async () => {
+      //Wrapping the action in a transition makes thrown errors reach the nearest error boundary, and also allows us to show a loading state while the action is running. "expected" errors are stored in the error state
+      setError(null);
+      const claimedInviteResult = await claimInvite(token);
+      if (claimedInviteResult?.error) {
+        setError(claimedInviteResult.error);
+        return;
+      }
       router.push(`/dashboard/events/${eventId}/`);
-    } catch (e) {
-      setError((e as Error).message);
-      setPending(false);
-    }
+    });
   };
 
   return (

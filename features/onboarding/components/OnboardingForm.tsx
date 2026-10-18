@@ -1,4 +1,5 @@
 "use client";
+import { useActionState } from "react";
 import { useSession } from "@/data/auth/auth-client";
 import Form from "next/form";
 import { onboard } from "../services/onboard";
@@ -15,15 +16,24 @@ export default function OnboardingForm({ callbackUrl = "/dashboard" }: Props) {
   const { data } = useSession();
   const router = useRouter();
   const url = isPathSafe(callbackUrl) ? callbackUrl : "/dashboard";
+  const [state, dispatch, pending] = useActionState(handleAction, undefined);
 
-  async function handleAction(formData: FormData) {
+  async function handleAction(
+    prevState: { error: string } | undefined,
+    formData: FormData,
+  ) {
     const user = {
       name: (formData.get("name") as string) || "",
       avoids: formData
         .getAll("avoids")
         .map((value) => String(value) as IssueType),
     };
-    await onboard(user);
+    const onboardResult = await onboard(user);
+
+    if (onboardResult?.error) {
+      return onboardResult;
+    }
+
     router.push(url);
   }
 
@@ -33,8 +43,9 @@ export default function OnboardingForm({ callbackUrl = "/dashboard" }: Props) {
         You are registering with the google account for{" "}
         <span className="block">{data?.user.email}</span>
       </h2>
+      {state?.error && <p role="alert">{state.error}</p>}
       <Form
-        action={handleAction}
+        action={dispatch}
         className="flex w-full flex-col items-start justify-start gap-5"
       >
         <div className="flex w-full flex-col gap-1">
@@ -72,8 +83,8 @@ export default function OnboardingForm({ callbackUrl = "/dashboard" }: Props) {
             })}
           </div>
         </div>
-        <Button type="submit" width="full">
-          Join the party!
+        <Button type="submit" width="full" loading={pending}>
+          {pending ? "Joining the party..." : "Join the party!"}
         </Button>
       </Form>
     </>

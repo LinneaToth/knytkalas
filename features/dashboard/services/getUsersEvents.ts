@@ -8,6 +8,8 @@ export const getUsersEvents = async (
   archivePastDays = 7,
 ) => {
   const userId = await getSessionUserId();
+  if (!userId) throw new Error("No session found"); //Proxy.ts guarantees a user with an active session when someone's in /dashboard, so a missing session means something is broken. Error thrown.
+
   let events: Awaited<ReturnType<typeof getEventsByUser>> = [];
 
   if (attendance === "host") events = await getEventsByUser(userId, "host");

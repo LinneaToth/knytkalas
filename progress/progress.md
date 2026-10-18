@@ -579,3 +579,53 @@ To ponder next time I work on this, hopefully tomorrow:
 
 - Do I throw errors in my DA? Where do I catch these, services? What then?
 - Auth checks in DAL according to the docs, as already implemented in onboardUser. Throw if fail.
+
+## [2026-10-16]
+
+In the app, two types of errors occur. Expected errors, like when a user tries to submit a partially filled out form, or unexpected errors where something is actually "broken".
+The docs, previously linked in the last log entry, tells to handle the expected errors with return values, rather than throwing errors. Meanwhile, unexpected errors are where errors should be thrown and caught with an error boundary.
+
+proxy.ts → optimistic check: "is there a session cookie?" → redirect to /login
+DAL (data/dal) → secure check: who is this, are they allowed, return a safe DTO. Throws on violations.
+Server actions → parse and validate input, call the DAL, return { error } for expected cases
+Pages (RSC) → call the DAL, notFound() when nothing comes back, render
+Client → useActionState / useTransition, show { error }, boundaries catch the rest
+
+# [2026-10-17]
+
+I have a feeling I did this in the wrong order, not spending enough time on error handling from the beginning. Oh well, learning by doing. Extended spike here, reading up on error handling in next.js.
+
+First thing I did today was to check for error thrown on expected mishaps, since the docs are clear about returning a descriptive object instead of throwing in those cases.
+
+After doing C# tutorials it feels completely wild returning objects with error: message, but that's what I am doing for expected errors in my DAL functions now. It of course had some cascading consequences, where I had to follow the trail and adjust what services and other layers expected and handled. It seems like the point of the division is for the error message (in the returned object, not thrown) to actually reach the user? Or at least it is an important effect.
+
+I had to refresh my knowledge on the "new" hook useActionState when refactoring the OnboardingForm component. When I'm not squeezed like a lemonadeized lemon for time and energy, I will do an in-depth dive on this. Right now I'll leave it where I kind of know how to use it with a form.
+
+I remember feeling "duktig" when implementing some try/catches throughout; but during this round I found that some of them only resulted in swallowed errors. That's taken care of now.
+
+What a rabbit hole, this error handling business is. Hello new acquaintance useTransition. This hook comes with a pending state and a space for a callback method (always called action, [according to the docs](https://react.dev/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)). This enables handling returned error objects (expected issues) differently from thrown unexpected errors. The latter ends the transition and will let the error bubble up and reach an error boundary. The former can be dealt with in the UI.
+
+I had Claude act secretary for me during the error-handling induced refactoring and blasted some really bad upbeat music in my headphone, while cursing my way through the chains and my Saturday.
+
+![Checklist refactoring](./img/24.png)
+
+Side note:
+Not sure I have covered active scope revision I did during the work. If not, here goes:
+
+- Dropped editing contributions. Deleting and re-adding if needed covers what is sufficient for my MVP
+- Higlighting dietary issues with contributions gave a clearer overview.
+- I think I initially had an idea about the host defining categories for each party. I scratched that.
+
+# [2026-10-18]
+
+Turned out to be a weekend-project, this. Crunched for a couple of hours and finished the list.
+
+Added a missing auth-check to create invite service. Only the host is now permitted to send invites.
+
+Test drive booked for first Sunday of Advent. More on that later.
+
+Found some issues with buttons width in certain breakpoints inside /dashboard. Put Claude on fixing that (it was a matter of adjusting classes across several components). It was also put to work on finishing the useActionState implementation I did on the forms. I had an unwanted side effect where the forms were cleared on trying to submit an invalid input. The "old" workaround with preventDefault isn't in line with the docs on this. The workaround works, but it bypasses the central idea of building around the form action pattern. So instead the server actions now return the submitted values together with the error, and the form uses them as defaultValues. When React resets the form after the action, it resets to what the user typed rather than to empty fields. On success, createEvent redirects straight to the new event, so the old success screen is gone.
+
+When reaching the last "chain" on my list, I let in Claude and gave it a longer rein.
+
+getInviteIdByUserAndEvent.ts was a duplicate, getEventDetails.ts already took care of the same thing. Its one call was replaced.

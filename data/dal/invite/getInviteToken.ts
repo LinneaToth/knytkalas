@@ -8,6 +8,7 @@ export const getInviteToken = async (invId: number) => {
     },
     select: {
       token: true,
+      invById: true,
     },
   });
 };

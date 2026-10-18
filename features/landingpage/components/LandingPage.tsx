@@ -9,14 +9,8 @@ import { getUser } from "@/data/dal/user/getUser";
 import JoinTheParty from "./JoinTheParty";
 
 export default async function LandingPage() {
-  let currentUser = null;
-
-  try {
-    const id = await getSessionUserId();
-    currentUser = await getUser(id);
-  } catch (e) {
-    console.log(e);
-  }
+  const id = await getSessionUserId();
+  const currentUser = id ? await getUser(id) : null;
 
   return (
     <>

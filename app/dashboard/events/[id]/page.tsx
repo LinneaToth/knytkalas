@@ -1,12 +1,13 @@
 "use server";
 
+import { notFound } from "next/navigation";
+
 import EventDetails from "@/features/dashboard/components/Events/EventDetails";
 import { getEventDetails } from "@/features/dashboard/services/getEventDetails";
 import { getContributionsByEvent } from "@/features/dashboard/services/getContributionsByEvent";
 import ResponseDetails from "@/features/dashboard/components/Events/ResponseDetails";
 import GuestDetails from "@/features/dashboard/components/Guests/GuestsDetails";
 import ContributionsDetails from "@/features/dashboard/components/Contributions/ContributionsDetails";
-import { getInviteIdByUserAndEvent } from "@/features/dashboard/services/getInviteIdByUserAndEvent";
 import { getCurrentUser } from "@/features/auth/services/getCurrentUser";
 
 export default async function Page({
@@ -15,14 +16,19 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const event = await getEventDetails(Number(id));
-  if (!event) return <h2>Event not found</h2>;
+  const eventId = Number(id);
+  if (!Number.isInteger(eventId)) return notFound(); //404 if id is not a valid int, no lookups needed
+  const event = await getEventDetails(eventId);
+  if (!event) return notFound(); //404 if event not found or user not authorized to see it
   const user = await getCurrentUser();
-  if (!user) return <h2>User not signed in</h2>; //SHOULD BE REPLACED WITH A REDIRECT TO SOMETHING THAT PROMPTS USER TO SIGN IN
+  if (!user) throw new Error("No session found"); //getEventDetails already throws without a session, and proxy.ts requires one in /dashboard. Getting here without a user means something is broken
+
+  //getEventDetails already found the user's own invite. Both guests and the host have one (createEvent creates the host's invite)
+  const usersInviteId = event.userInviteId;
+  if (!usersInviteId) throw new Error("User has no invite for this event"); //getEventDetails only returns events the user is invited to or hosts, so a missing invite means broken data
 
   const contributions = await getContributionsByEvent(event.id);
   const role = user.id === event.hostId ? "host" : "guest";
-  const usersInviteId = await getInviteIdByUserAndEvent(user.id, event.id);
   const userAvoids = user.onboarded ? user.avoids : [];
   const eventHasBeen = event.date < new Date();
 

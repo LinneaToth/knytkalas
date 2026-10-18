@@ -7,7 +7,7 @@ export const getContribution = async (id: number) => {
     where: { id: id },
   });
 
-  if (!contribution) throw new Error("No matching contribution found");
+  if (!contribution) return null;
 
   const contributionData = {
     name: contribution.name,
