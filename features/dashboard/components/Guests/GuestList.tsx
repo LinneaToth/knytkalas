@@ -35,19 +35,31 @@ export default function GuestList({ guests, role, hostId }: Props) {
     });
   };
 
-  const handleCopy = async (inviteId: number) => {
-    const inviteLink = await getInviteLink(inviteId);
+  const [isCopying, startCopyTransition] = useTransition(); //Separate from uninvite, so copying doesn't disable the uninvite buttons
 
-    if (inviteLink) {
-      navigator.clipboard.writeText(inviteLink);
+  const handleCopy = (inviteId: number) => {
+    startCopyTransition(async () => {
+      setError(null);
+      const result = await getInviteLink(inviteId);
+      //"in" narrows the type: after this, TypeScript knows result is { link }
+      if ("error" in result) {
+        setError(result.error);
+        return;
+      }
+
+      //A targeted try/catch is right here: the clipboard can be refused by the browser (permissions, no https), and that is something we can actually handle by showing the link instead
+      try {
+        await navigator.clipboard.writeText(result.link);
+      } catch {
+        setError(`Couldn't copy the link, copy it manually: ${result.link}`);
+        return;
+      }
+
       setCopiedId(inviteId);
-
       setTimeout(() => {
         setCopiedId(null);
       }, 2000);
-    } else {
-      alert("Failed to copy invite link. Please try again.");
-    }
+    });
   };
 
   return (
@@ -98,7 +110,7 @@ export default function GuestList({ guests, role, hostId }: Props) {
                         : "bg-card-background hover:bg-gray-50"
                     }`}
                     onClick={() => handleCopy(guest.inviteId)}
-                    disabled={isCopied}
+                    disabled={isCopied || isCopying}
                   >
                     {isCopied ? (
                       <>

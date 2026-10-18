@@ -626,4 +626,6 @@ Test drive booked for first Sunday of Advent. More on that later.
 
 Found some issues with buttons width in certain breakpoints inside /dashboard. Put Claude on fixing that (it was a matter of adjusting classes across several components). It was also put to work on finishing the useActionState implementation I did on the forms. I had an unwanted side effect where the forms were cleared on trying to submit an invalid input. The "old" workaround with preventDefault isn't in line with the docs on this. The workaround works, but it bypasses the central idea of building around the form action pattern. So instead the server actions now return the submitted values together with the error, and the form uses them as defaultValues. When React resets the form after the action, it resets to what the user typed rather than to empty fields. On success, createEvent redirects straight to the new event, so the old success screen is gone.
 
+When reaching the last "chain" on my list, I let in Claude and gave it a longer rein.
+
 getInviteIdByUserAndEvent.ts was a duplicate, getEventDetails.ts already took care of the same thing. Its one call was replaced.
