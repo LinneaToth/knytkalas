@@ -51,16 +51,27 @@ export default function RespondToEventButtons({
           ? "Respond to invitation"
           : "Change your response"}
       </h3>
-      {status !== "GOING" && (
-        <Button variant="dark" onClick={() => rspv(id, "GOING", 0)}>
-          I&apos;ll join!
-        </Button>
-      )}
-      {status !== "DECLINED" && (
-        <Button variant="dark" onClick={() => rspv(id, "DECLINED", 0)}>
-          Can&apos;t come.
-        </Button>
-      )}
+      {/* Stacked under the other boxes (below lg): same as other button rows. Floating box top right (lg+): full width */}
+      <div className="flex w-full flex-col items-center gap-3 md:flex-row md:justify-center lg:flex-col lg:items-stretch">
+        {status !== "GOING" && (
+          <Button
+            variant="dark"
+            onClick={() => rspv(id, "GOING", 0)}
+            className="w-full md:w-auto lg:w-full"
+          >
+            I&apos;ll join!
+          </Button>
+        )}
+        {status !== "DECLINED" && (
+          <Button
+            variant="dark"
+            onClick={() => rspv(id, "DECLINED", 0)}
+            className="w-full md:w-auto lg:w-full"
+          >
+            Can&apos;t come.
+          </Button>
+        )}
+      </div>
     </>
   );
 }

@@ -605,7 +605,9 @@ I remember feeling "duktig" when implementing some try/catches throughout; but d
 
 What a rabbit hole, this error handling business is. Hello new acquaintance useTransition. This hook comes with a pending state and a space for a callback method (always called action, [according to the docs](https://react.dev/reference/react/useTransition#displaying-an-error-to-users-with-error-boundary)). This enables handling returned error objects (expected issues) differently from thrown unexpected errors. The latter ends the transition and will let the error bubble up and reach an error boundary. The former can be dealt with in the UI.
 
-I had Claude act secretary for me and blasted some really bad upbeat music in my headphone, while cursing my way through the chains and my saturday.
+I had Claude act secretary for me during the error-handling induced refactoring and blasted some really bad upbeat music in my headphone, while cursing my way through the chains and my Saturday.
+
+![Checklist refactoring](./img/24.png)
 
 Side note:
 Not sure I have covered active scope revision I did during the work. If not, here goes:
@@ -613,3 +615,11 @@ Not sure I have covered active scope revision I did during the work. If not, her
 - Dropped editing contributions. Deleting and re-adding if needed covers what is sufficient for my MVP
 - Higlighting dietary issues with contributions gave a clearer overview.
 - I think I initially had an idea about the host defining categories for each party. I scratched that.
+
+# [2026-10-18]
+
+Turned out to be a weekend-project, this.
+
+Test drive booked for first Sunday of Advent. More on that later.
+
+Found some issues with buttons width in certain breakpoints inside /dashboard. Put Claude on fixing that (it was a matter of adjusting classes across several components).

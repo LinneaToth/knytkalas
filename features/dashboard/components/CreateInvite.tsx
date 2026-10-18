@@ -37,7 +37,11 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
 
   if (!isActive) {
     return (
-      <Button onClick={toggleActive} variant="secondary">
+      <Button
+        onClick={toggleActive}
+        variant="secondary"
+        className="w-full md:w-auto md:self-center"
+      >
         Create new invite
       </Button>
     );
@@ -86,15 +90,22 @@ export default function CreateInvite({ eventId }: { eventId: number }) {
         className="bg-background text-foreground focus:bg-focus w-full p-3"
       />
       <input type="hidden" name="eventId" value={eventId} />
-      <Button>Create invite</Button>{" "}
-      <Button
-        onClick={() => {
-          toggleActive();
-          setSuccess(false);
-        }}
-      >
-        Cancel
-      </Button>
+      <div className="flex w-full flex-col items-center gap-3 md:flex-row md:justify-center">
+        <Button type="submit" className="w-full md:w-auto">
+          Create invite
+        </Button>
+        {/* type="button" so it doesn't submit the form it's inside */}
+        <Button
+          type="button"
+          onClick={() => {
+            toggleActive();
+            setSuccess(false);
+          }}
+          className="w-full md:w-auto"
+        >
+          Cancel
+        </Button>
+      </div>
     </Form>
   );
 }

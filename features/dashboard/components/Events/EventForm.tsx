@@ -4,7 +4,7 @@ import DateField from "../../../../ui/components/DateField";
 import { formatDate } from "../../utils/formatDate";
 
 type Props = {
-  handleFormAction: (formData: FormData) => Promise<void>;
+  handleFormAction: (formData: FormData) => void | Promise<void>;
   eventData?: {
     occasion?: string;
     description?: string;
@@ -12,9 +12,16 @@ type Props = {
     date?: Date;
     responseDeadline?: Date;
   };
+  pending?: boolean;
+  onCancel?: () => void; //Optional, only shown when editing. Lives in here so it can share a row with the submit button
 };
 
-export default function EventForm({ handleFormAction, eventData }: Props) {
+export default function EventForm({
+  handleFormAction,
+  eventData,
+  pending,
+  onCancel,
+}: Props) {
   return (
     <Form
       action={handleFormAction}
@@ -73,9 +80,27 @@ export default function EventForm({ handleFormAction, eventData }: Props) {
         className="w-full"
       />
 
-      <Button variant="dark">
-        {eventData ? "Update event" : "Create Event"}
-      </Button>
+      <div className="flex w-full flex-col items-center gap-3 md:flex-row md:justify-center">
+        <Button
+          type="submit"
+          variant="dark"
+          loading={pending}
+          className="w-full md:w-auto"
+        >
+          {eventData ? "Update event" : "Create event"}
+        </Button>
+        {onCancel && (
+          //type="button" so it doesn't submit the form it's inside
+          <Button
+            type="button"
+            onClick={onCancel}
+            disabled={pending}
+            className="w-full md:w-auto"
+          >
+            Cancel
+          </Button>
+        )}
+      </div>
     </Form>
   );
 }

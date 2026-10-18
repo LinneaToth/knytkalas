@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useTransition, useActionState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/ui/components/Button";
 import { toggleCancelEvent } from "../../services/toggleCancelEvent";
@@ -10,7 +10,10 @@ import ContentBox from "@/ui/components/ContentBox";
 import EventForm from "./EventForm";
 import { updateEvent } from "../../services/updateEvent";
 
-type EventDetails = Awaited<ReturnType<typeof getEventDetails>>;
+//getEventDetails returns null when there is no event, but events/[id]/page.tsx calls notFound() in that case, so this component never receives null. NonNullable removes null from the type
+type EventDetails = NonNullable<Awaited<ReturnType<typeof getEventDetails>>>;
+
+type SaveState = { error: string } | undefined;
 
 type Props = {
   event: EventDetails;
@@ -21,34 +24,41 @@ type Props = {
 
 export default function EventDetails({ event, date, time, role }: Props) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isToggling, startToggleTransition] = useTransition();
   const router = useRouter();
-  if (!event) return <h2>Event data missing</h2>;
 
   const eventHasBeen = event.date < new Date();
 
-  const handleToggleCancel = async () => {
-    await toggleCancelEvent(event.id);
-    router.refresh();
+  //toggleCancelEvent has no expected errors to return, so no error state. The transition gives a pending state and lets thrown errors reach the nearest error boundary
+  const handleToggleCancel = () => {
+    startToggleTransition(async () => {
+      await toggleCancelEvent(event.id);
+      router.refresh();
+    });
   };
 
-  const onSave = async (formData: FormData) => {
-    await updateEvent(event.id, formData);
+  const handleSave = async (prevState: SaveState, formData: FormData) => {
+    const updatedEvent = await updateEvent(event.id, formData);
+    if (updatedEvent?.error) return updatedEvent;
     setIsEditing(false);
     router.refresh();
   };
+
+  const [saveState, saveAction, isSaving] = useActionState(
+    handleSave,
+    undefined,
+  );
 
   const onCancel = () => {
     setIsEditing(false);
   };
-
-  //If user is host, add option to edit event details, like occasion, date, and description
 
   if (isEditing) {
     return (
       <ContentBox styling="flex flex-col gap-3 md:col-span-2" glass={true}>
         <h2>Editing Event</h2>
         <EventForm
-          handleFormAction={onSave}
+          handleFormAction={saveAction}
           eventData={{
             occasion: event.occasion,
             description: event.description || "",
@@ -56,8 +66,10 @@ export default function EventDetails({ event, date, time, role }: Props) {
             date: event.date,
             responseDeadline: event.responseDeadline ?? undefined,
           }}
+          pending={isSaving}
+          onCancel={onCancel}
         />
-        <button onClick={onCancel}>CANCEL</button>
+        {saveState?.error && <p className="text-error">{saveState.error}</p>}
       </ContentBox>
     );
   }
@@ -115,6 +127,7 @@ export default function EventDetails({ event, date, time, role }: Props) {
               variant="secondary"
               size="sm"
               onClick={handleToggleCancel}
+              loading={isToggling}
             >
               {event.deletedAt ? "Re-publish event" : "Cancel event"}
             </Button>
